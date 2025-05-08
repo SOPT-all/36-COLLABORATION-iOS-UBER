@@ -1,2 +1,3 @@
-# 36-COLLABORATION-iOS-UBER
-36기 합동세미나 모바일 앱 4팀 우버 택시 iOS 레포지토리입니다.
+<div align="center">
+  <img src="https://capsule-render.vercel.app/api?type=soft&color=0:0e0f12,100:2b2e38&height=100&text=🚕%2036%20COLLABORATION%20iOS%20UBER%20🍎&animation=&fontColor=ffffff&fontSize=40" />
+</div>
