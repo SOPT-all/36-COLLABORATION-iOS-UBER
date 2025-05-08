@@ -16,22 +16,37 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
-		1497B1AD2DCCD656007B5E1B /* Exceptions for "Uber-iOS" folder in "Uber-iOS" target */ = {
+		147249C12DCCDD050093B866 /* Exceptions for "Global" folder in "Uber-iOS" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
-				Info.plist,
+				Resources/Assets.xcassets,
 			);
 			target = 1497B19A2DCCD655007B5E1B /* Uber-iOS */;
 		};
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
-		1497B19D2DCCD655007B5E1B /* Uber-iOS */ = {
+		147249B72DCCDCFF0093B866 /* Application */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = Application;
+			sourceTree = "<group>";
+		};
+		147249BF2DCCDD050093B866 /* Global */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
-				1497B1AD2DCCD656007B5E1B /* Exceptions for "Uber-iOS" folder in "Uber-iOS" target */,
+				147249C12DCCDD050093B866 /* Exceptions for "Global" folder in "Uber-iOS" target */,
 			);
-			path = "Uber-iOS";
+			path = Global;
+			sourceTree = "<group>";
+		};
+		147249C22DCCDD0D0093B866 /* Network */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = Network;
+			sourceTree = "<group>";
+		};
+		147249C42DCCDD1E0093B866 /* Presentation */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = Presentation;
 			sourceTree = "<group>";
 		};
 /* End PBXFileSystemSynchronizedRootGroup section */
@@ -49,10 +64,21 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		147249AC2DCCDCE90093B866 /* Uber-iOS */ = {
+			isa = PBXGroup;
+			children = (
+				147249B72DCCDCFF0093B866 /* Application */,
+				147249BF2DCCDD050093B866 /* Global */,
+				147249C22DCCDD0D0093B866 /* Network */,
+				147249C42DCCDD1E0093B866 /* Presentation */,
+			);
+			path = "Uber-iOS";
+			sourceTree = "<group>";
+		};
 		1497B1922DCCD655007B5E1B = {
 			isa = PBXGroup;
 			children = (
-				1497B19D2DCCD655007B5E1B /* Uber-iOS */,
+				147249AC2DCCDCE90093B866 /* Uber-iOS */,
 				1497B19C2DCCD655007B5E1B /* Products */,
 			);
 			sourceTree = "<group>";
@@ -81,7 +107,8 @@
 			dependencies = (
 			);
 			fileSystemSynchronizedGroups = (
-				1497B19D2DCCD655007B5E1B /* Uber-iOS */,
+				147249B72DCCDCFF0093B866 /* Application */,
+				147249C42DCCDD1E0093B866 /* Presentation */,
 			);
 			name = "Uber-iOS";
 			packageProductDependencies = (
@@ -159,7 +186,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = "Uber-iOS/Info.plist";
+				INFOPLIST_FILE = "Uber-iOS/Global/Setting/Info.plist";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -185,7 +212,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = "Uber-iOS/Info.plist";
+				INFOPLIST_FILE = "Uber-iOS/Global/Setting/Info.plist";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
