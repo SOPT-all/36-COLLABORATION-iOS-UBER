@@ -12,6 +12,9 @@
 .AppleDouble
 .LSOverride
 
+## build configuration
+*.xcconfig
+
 ## User settings
 xcuserdata/
 
