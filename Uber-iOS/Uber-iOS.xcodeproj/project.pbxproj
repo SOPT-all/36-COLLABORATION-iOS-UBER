@@ -19,7 +19,12 @@
 		147249C12DCCDD050093B866 /* Exceptions for "Global" folder in "Uber-iOS" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
-				Resources/Assets.xcassets,
+				"Resources/Extension/UIFont+.swift",
+				Resources/Resources/Assets.xcassets,
+				"Resources/Resources/Font/SUIT-Bold.otf",
+				"Resources/Resources/Font/SUIT-ExtraBold.otf",
+				"Resources/Resources/Font/SUIT-Medium.otf",
+				"Resources/Resources/Font/SUIT-SemiBold.otf",
 			);
 			target = 1497B19A2DCCD655007B5E1B /* Uber-iOS */;
 		};
@@ -108,6 +113,7 @@
 			);
 			fileSystemSynchronizedGroups = (
 				147249B72DCCDCFF0093B866 /* Application */,
+				147249C22DCCDD0D0093B866 /* Network */,
 				147249C42DCCDD1E0093B866 /* Presentation */,
 			);
 			name = "Uber-iOS";
@@ -185,6 +191,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 6B47X24XTW;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Uber-iOS/Global/Setting/Info.plist";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -216,6 +223,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 6B47X24XTW;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Uber-iOS/Global/Setting/Info.plist";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
