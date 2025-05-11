@@ -20,6 +20,7 @@
 		147249C12DCCDD050093B866 /* Exceptions for "Global" folder in "Uber-iOS" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
+				Config/Secret.swift,
 				Resources/Assets.xcassets,
 			);
 			target = 1497B19A2DCCD655007B5E1B /* Uber-iOS */;
