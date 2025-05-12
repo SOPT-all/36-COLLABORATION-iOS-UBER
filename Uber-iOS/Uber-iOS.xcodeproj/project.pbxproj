@@ -12,6 +12,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1484F3C12DD1EA13009F1EC2 /* Secrets.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Secrets.xcconfig; sourceTree = "<group>"; };
 		1497B19B2DCCD655007B5E1B /* Uber-iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Uber-iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		471A994D2DD0D46500368E2D /* Secrets.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Secrets.xcconfig; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -85,6 +86,7 @@
 		1497B1922DCCD655007B5E1B = {
 			isa = PBXGroup;
 			children = (
+				1484F3C12DD1EA13009F1EC2 /* Secrets.xcconfig */,
 				471A994D2DD0D46500368E2D /* Secrets.xcconfig */,
 				147249AC2DCCDCE90093B866 /* Uber-iOS */,
 				1497B19C2DCCD655007B5E1B /* Products */,
