@@ -4,6 +4,13 @@
 <dict>
 	<key>BASE_URL</key>
 	<string>${BASE_URL}</string>
+	<key>UIAppFonts</key>
+	<array>
+        <string>SUIT-ExtraBold.otf</string>
+        <string>SUIT-Bold.otf</string>
+        <string>SUIT-SemiBold.otf</string>
+        <string>SUIT-Medium.otf</string>
+	</array>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>
