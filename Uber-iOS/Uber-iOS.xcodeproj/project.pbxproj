@@ -13,12 +13,14 @@
 
 /* Begin PBXFileReference section */
 		1497B19B2DCCD655007B5E1B /* Uber-iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Uber-iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		471A994D2DD0D46500368E2D /* Secrets.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Secrets.xcconfig; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
 		147249C12DCCDD050093B866 /* Exceptions for "Global" folder in "Uber-iOS" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
+				Config/Secret.swift,
 				"Resources/Extension/UIFont+.swift",
 				Resources/Resources/Assets.xcassets,
 				"Resources/Resources/Font/SUIT-Bold.otf",
@@ -83,6 +85,7 @@
 		1497B1922DCCD655007B5E1B = {
 			isa = PBXGroup;
 			children = (
+				471A994D2DD0D46500368E2D /* Secrets.xcconfig */,
 				147249AC2DCCDCE90093B866 /* Uber-iOS */,
 				1497B19C2DCCD655007B5E1B /* Products */,
 			);
@@ -186,19 +189,20 @@
 /* Begin XCBuildConfiguration section */
 		1497B1AF2DCCD656007B5E1B /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 471A994D2DD0D46500368E2D /* Secrets.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 6B47X24XTW;
+				DEVELOPMENT_TEAM = X58MVPBY9R;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Uber-iOS/Global/Setting/Info.plist";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -218,19 +222,20 @@
 		};
 		1497B1B02DCCD656007B5E1B /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 471A994D2DD0D46500368E2D /* Secrets.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 6B47X24XTW;
+				DEVELOPMENT_TEAM = X58MVPBY9R;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Uber-iOS/Global/Setting/Info.plist";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -250,6 +255,7 @@
 		};
 		1497B1B12DCCD656007B5E1B /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 471A994D2DD0D46500368E2D /* Secrets.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
@@ -313,6 +319,7 @@
 		};
 		1497B1B22DCCD656007B5E1B /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 471A994D2DD0D46500368E2D /* Secrets.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
