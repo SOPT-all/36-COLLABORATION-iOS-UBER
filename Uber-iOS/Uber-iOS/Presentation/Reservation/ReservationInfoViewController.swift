@@ -14,11 +14,12 @@ import SnapKit
 final class ReservationInfoViewController: UIViewController {
     
     private let scrollView = UIScrollView().then {
-        $0.backgroundColor = .red
+        $0.showsVerticalScrollIndicator = false
     }
     
     private let contentStackView = UIStackView().then {
         $0.backgroundColor = .bgGray
+        $0.axis = .vertical
         $0.spacing = 8
     }
 }
@@ -51,7 +52,7 @@ extension ReservationInfoViewController {
         
         contentStackView.snp.makeConstraints {
             $0.edges.equalTo(scrollView.contentLayoutGuide)
-            $0.width.equalTo(scrollView.contentLayoutGuide)
+            $0.width.equalTo(scrollView.frameLayoutGuide)
         }
     }
 }
