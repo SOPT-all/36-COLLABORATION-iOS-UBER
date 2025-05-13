@@ -27,7 +27,7 @@ class ViewController: BaseViewController {
     
     override func configure() {
         super.configure()
-        [helloLabel, subLabel].forEach { view.addSubview($0) }
+        addSubviews(helloLabel, subLabel)
     }
     
     override func setConstraints() {

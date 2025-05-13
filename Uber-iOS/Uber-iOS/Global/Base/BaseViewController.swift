@@ -25,4 +25,8 @@ class BaseViewController: UIViewController {
     // MARK: - Layout
 
     func setConstraints() {}
-}
+
+    func addSubviews(_ views: UIView...) {
+            views.forEach { view.addSubview($0) }
+        }
+    }
