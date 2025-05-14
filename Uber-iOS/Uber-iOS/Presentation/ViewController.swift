@@ -9,24 +9,7 @@ import SnapKit
 import Then
 import UIKit
 
-class ViewController: UIViewController {
-
-    override func viewDidLoad() {
-
-        super.viewDidLoad()
-        view.backgroundColor = UIColor.bgBlack
-        
-        [helloLabel, subLabel].forEach { view.addSubview($0) }
-
-        helloLabel.snp.makeConstraints {
-            $0.center.equalToSuperview()
-        }
-        
-        subLabel.snp.makeConstraints {
-            $0.centerX.equalToSuperview()
-            $0.top.equalTo(helloLabel.snp.bottom).offset(4)
-        }
-    }
+class ViewController: BaseViewController {
 
     private let helloLabel = UILabel().then {
         $0.text = "우버들아 안뇽 붕붕"
@@ -37,8 +20,24 @@ class ViewController: UIViewController {
     
     private let subLabel = UILabel().then {
         $0.text = "앞으로 잘해보자"
-        $0.textColor = UIColor.textWhite
+        $0.textColor = UIColor.primary
         $0.font = UIFont.caption_m12
         $0.textAlignment = .center
+    }
+    
+    override func configure() {
+        super.configure()
+        addSubviews(helloLabel, subLabel)
+    }
+    
+    override func setConstraints() {
+        helloLabel.snp.makeConstraints {
+            $0.center.equalToSuperview()
+        }
+        
+        subLabel.snp.makeConstraints {
+            $0.centerX.equalToSuperview()
+            $0.top.equalTo(helloLabel.snp.bottom).offset(4)
+        }
     }
 }
