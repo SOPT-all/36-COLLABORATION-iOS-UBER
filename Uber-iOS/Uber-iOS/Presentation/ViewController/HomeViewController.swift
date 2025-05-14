@@ -12,7 +12,7 @@ final class HomeViewController: BaseViewController {
 
     private let goToNextButton = UIButton().then {
         $0.setTitle("다음 화면으로", for: .normal)
-        $0.applyUberStyle(.blackMain)
+        $0.applyUberStyle()
     }
 
     // MARK: - LifeCycle
