@@ -12,10 +12,10 @@ import SnapKit
 final class SectionView: UIView {
     
     private let titleLabel = UILabel().then {
-        $0.setLabel(textColor: .primary, font: .body1_eb18)
+        $0.setLabel(alignment: .left, textColor: .primary, font: .body1_eb18)
     }
     private let subtitleLabel = UILabel().then {
-        $0.setLabel(textColor: .sub2, font: .caption_m12)
+        $0.setLabel(alignment: .left, textColor: .sub2, font: .caption_m12)
     }
     
     private let topContainerView = UIStackView().then {
