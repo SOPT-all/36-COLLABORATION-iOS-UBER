@@ -11,73 +11,73 @@ import SnapKit
 
 final class SectionView: UIView {
     
-    private let titleLabel = UILabel()
-    private let subtitleLabel = UILabel()
-    private let contentView = UIView()
+    private let titleLabel = UILabel().then {
+        $0.setLabel(textColor: .primary, font: .body1_eb18)
+    }
+    private let subtitleLabel = UILabel().then {
+        $0.setLabel(textColor: .sub2, font: .caption_m12)
+    }
     
-    init(title: String, subtitle: String?, content: UIView, edgeInset: UIEdgeInsets = UIEdgeInsets()) {
+    private let topContainerView = UIStackView().then {
+        $0.axis = .vertical
+        $0.alignment = .leading
+        $0.spacing = 4.5
+    }
+    
+    private let bottomContainer = UIStackView().then {
+        $0.axis = .vertical
+    }
+    
+    private let contentView = UIStackView().then {
+        $0.axis = .vertical
+    }
+    
+    init(title: String, subtitle: String?, content: UIView, contentEdge: UIEdgeInsets) {
         super.init(frame: .zero)
-        setupView()
-        configure(title: title, subtitle: subtitle, content: content, edgeInset: edgeInset)
+        setupView(title: title, subtitle: subtitle, content: content, contentEdge: contentEdge)
+    }
+    
+    convenience init(title: String, subtitle: String?, content: UIView) {
+        self.init(title: title, subtitle: subtitle, content: content, contentEdge: UIEdgeInsets())
+    }
+    
+    convenience init(title: String, content: UIView) {
+        self.init(title: title, subtitle: nil, content: content, contentEdge: UIEdgeInsets())
+    }
+    
+    convenience init(title: String, content: UIView, contentEdge: UIEdgeInsets) {
+        self.init(title: title, subtitle: nil, content: content, contentEdge: contentEdge)
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    private func setupView() {
-        titleLabel.font = .boldSystemFont(ofSize: 18)
-        subtitleLabel.font = .systemFont(ofSize: 14)
-        subtitleLabel.textColor = .gray
-        
+    private func setupView(title: String, subtitle: String?, content: UIView, contentEdge: UIEdgeInsets) {
         backgroundColor = .white
-        
-        [titleLabel, subtitleLabel, contentView].forEach {
-            addSubview($0)
-        }
-        
-        titleLabel.snp.makeConstraints {
-            $0.leading.equalToSuperview().offset(25)
-            $0.top.equalToSuperview().offset(10)
-        }
-        
-        var contentTopAnchor: ConstraintItem
-        var contentTopOffset: CGFloat
-        
-        if subtitleLabel.text != nil {
-            contentTopAnchor = subtitleLabel.snp.bottom
-            contentTopOffset = 4.5
-            
-            subtitleLabel.snp.makeConstraints {
-                $0.leading.equalToSuperview().offset(25)
-                $0.top.equalTo(titleLabel.snp.bottom).offset(4.5)
-            }
-        } else {
-            contentTopAnchor = titleLabel.snp.bottom
-            contentTopOffset = 16
-        }
-        
-        contentView.snp.makeConstraints {
-            $0.top.equalTo(contentTopAnchor).offset(contentTopOffset)
-        }
-        
-    }
-    
-    private func configure(title: String, subtitle: String?, content: UIView, edgeInset: UIEdgeInsets) {
         titleLabel.text = title
         subtitleLabel.text = subtitle
         
-        setupView()
-        
-        contentView.subviews.forEach {
-            $0.removeFromSuperview()
+        if subtitle != nil {
+            topContainerView.addArrangedSubviews(titleLabel, subtitleLabel)
+        } else {
+            topContainerView.addArrangedSubview(titleLabel)
         }
-        contentView.addSubview(content)
-        content.snp.makeConstraints {
-            $0.leading.equalToSuperview().inset(edgeInset.left)
-            $0.trailing.equalToSuperview().inset(edgeInset.right)
-            $0.top.equalToSuperview().inset(edgeInset.top)
-            $0.bottom.equalToSuperview().inset(edgeInset.bottom)
+        
+        topContainerView.isLayoutMarginsRelativeArrangement = true
+        topContainerView.layoutMargins = UIEdgeInsets(top: 10, left: 25, bottom: 10, right: 25)
+        
+        bottomContainer.addArrangedSubview(content)
+        bottomContainer.isLayoutMarginsRelativeArrangement = true
+        bottomContainer.layoutMargins = contentEdge
+        bottomContainer.layoutMargins.bottom += 10
+        
+        addSubview(contentView)
+        
+        contentView.addArrangedSubviews(topContainerView, bottomContainer)
+        
+        contentView.snp.makeConstraints {
+            $0.edges.equalToSuperview()
         }
     }
 }

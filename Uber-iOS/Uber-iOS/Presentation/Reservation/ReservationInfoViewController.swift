@@ -20,7 +20,7 @@ final class ReservationInfoViewController: UIViewController {
     private let contentStackView = UIStackView().then {
         $0.backgroundColor = .bgGray
         $0.axis = .vertical
-        $0.spacing = 8
+        $0.spacing = 8    
     }
 }
 
