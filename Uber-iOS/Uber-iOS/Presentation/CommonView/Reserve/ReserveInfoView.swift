@@ -97,4 +97,23 @@ final class ReserveInfoView: UIView {
         subTitleLabel.text = subtitle
     }
 
+    func applyStyle(_ style: ReserveInfoStyle) {
+        switch style {
+        case .info:
+            layer.borderWidth = 0
+            iconImageView.tintColor = nil
+        case .suggestion:
+            layer.borderWidth = 1
+            layer.borderColor = UIColor.bgGray.cgColor
+            iconImageView.tintColor = .iconInactive
+            iconImageView.image = iconImageView.image?.withRenderingMode(
+                .alwaysTemplate
+            )
+        case .selected:
+            layer.borderWidth = 1
+            layer.borderColor = UIColor.btnActive.cgColor
+            iconImageView.tintColor = nil
+        }
+    }
+
 }
