@@ -25,14 +25,14 @@ final class RecentSearchHeaderView: UIView {
         $0.font = .body3_sb14
         $0.textColor = .sub2
     }
-    
+
     private let spacerView = UIView()
-    
 
     let allDeleteButton = UIButton(type: .system).then {
         $0.setTitle("전체 삭제", for: .normal)
         $0.setTitleColor(.point2, for: .normal)
         $0.titleLabel?.font = .caption_m12
+        $0.isHidden = false
     }
 
     // MARK: - Initializer
@@ -50,7 +50,7 @@ final class RecentSearchHeaderView: UIView {
     // MARK: - Configure
 
     private func configure() {
-        
+
         addSubview(contentView)
         contentView.addSubviews(
             iconImageView,
@@ -80,7 +80,7 @@ final class RecentSearchHeaderView: UIView {
             $0.leading.equalTo(iconImageView.snp.trailing).offset(24)
             $0.centerY.equalToSuperview()
         }
-        
+
         spacerView.snp.makeConstraints {
             $0.leading.equalTo(recentSearchLabel.snp.trailing)
             $0.trailing.equalTo(allDeleteButton.snp.leading)
@@ -94,6 +94,5 @@ final class RecentSearchHeaderView: UIView {
         }
 
     }
-    
 
 }
