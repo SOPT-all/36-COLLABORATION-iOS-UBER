@@ -43,6 +43,17 @@ final class ReserveInfoView: UIView {
         $0.alignment = .center
     }
 
+    private let additionalTaxiContainerView = UIStackView().then {
+        $0.axis = .vertical
+        $0.spacing = 10
+        $0.isHidden = true
+    }
+
+    private let mainStackView = UIStackView().then {
+        $0.axis = .vertical
+        $0.spacing = 12
+    }
+
     // MARK: - Initializer
 
     override init(frame: CGRect) {
@@ -66,9 +77,16 @@ final class ReserveInfoView: UIView {
 
         iconContainerView.addSubview(iconImageView)
         textStackView.addArrangedSubviews(subTitleLabel, titleLabel)
-        contentStackView.addArrangedSubviews(iconContainerView, textStackView)
+        contentStackView.addArrangedSubviews(
+            iconContainerView,
+            textStackView
+        )
+        mainStackView.addArrangedSubviews(
+            contentStackView,
+            additionalTaxiContainerView
+        )
 
-        addSubview(contentStackView)
+        addSubview(mainStackView)
     }
 
     // MARK: - Layout
@@ -84,7 +102,7 @@ final class ReserveInfoView: UIView {
             $0.width.height.equalTo(36)
         }
 
-        contentStackView.snp.makeConstraints {
+        mainStackView.snp.makeConstraints {
             $0.edges.equalTo(layoutMarginsGuide)
         }
     }
@@ -114,6 +132,15 @@ final class ReserveInfoView: UIView {
             layer.borderColor = UIColor.btnActive.cgColor
             iconImageView.tintColor = nil
         }
+    }
+
+    func updateState(_ style: ReserveInfoStyle) {
+        applyStyle(style)
+        additionalTaxiContainerView.isHidden = (style != .active)
+    }
+
+    func addAdditionalViews(_ views: [UIView]) {
+        views.forEach { additionalTaxiContainerView.addArrangedSubviews($0) }
     }
 
 }
