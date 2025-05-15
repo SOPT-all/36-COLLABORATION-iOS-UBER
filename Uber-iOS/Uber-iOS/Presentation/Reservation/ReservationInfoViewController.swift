@@ -9,9 +9,9 @@ import UIKit
 
 import SnapKit
 
-// MARK: - Properties
-
 final class ReservationInfoViewController: UIViewController {
+    
+    // MARK: - Properties
     
     // Content
     
@@ -115,60 +115,53 @@ final class ReservationInfoViewController: UIViewController {
     
     // Sections containing content
     
-    private lazy var startAndArriveSection = SectionView(
-        title: "출발/도착",
-        content: imageView,
-        contentEdge: .init(top: 10, left: 15, bottom: 10, right: 15)
-    )
-    
-    private lazy var pickupTimeSection = SectionView(
-        title: "픽업 시간",
-        content: pickupTimeLabel,
-        contentEdge: .init(top: 0, left: 25, bottom: 0, right: 25)
-    )
-    
-    private lazy var expectedArriveSection = SectionView(
-        title: "예정 도착 시간",
-        content: expectedArriveStack,
-        contentEdge: .init(top: 0, left: 25, bottom: 10, right: 25)
-    )
-    
-    private lazy var vehicleSelectionSection = SectionView(
-        title: "차량 선택",
-        subtitle: .init(string: "상황에 최적화 된 차량과 기사님을 만나보세요\n가장 훌륭한 탑승 경험을 누릴 수 있어요"),
-        content: vehicleSelectionButton,
-        contentEdge: .init(top: 16, left: 17.5, bottom: 6, right: 17.5)
-    )
-    
-    private lazy var expectedPaymentAccountSection = SectionView(
-        title: "예상 결제 금액",
-        subtitle: .init(string: "적용 가능한 할인 혜택이 없습니다.")
-            .prependImage(image: UIImage(resource: .promotion), imageSize: .init(width: 18, height: 18)),
-        content: expectedPaymentLabel,
-        contentEdge: .init(top: 0, left: 25, bottom: 10, right: 25)
-    )
-    
-    private lazy var directPaymentSection = SectionView(
-        title: "",
-        content: directPaymentView,
-        contentEdge: .init(top: 10, left: 18, bottom: 10, right: 18)
-    )
+    private lazy var sections: [SectionView] = [
+        .init(
+            title: "출발/도착",
+            content: imageView,
+            contentEdge: .init(top: 10, left: 15, bottom: 10, right: 15)
+        ),
+        .init(
+            title: "픽업 시간",
+            content: pickupTimeLabel,
+            contentEdge: .init(top: 0, left: 25, bottom: 0, right: 25)
+        ),
+        .init(
+            title: "예정 도착 시간",
+            content: expectedArriveStack,
+            contentEdge: .init(top: 0, left: 25, bottom: 10, right: 25)
+        ),
+        .init(
+            title: "차량 선택",
+            subtitle: .init(string: "상황에 최적화 된 차량과 기사님을 만나보세요\n가장 훌륭한 탑승 경험을 누릴 수 있어요"),
+            content: vehicleSelectionButton,
+            contentEdge: .init(top: 16, left: 17.5, bottom: 6, right: 17.5)
+        ),
+        .init(
+            title: "예상 결제 금액",
+            subtitle: .init(string: "적용 가능한 할인 혜택이 없습니다.")
+                .prependImage(image: UIImage(resource: .promotion), imageSize: .init(width: 18, height: 18)),
+            content: expectedPaymentLabel,
+            contentEdge: .init(top: 0, left: 25, bottom: 10, right: 25)
+        ).then { $0.headerAxis = .horizontal },
+        .init(
+            title: "",
+            content: directPaymentView,
+            contentEdge: .init(top: 10, left: 18, bottom: 10, right: 18)
+        )
+    ]
     
     // Container containing sections
     
     private lazy var contentStackView = UIStackView().then {
-        $0.backgroundColor = .bgGray
-        $0.axis = .vertical
-        $0.spacing = 8
-        expectedPaymentAccountSection.headerAxis = .horizontal
-        $0.addArrangedSubviews(startAndArriveSection,
-                               pickupTimeSection,
-                               expectedArriveSection,
-                               vehicleSelectionSection,
-                               expectedPaymentAccountSection,
-                               directPaymentSection)
-        
-        $0.setCustomSpacing(0, after: pickupTimeSection)
+        let stackView = $0
+        stackView.backgroundColor = .bgGray
+        stackView.axis = .vertical
+        stackView.spacing = 8
+        sections.forEach { section in
+            stackView.addArrangedSubview(section)
+        }
+        stackView.setCustomSpacing(0, after: sections[1])
     }
 }
 
@@ -208,7 +201,7 @@ extension ReservationInfoViewController {
         buttonContainer.snp.makeConstraints {
             $0.horizontalEdges.bottom.equalToSuperview()
         }
-
+        
         goTovehicleReservButton.snp.makeConstraints {
             $0.horizontalEdges.equalToSuperview().inset(10)
             $0.top.equalTo(buttonContainer.safeAreaLayoutGuide).inset(6)
