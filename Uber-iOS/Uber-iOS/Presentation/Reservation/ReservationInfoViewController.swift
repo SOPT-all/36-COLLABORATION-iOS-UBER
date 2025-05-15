@@ -56,6 +56,7 @@ final class ReservationInfoViewController: UIViewController {
         $0.snp.makeConstraints {
             $0.height.equalTo(56)
         }
+        $0.addTarget(self, action: #selector(vehicleSelectionButtonTapped), for: .touchUpInside)
     }
     
     private let expectedPaymentLabel = UILabel().then {
@@ -91,6 +92,9 @@ final class ReservationInfoViewController: UIViewController {
         }
         
         $0.addArrangedSubviews(cardImageView, paymentLabel, rightIconImageView)
+        let tapGesture = UITapGestureRecognizer()
+        tapGesture.addTarget(self, action: #selector(directPaymentButtonTapped))
+        $0.addGestureRecognizer(tapGesture)
     }
     
     // ScrollView
@@ -188,6 +192,18 @@ extension ReservationInfoViewController {
             $0.edges.equalTo(scrollView.contentLayoutGuide)
             $0.width.equalTo(scrollView.frameLayoutGuide)
         }
+    }
+}
+
+// MARK: - UI Action
+
+extension ReservationInfoViewController {
+    @objc private func vehicleSelectionButtonTapped() {
+        
+    }
+    
+    @objc private func directPaymentButtonTapped() {
+       
     }
 }
 
