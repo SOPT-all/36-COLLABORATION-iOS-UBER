@@ -22,18 +22,13 @@ final class ReserveNoticeView: UIView {
         $0.textColor = .sub2
         $0.numberOfLines = 0
         $0.lineBreakMode = .byCharWrapping
-        //
-        $0.layer.borderColor = UIColor.red.cgColor
-        $0.layer.borderWidth = 1
+        $0.setTextWithLineHeight(text: $0.text, lineHeight: -2)
     }
 
     private let contentStackView = UIStackView().then {
         $0.axis = .horizontal
         $0.spacing = 20
         $0.alignment = .center
-        //
-        $0.layer.borderColor = UIColor.blue.cgColor
-        $0.layer.borderWidth = 1
     }
 
     // MARK: - Initializer
@@ -61,11 +56,6 @@ final class ReserveNoticeView: UIView {
         iconImageView.snp.makeConstraints {
             $0.size.equalTo(24)
         }
-        contentLabel.setContentHuggingPriority(.defaultLow, for: .horizontal)
-        contentLabel.setContentCompressionResistancePriority(
-            .defaultHigh,
-            for: .horizontal
-        )
         contentStackView.snp.makeConstraints {
             $0.edges.equalToSuperview()
         }
