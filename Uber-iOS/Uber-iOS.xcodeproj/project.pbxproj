@@ -12,9 +12,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		1484F3C12DD1EA13009F1EC2 /* Secrets.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Secrets.xcconfig; sourceTree = "<group>"; };
-		1497B19B2DCCD655007B5E1B /* Uber-iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Uber-iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		471A994D2DD0D46500368E2D /* Secrets.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Secrets.xcconfig; sourceTree = "<group>"; };
+		9853E13E2DD225CB0061EDDC /* Secrets.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Secrets.xcconfig; sourceTree = "<group>"; };
+		988989A62DD39F8B00215B7E /* Uber-iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Uber-iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
@@ -24,8 +23,12 @@
 				Config/Secret.swift,
 				"Extension/NSMutableAttributedString+.swift",
 				"Extension/String+.swift",
+				Base/BaseViewController.swift,
+				"Extension/NSObject+.swift",
+				"Extension/UIButton+.swift",
 				"Extension/UILabel+.swift",
 				"Extension/UIStackView+.swift",
+				"Extension/UIView+.swift",
 				"Resources/Extension/UIFont+.swift",
 				Resources/Resources/Assets.xcassets,
 				"Resources/Resources/Font/SUIT-Bold.otf",
@@ -90,19 +93,10 @@
 		1497B1922DCCD655007B5E1B = {
 			isa = PBXGroup;
 			children = (
-				1484F3C12DD1EA13009F1EC2 /* Secrets.xcconfig */,
-				471A994D2DD0D46500368E2D /* Secrets.xcconfig */,
+				9853E13E2DD225CB0061EDDC /* Secrets.xcconfig */,
 				147249AC2DCCDCE90093B866 /* Uber-iOS */,
-				1497B19C2DCCD655007B5E1B /* Products */,
+				988989A62DD39F8B00215B7E /* Uber-iOS.app */,
 			);
-			sourceTree = "<group>";
-		};
-		1497B19C2DCCD655007B5E1B /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				1497B19B2DCCD655007B5E1B /* Uber-iOS.app */,
-			);
-			name = Products;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -131,7 +125,7 @@
 				1497B1B72DCCD721007B5E1B /* Then */,
 			);
 			productName = "Uber-iOS";
-			productReference = 1497B19B2DCCD655007B5E1B /* Uber-iOS.app */;
+			productReference = 988989A62DD39F8B00215B7E /* Uber-iOS.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -163,7 +157,7 @@
 				1497B1B62DCCD721007B5E1B /* XCRemoteSwiftPackageReference "Then" */,
 			);
 			preferredProjectObjectVersion = 77;
-			productRefGroup = 1497B19C2DCCD655007B5E1B /* Products */;
+			productRefGroup = 1497B1922DCCD655007B5E1B;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
@@ -195,20 +189,19 @@
 /* Begin XCBuildConfiguration section */
 		1497B1AF2DCCD656007B5E1B /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 471A994D2DD0D46500368E2D /* Secrets.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = X58MVPBY9R;
+				DEVELOPMENT_TEAM = 6B47X24XTW;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Uber-iOS/Global/Setting/Info.plist";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -228,20 +221,19 @@
 		};
 		1497B1B02DCCD656007B5E1B /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 471A994D2DD0D46500368E2D /* Secrets.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = X58MVPBY9R;
+				DEVELOPMENT_TEAM = 6B47X24XTW;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Uber-iOS/Global/Setting/Info.plist";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -261,7 +253,6 @@
 		};
 		1497B1B12DCCD656007B5E1B /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 471A994D2DD0D46500368E2D /* Secrets.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
@@ -325,7 +316,6 @@
 		};
 		1497B1B22DCCD656007B5E1B /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 471A994D2DD0D46500368E2D /* Secrets.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
