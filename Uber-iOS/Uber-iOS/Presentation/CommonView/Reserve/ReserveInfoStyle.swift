@@ -7,6 +7,6 @@
 
 enum ReserveInfoStyle {
     case info
-    case suggestion
-    case selected
+    case inactive
+    case active
 }
