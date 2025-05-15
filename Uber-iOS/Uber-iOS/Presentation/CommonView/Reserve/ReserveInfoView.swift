@@ -111,6 +111,7 @@ final class ReserveInfoView: UIView {
 
     func configure(_ style: ReserveInfoStyle) {
         switch style {
+            
         case let .info(icon, title, subtitle):
             setContent(icon: icon, title: title, subtitle: subtitle)
             applyBorder(width: 0, color: nil)
@@ -119,7 +120,7 @@ final class ReserveInfoView: UIView {
 
         case let .inactive(icon, title, subtitle):
             setContent(icon: icon, title: title, subtitle: subtitle)
-            applyBorder(width: 1, color: UIColor.bgGray.cgColor)
+            applyBorder(width: 1, color: UIColor.graysub.cgColor)
             iconImageView.tintColor = .iconInactive
             iconImageView.image = iconImageView.image?.withRenderingMode(
                 .alwaysTemplate
