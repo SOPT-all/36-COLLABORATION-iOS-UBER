@@ -109,7 +109,7 @@ final class ReserveInfoView: UIView {
 
     // MARK: - Public Configurator
 
-    func applyStyle(_ style: ReserveInfoStyle) {
+    func configure(_ style: ReserveInfoStyle) {
         switch style {
         case let .info(icon, title, subtitle):
             setContent(icon: icon, title: title, subtitle: subtitle)
