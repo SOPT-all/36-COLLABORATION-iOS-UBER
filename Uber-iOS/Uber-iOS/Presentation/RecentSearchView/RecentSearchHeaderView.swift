@@ -13,6 +13,8 @@ final class RecentSearchHeaderView: UIView {
 
     // MARK: - Properties
 
+    private let contentView = UIView()
+
     private let iconImageView = UIImageView().then {
         $0.image = .time
         $0.contentMode = .scaleAspectFit
@@ -23,8 +25,11 @@ final class RecentSearchHeaderView: UIView {
         $0.font = .body3_sb14
         $0.textColor = .sub2
     }
+    
+    private let spacerView = UIView()
+    
 
-    let allDeleteLabel = UIButton(type: .system).then {
+    let allDeleteButton = UIButton(type: .system).then {
         $0.setTitle("전체 삭제", for: .normal)
         $0.setTitleColor(.point2, for: .normal)
         $0.titleLabel?.font = .caption_m12
@@ -45,12 +50,26 @@ final class RecentSearchHeaderView: UIView {
     // MARK: - Configure
 
     private func configure() {
-        addSubviews(iconImageView, recentSearchLabel, allDeleteLabel)
+        
+        addSubview(contentView)
+        contentView.addSubviews(
+            iconImageView,
+            recentSearchLabel,
+            spacerView,
+            allDeleteButton
+        )
     }
 
     // MARK: - Layout
 
     private func setConstraints() {
+
+        contentView.snp.makeConstraints {
+            $0.edges.equalToSuperview().inset(
+                UIEdgeInsets(top: 12, left: 20, bottom: 12, right: 20)
+            )
+        }
+
         iconImageView.snp.makeConstraints {
             $0.leading.equalToSuperview()
             $0.centerY.equalToSuperview()
@@ -61,11 +80,20 @@ final class RecentSearchHeaderView: UIView {
             $0.leading.equalTo(iconImageView.snp.trailing).offset(24)
             $0.centerY.equalToSuperview()
         }
+        
+        spacerView.snp.makeConstraints {
+            $0.leading.equalTo(recentSearchLabel.snp.trailing)
+            $0.trailing.equalTo(allDeleteButton.snp.leading)
+            $0.centerY.equalToSuperview()
+            $0.width.equalTo(181)
+        }
 
-        allDeleteLabel.snp.makeConstraints {
+        allDeleteButton.snp.makeConstraints {
             $0.trailing.equalToSuperview()
             $0.centerY.equalToSuperview()
         }
+
     }
+    
 
 }
