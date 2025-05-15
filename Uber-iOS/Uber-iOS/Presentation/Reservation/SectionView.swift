@@ -65,6 +65,7 @@ final class SectionView: UIView {
         titleLabel.text = title
         subtitleLabel.attributedText = subtitle        
         titleLabel.setTextWithLineHeight(text: title, lineHeight: 36)
+        
         // Set topContainer
         
         if subtitle != nil {
@@ -74,7 +75,8 @@ final class SectionView: UIView {
         }
         
         topContainerView.isLayoutMarginsRelativeArrangement = true
-        topContainerView.layoutMargins = UIEdgeInsets(top: 10, left: 25, bottom: 10, right: 25)
+        topContainerView.layoutMargins = UIEdgeInsets(top: 10, left: 25, bottom: 0, right: 25)
+        topContainerView.layoutMargins.top += 10
         
         // Set bottomContainer
         
@@ -82,7 +84,7 @@ final class SectionView: UIView {
         
         content.snp.makeConstraints {
             $0.leading.equalToSuperview().inset(contentEdge.left)
-            $0.top.equalToSuperview().inset(contentEdge.top + 10)
+            $0.top.equalToSuperview().inset(contentEdge.top)
             $0.bottom.equalToSuperview().inset(contentEdge.bottom + 10)
             $0.trailing.equalToSuperview().inset(contentEdge.right)
         }

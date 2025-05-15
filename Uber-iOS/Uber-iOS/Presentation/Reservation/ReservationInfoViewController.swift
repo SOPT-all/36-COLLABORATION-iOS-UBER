@@ -104,13 +104,13 @@ final class ReservationInfoViewController: UIViewController {
     private lazy var startAndArriveSection = SectionView(
         title: "출발/도착",
         content: imageView,
-        contentEdge: .init(top: 10, left: 10, bottom: 10, right: 10)
+        contentEdge: .init(top: 10, left: 15, bottom: 10, right: 15)
     )
     
     private lazy var pickupTimeSection = SectionView(
         title: "픽업 시간",
         content: pickupTimeLabel,
-        contentEdge: .init(top: 0, left: 25, bottom: 10, right: 25)
+        contentEdge: .init(top: 0, left: 25, bottom: 0, right: 25)
     )
     
     private lazy var expectedArriveSection = SectionView(
@@ -123,7 +123,7 @@ final class ReservationInfoViewController: UIViewController {
         title: "차량 선택",
         subtitle: .init(string: "상황에 최적화 된 차량과 기사님을 만나보세요\n가장 훌륭한 탑승 경험을 누릴 수 있어요"),
         content: vehicleSelectionButton,
-        contentEdge: .init(top: 6, left: 17.5, bottom: 6, right: 17.5)
+        contentEdge: .init(top: 16, left: 17.5, bottom: 6, right: 17.5)
     )
     
     private lazy var expectedPaymentAccountSection = SectionView(
