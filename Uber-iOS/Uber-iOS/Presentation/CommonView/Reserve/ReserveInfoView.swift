@@ -109,38 +109,50 @@ final class ReserveInfoView: UIView {
 
     // MARK: - Public Configurator
 
-    func setData(with icon: UIImage?, title: String, subtitle: String) {
+    func applyStyle(_ style: ReserveInfoStyle) {
+        switch style {
+        case let .info(icon, title, subtitle):
+            setContent(icon: icon, title: title, subtitle: subtitle)
+            applyBorder(width: 0, color: nil)
+            iconImageView.tintColor = nil
+            additionalTaxiContainerView.isHidden = true
+
+        case let .inactive(icon, title, subtitle):
+            setContent(icon: icon, title: title, subtitle: subtitle)
+            applyBorder(width: 1, color: UIColor.bgGray.cgColor)
+            iconImageView.tintColor = .iconInactive
+            iconImageView.image = iconImageView.image?.withRenderingMode(
+                .alwaysTemplate
+            )
+            additionalTaxiContainerView.isHidden = true
+
+        case let .active(icon, title, subtitle, views):
+            setContent(icon: icon, title: title, subtitle: subtitle)
+            applyBorder(width: 1, color: UIColor.btnActive.cgColor)
+            iconImageView.tintColor = nil
+            additionalTaxiContainerView.isHidden = false
+            addAdditionalViews(views)
+        }
+    }
+    
+    // MARK: - Helper
+
+    private func setContent(icon: UIImage?, title: String, subtitle: String) {
         iconImageView.image = icon
         titleLabel.text = title
         subTitleLabel.text = subtitle
     }
 
-    func applyStyle(_ style: ReserveInfoStyle) {
-        switch style {
-        case .info:
-            layer.borderWidth = 0
-            iconImageView.tintColor = nil
-        case .inactive:
-            layer.borderWidth = 1
-            layer.borderColor = UIColor.bgGray.cgColor
-            iconImageView.tintColor = .iconInactive
-            iconImageView.image = iconImageView.image?.withRenderingMode(
-                .alwaysTemplate
-            )
-        case .active:
-            layer.borderWidth = 1
-            layer.borderColor = UIColor.btnActive.cgColor
-            iconImageView.tintColor = nil
+    private func applyBorder(width: CGFloat, color: CGColor?) {
+        layer.borderWidth = width
+        layer.borderColor = color
+    }
+
+    private func addAdditionalViews(_ views: [UIView]) {
+        additionalTaxiContainerView.arrangedSubviews.forEach {
+            $0.removeFromSuperview()
         }
-    }
-
-    func updateState(_ style: ReserveInfoStyle) {
-        applyStyle(style)
-        additionalTaxiContainerView.isHidden = (style != .active)
-    }
-
-    func addAdditionalViews(_ views: [UIView]) {
-        views.forEach { additionalTaxiContainerView.addArrangedSubviews($0) }
+        views.forEach { additionalTaxiContainerView.addArrangedSubview($0) }
     }
 
 }
