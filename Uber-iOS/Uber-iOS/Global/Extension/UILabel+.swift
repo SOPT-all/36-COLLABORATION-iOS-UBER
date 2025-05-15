@@ -8,7 +8,7 @@
 import UIKit
 
 extension UILabel {
-
+    
     func setLabel(
         text: String? = "",
         alignment: NSTextAlignment = .center,
@@ -24,5 +24,30 @@ extension UILabel {
         self.font = font
         self.backgroundColor = backgroundColor
     }
+    
+    func setTextWithLineHeight(text: String?, lineHeight: CGFloat) {
+        if let text = text {
+            let style = NSMutableParagraphStyle()
+            style.maximumLineHeight = lineHeight
+            style.minimumLineHeight = lineHeight
+            
+            let range = NSRange(location: 0, length: text.count)
+            
+            let attributes: [NSAttributedString.Key: Any] = [
+                .paragraphStyle: style,
+                .baselineOffset: (lineHeight - font.lineHeight) / 2
+            ]          
+            
+            var mutableAttrString = NSMutableAttributedString(string: text)
+            
+            // 기존에 AttributedString이 존재한다면 덮어쓰기
+            if let attrString = self.attributedText {
+                mutableAttrString = NSMutableAttributedString(attributedString: attrString)
+            }
+            
+            mutableAttrString.addAttributes(attributes, range: range)
 
+            self.attributedText = mutableAttrString
+        }
+    }
 }

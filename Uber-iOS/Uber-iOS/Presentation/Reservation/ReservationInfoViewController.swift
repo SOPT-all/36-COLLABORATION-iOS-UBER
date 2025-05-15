@@ -23,18 +23,21 @@ final class ReservationInfoViewController: UIViewController {
         $0.font = .caption_m12
         $0.textColor = .sub1
         $0.attributedText = "05월 05일 (월) / 오전 20:16".replaceFont(pattern: "[0-9]|\\([ㄱ-ㅣ가-힣]\\)", replaceFont: .body2_sb16)
+        $0.setTextWithLineHeight(text: $0.text, lineHeight: 24)
     }
     
     private let expectedArriveLabel = UILabel().then {
         $0.font = .caption_m12
         $0.textColor = .sub1
         $0.attributedText = "오전 20:31".replaceFont(pattern: "[0-9]|\\([ㄱ-ㅣ가-힣]\\)", replaceFont: .body2_sb16)
+        $0.setTextWithLineHeight(text: $0.text, lineHeight: 24)
     }
     
     private let expectedArriveDetailLabel = UILabel().then {
         $0.font = .caption_m12
         $0.textColor = .sub1
         $0.text = "예상 운행 시간 약 25분 소요 예상"
+        $0.setTextWithLineHeight(text: $0.text, lineHeight: 18)
     }
     
     private lazy var expectedArriveStack = UIStackView().then {

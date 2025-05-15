@@ -63,8 +63,8 @@ final class SectionView: UIView {
     private func setupView(title: String, subtitle: NSMutableAttributedString?, content: UIView, contentEdge: UIEdgeInsets) {
         backgroundColor = .white
         titleLabel.text = title
-        subtitleLabel.attributedText = subtitle
-        
+        subtitleLabel.attributedText = subtitle        
+        titleLabel.setTextWithLineHeight(text: title, lineHeight: 36)
         // Set topContainer
         
         if subtitle != nil {
@@ -97,15 +97,5 @@ final class SectionView: UIView {
         contentView.snp.makeConstraints {
             $0.edges.equalToSuperview()
         }
-    }
-}
-
-
-extension NSMutableAttributedString {
-    func appendImage(_ image: UIImage) {
-        let imageAttrachment = NSTextAttachment()
-        imageAttrachment.image = image
-        let strImage = NSAttributedString(attachment: imageAttrachment)
-        self.append(strImage)
     }
 }
