@@ -97,10 +97,20 @@ final class ReservationInfoViewController: UIViewController {
         $0.addGestureRecognizer(tapGesture)
     }
     
+    private let buttonContainer = UIView().then {
+        $0.backgroundColor = .white
+    }
+    
+    private let goTovehicleReservButton = UIButton().then {
+        $0.setTitle("차량 서비스 예약", for: .normal)
+        $0.applyUberStyle()
+    }
+    
     // ScrollView
     
     private let scrollView = UIScrollView().then {
         $0.showsVerticalScrollIndicator = false
+        $0.contentInset = .init(top: 0, left: 0, bottom: 92, right: 0)
     }
     
     // Sections containing content
@@ -144,7 +154,6 @@ final class ReservationInfoViewController: UIViewController {
         contentEdge: .init(top: 10, left: 18, bottom: 10, right: 18)
     )
     
-    
     // Container containing sections
     
     private lazy var contentStackView = UIStackView().then {
@@ -179,7 +188,10 @@ extension ReservationInfoViewController {
 extension ReservationInfoViewController {
     private func addSubViews() {
         scrollView.addSubview(contentStackView)
-        view.addSubview(scrollView)
+        buttonContainer.addSubview(goTovehicleReservButton)
+        [scrollView, buttonContainer].forEach {
+            view.addSubview($0)
+        }
     }
     
     private func setLayout() {
@@ -192,6 +204,17 @@ extension ReservationInfoViewController {
             $0.edges.equalTo(scrollView.contentLayoutGuide)
             $0.width.equalTo(scrollView.frameLayoutGuide)
         }
+        
+        buttonContainer.snp.makeConstraints {
+            $0.horizontalEdges.bottom.equalToSuperview()
+        }
+
+        goTovehicleReservButton.snp.makeConstraints {
+            $0.horizontalEdges.equalToSuperview().inset(10)
+            $0.top.equalTo(buttonContainer.safeAreaLayoutGuide).inset(6)
+            $0.bottom.equalTo(buttonContainer.safeAreaLayoutGuide).inset(6)
+            $0.height.equalTo(56)
+        }
     }
 }
 
@@ -203,7 +226,7 @@ extension ReservationInfoViewController {
     }
     
     @objc private func directPaymentButtonTapped() {
-       
+        
     }
 }
 
