@@ -13,6 +13,11 @@ final class VehicleSelectionViewController: BaseViewController {
     
     // MARK: - Properties
     
+    // ScrollView
+    private let scrollView = UIScrollView().then {
+        $0.showsVerticalScrollIndicator = false
+    }
+    
     // Contents
     
     private let uberTaxiStack = UIStackView().then {
@@ -25,27 +30,39 @@ final class VehicleSelectionViewController: BaseViewController {
         $0.addArrangedSubviews(label1, label2)
     }
     
-    private let suggestedVehicleStack = UIStackView().then {
-        $0.axis = .vertical
-        $0.spacing = 20
-        let suggestedAirplane = ReserveInfoView()
-        let suggestedBaby = ReserveInfoView()
-        let suggestedLongDrive = ReserveInfoView()
-        let suggestedForeigner = ReserveInfoView()
-        suggestedAirplane.configure(.active(icon: .icFlight32, title: "공항 갈 때", subtitle: "캐리어 걱정 없이 쾌적하게 이동", additionalViews: []))
-        suggestedBaby.configure(.inactive(icon: .icChildCare32, title: "아기와 함께 할 때", subtitle: "카시트로 안전하게, 걱정없는 이동"))
-        suggestedLongDrive.configure(.inactive(icon: .icDirectionsCar32, title: "장거리 운전을 해야할 때", subtitle: "렌터카 빌릴 필요 없이 편안하게"))
-        suggestedForeigner.configure(.inactive(icon: .icGTranslate32, title: "외국인 손님과 함께", subtitle: "외국어 가능 기사님으로 문제없는 의사소통"))
-        $0.addArrangedSubviews(suggestedAirplane, suggestedBaby, suggestedLongDrive, suggestedForeigner)
+    private lazy var reserveInfoViews: [ReserveInfoView] = {
+        
+        // Define initial model
+        
+        let configures: [ReserveInfoStyle] = [
+            .active(icon: .icFlight32, title: "공항 갈 때", subtitle: "캐리어 걱정 없이 쾌적하게 이동", additionalViews: []),
+            .inactive(icon: .icChildCare32, title: "아기와 함께 할 때", subtitle: "카시트로 안전하게, 걱정없는 이동"),
+            .inactive(icon: .icDirectionsCar32, title: "장거리 운전을 해야할 때", subtitle: "렌터카 빌릴 필요 없이 편안하게"),
+            .inactive(icon: .icGTranslate32, title: "외국인 손님과 함께", subtitle: "외국어 가능 기사님으로 문제없는 의사소통")
+        ]
+        
+        // Add gesture & configure
+        
+        let reserveInfoViews: [ReserveInfoView] = configures.map { configure in
+                .init().then {
+                    $0.configure(configure)
+                    $0.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(reserveInfoTapped(_:))))
+                }
+        }
+        
+        return reserveInfoViews
+    }()
+    
+    private lazy var suggestedVehicleStack = UIStackView().then {
+        let stackView = $0
+        stackView.axis = .vertical
+        stackView.spacing = 20
+        reserveInfoViews.forEach {
+            stackView.addArrangedSubview($0)
+        }
     }
     
-    // ScrollView
-    
-    private let scrollView = UIScrollView().then {
-        $0.showsVerticalScrollIndicator = false        
-    }
-    
-    // Sections
+    // Sections containing contents
     
     private lazy var sections: [SectionView] = [
         .init(
@@ -61,7 +78,7 @@ final class VehicleSelectionViewController: BaseViewController {
             contentEdge: .init(top: 20, left: 10, bottom: 10, right: 10))
     ]
     
-    // Container containing contents
+    // Container containing sections
     
     private lazy var contentStackView = UIStackView().then {
         let stackView = $0
@@ -105,4 +122,15 @@ extension VehicleSelectionViewController {
 
 #Preview {
     VehicleSelectionViewController()
+}
+
+// MARK: - UIAction
+
+extension VehicleSelectionViewController {
+    @objc private func reserveInfoTapped(_ gesture: UITapGestureRecognizer) {
+        guard let tappedView = gesture.view as? ReserveInfoView else { return }
+        // TODO: 임의로 컬러를 바꾸는중 인터페이스 변경이 필요함
+        reserveInfoViews.forEach { $0.layer.borderColor = UIColor.graysub.cgColor }
+        tappedView.layer.borderColor = UIColor.btnActive.cgColor
+    }
 }
