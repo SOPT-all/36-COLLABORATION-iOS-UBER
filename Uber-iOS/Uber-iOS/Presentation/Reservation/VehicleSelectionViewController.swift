@@ -16,6 +16,7 @@ final class VehicleSelectionViewController: BaseViewController {
     // ScrollView
     private let scrollView = UIScrollView().then {
         $0.showsVerticalScrollIndicator = false
+        $0.contentInset = .init(top: 0, left: 0, bottom: 92, right: 0)
     }
     
     // Contents
