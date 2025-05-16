@@ -22,8 +22,6 @@ final class RecentSearchCell: UIView {
     private let titleLabel = UILabel().then {
         $0.font = .body1_sb18
         $0.textColor = .primary
-        $0.numberOfLines = 1
-        $0.lineBreakMode = .byTruncatingTail
     }
 
     private let locationLabel = UILabel().then {
