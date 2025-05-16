@@ -62,6 +62,15 @@ final class VehicleSelectionViewController: BaseViewController {
         }
     }
     
+    private let buttonContainer = UIView().then {
+        $0.backgroundColor = .white
+    }
+    
+    private let goToReservInfoButton = UIButton().then {
+        $0.setTitle("차량 서비스 예약", for: .normal)
+        $0.applyUberStyle()
+    }
+    
     // Sections containing contents
     
     private lazy var sections: [SectionView] = [
@@ -95,7 +104,8 @@ final class VehicleSelectionViewController: BaseViewController {
     
     override func configure() {
         scrollView.addSubview(contentStackView)
-        addSubviews(scrollView)
+        buttonContainer.addSubview(goToReservInfoButton)
+        addSubviews(scrollView, buttonContainer)
     }
     
     override func setConstraints() {
@@ -107,6 +117,17 @@ final class VehicleSelectionViewController: BaseViewController {
         contentStackView.snp.makeConstraints {
             $0.edges.equalTo(scrollView.contentLayoutGuide)
             $0.width.equalTo(scrollView.frameLayoutGuide)
+        }
+        
+        buttonContainer.snp.makeConstraints {
+            $0.horizontalEdges.bottom.equalToSuperview()
+        }
+        
+        goToReservInfoButton.snp.makeConstraints {
+            $0.horizontalEdges.equalToSuperview().inset(10)
+            $0.top.equalTo(buttonContainer.safeAreaLayoutGuide).inset(6)
+            $0.bottom.equalTo(buttonContainer.safeAreaLayoutGuide).inset(6)
+            $0.height.equalTo(56)
         }
     }
 }
