@@ -13,7 +13,11 @@ final class VehicleSelectionViewController: BaseViewController {
     
     // MARK: - Properties
     
+    // Contents
+    
+    
     // ScrollView
+    
     private let scrollView = UIScrollView().then {
         $0.showsVerticalScrollIndicator = false
     }
@@ -22,8 +26,8 @@ final class VehicleSelectionViewController: BaseViewController {
     
     private let sections: [SectionView] = [
         .init(
-            title: "차량 선택",
-            subtitle: .init(string: "상황에 최적화 된 차량과 기사님을 만나보세요\n가장 훌륭한 탑승 경험을 누릴 수 있어요"),
+            title: "우버 기본 택시 제안",
+            subtitle: .init(string: "우버가 제공하는 기본 택시들을 이용해보세요.\n안전하고 편리한 여정을 보장합니다."),
             content: UIView(),
             contentEdge: .init(top: 0, left: 5.5, bottom: 0, right: 5.5)
         ),
