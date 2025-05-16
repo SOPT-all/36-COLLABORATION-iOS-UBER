@@ -13,14 +13,33 @@ final class VehicleSelectionViewController: BaseViewController {
     
     // MARK: - Properties
     
+    // ScrollView
     private let scrollView = UIScrollView().then {
         $0.showsVerticalScrollIndicator = false
     }
     
+    // Sections
+    
+    private let sections: [SectionView] = [
+        .init(
+            title: "차량 선택",
+            subtitle: .init(string: "상황에 최적화 된 차량과 기사님을 만나보세요\n가장 훌륭한 탑승 경험을 누릴 수 있어요"),
+            content: UIView(),
+            contentEdge: .init()
+        )
+    ]
+    
+    // Container containing contents
+    
     private lazy var contentStackView = UIStackView().then {
-        $0.backgroundColor = .bgGray
-        $0.axis = .vertical
-        $0.spacing = 8
+        let stackView = $0
+        stackView.backgroundColor = .bgGray
+        stackView.axis = .vertical
+        stackView.spacing = 8
+        
+        sections.forEach { section in
+            stackView.addArrangedSubview(section)
+        }
     }
     
     // MARK: - Layout
