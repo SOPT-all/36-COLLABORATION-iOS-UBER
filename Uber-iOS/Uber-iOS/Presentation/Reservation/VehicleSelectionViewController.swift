@@ -142,10 +142,6 @@ extension VehicleSelectionViewController {
     }
 }
 
-#Preview {
-    VehicleSelectionViewController()
-}
-
 // MARK: - UIAction
 
 extension VehicleSelectionViewController {
@@ -155,4 +151,8 @@ extension VehicleSelectionViewController {
         reserveInfoViews.forEach { $0.layer.borderColor = UIColor.graysub.cgColor }
         tappedView.layer.borderColor = UIColor.btnActive.cgColor
     }
+}
+
+#Preview {
+    VehicleSelectionViewController()
 }
