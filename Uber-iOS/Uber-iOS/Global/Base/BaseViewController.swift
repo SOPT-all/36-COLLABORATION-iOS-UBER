@@ -6,30 +6,27 @@
 //
 import UIKit
 
-import SnapKit
-
 class BaseViewController: UIViewController {
-    
+
     // MARK: - LifeCycle
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         configure()
         setConstraints()
     }
-    
+
     // MARK: - Configure UI
-    
+
     func configure() {
         view.backgroundColor = UIColor.bgWhite
     }
-    
+
     // MARK: - Layout
-    
-    func setConstraints() {
-    }
-    
+
+    func setConstraints() {}
+
     func addSubviews(_ views: UIView...) {
-        views.forEach { view.addSubview($0) }
+            views.forEach { view.addSubview($0) }
+        }
     }
-}

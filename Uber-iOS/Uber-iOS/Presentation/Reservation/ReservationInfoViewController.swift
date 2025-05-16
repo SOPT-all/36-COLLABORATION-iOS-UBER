@@ -202,7 +202,7 @@ final class ReservationInfoViewController: BaseViewController {
 
 extension ReservationInfoViewController {
     @objc private func vehicleSelectionButtonTapped() {
-        
+        navigationController?.pushViewController(HomeViewController(), animated: true)
     }
     
     @objc private func directPaymentButtonTapped() {
