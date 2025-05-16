@@ -25,8 +25,13 @@ final class VehicleSelectionViewController: BaseViewController {
             title: "차량 선택",
             subtitle: .init(string: "상황에 최적화 된 차량과 기사님을 만나보세요\n가장 훌륭한 탑승 경험을 누릴 수 있어요"),
             content: UIView(),
-            contentEdge: .init()
-        )
+            contentEdge: .init(top: 0, left: 5.5, bottom: 0, right: 5.5)
+        ),
+        .init(
+            title: "상황별 맞춤 차량 제안",
+            subtitle: .init(string: "상황에 최적화 된 차량과 기사님을 만나보세요 \n가장 훌륭한 탑승 경험을 누릴 수 있어요"),
+            content: UIView(),
+            contentEdge: .init())
     ]
     
     // Container containing contents
