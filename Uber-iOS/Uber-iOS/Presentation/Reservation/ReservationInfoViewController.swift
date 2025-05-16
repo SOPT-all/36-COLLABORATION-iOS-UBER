@@ -9,8 +9,8 @@ import UIKit
 
 import SnapKit
 
-final class ReservationInfoViewController: UIViewController {
-    
+final class ReservationInfoViewController: BaseViewController {
+        
     // MARK: - Properties
     
     // Content
@@ -163,23 +163,10 @@ final class ReservationInfoViewController: UIViewController {
         }
         stackView.setCustomSpacing(0, after: sections[1])
     }
-}
-
-// MARK: - LifeCycle
-
-extension ReservationInfoViewController {
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        view.backgroundColor = .white
-        addSubViews()
-        setLayout()
-    }
-}
-
-// MARK: - Layout
-
-extension ReservationInfoViewController {
-    private func addSubViews() {
+    
+    // Override method
+    
+    override func configure() {
         scrollView.addSubview(contentStackView)
         buttonContainer.addSubview(goTovehicleReservButton)
         [scrollView, buttonContainer].forEach {
@@ -187,7 +174,7 @@ extension ReservationInfoViewController {
         }
     }
     
-    private func setLayout() {
+    override func setConstraints() {
         scrollView.snp.makeConstraints {
             $0.leading.trailing.bottom.equalToSuperview()
             $0.top.equalTo(view.safeAreaLayoutGuide)
