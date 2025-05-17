@@ -124,5 +124,12 @@ final class VehicleSelectionButton: UIButton {
     func setUnselected() {
         layer.borderWidth = 0
     }
+    
+    func configure(_ vehicle: TaxiInfo) {
+        self.vehicleNameLabel.text = vehicle.type
+        self.guestLabel.text = "\(vehicle.guests)"
+        self.descriptionLabel.text = vehicle.commnet
+        self.priceLabel.text = "\(vehicle.min-vehicle.max)"
+    }
 }
 

@@ -9,6 +9,24 @@ import UIKit
 
 import SnapKit
 
+struct TaxiInfo {
+    let id: Int
+    let type: String
+    let min: Double
+    let max: Double
+    let guests: Int
+    let commnet: String
+    
+    static func dummy() -> [TaxiInfo] {
+        [
+            .init(id: 0, type: "STANDARD", min: 20000, max: 22000, guests: 4, commnet: "택시 안내 코멘트"),
+            .init(id: 1, type: "STANDARD", min: 20000, max: 22000, guests: 4, commnet: "택시 안내 코멘트"),
+            .init(id: 2, type: "STANDARD", min: 20000, max: 22000, guests: 4, commnet: "택시 안내 코멘트"),
+            .init(id: 3, type: "STANDARD", min: 20000, max: 22000, guests: 4, commnet: "택시 안내 코멘트")
+        ]
+    }
+}
+
 final class VehicleSelectionViewController: BaseViewController {
     
     // MARK: - Properties
@@ -19,16 +37,21 @@ final class VehicleSelectionViewController: BaseViewController {
         $0.contentInset = .init(top: 0, left: 0, bottom: 92, right: 0)
     }
     
+    private lazy var taxiList: [VehicleSelectionButton] = TaxiInfo.dummy().map {
+        let button = VehicleSelectionButton()
+        button.configure($0)
+        button.addTarget(self, action: #selector(veheicleSelectionButtonTapped(_:)), for: .touchUpInside)
+        return button
+    }
+    
     // Contents
     
-    private let uberTaxiStack = UIStackView().then {
-        $0.axis = .vertical
-        let label1 = UILabel()
-        let label2 = UILabel()
-        
-        label1.text = "택시1"
-        label2.text = "택시2"
-        $0.addArrangedSubviews(label1, label2)
+    private lazy var uberTaxiStack = UIStackView().then {
+        let stackView = $0
+        stackView.axis = .vertical
+        taxiList[0...1].forEach {
+            stackView.addArrangedSubview($0)
+        }
     }
     
     private lazy var reserveInfoViews: [ReserveInfoView] = {
@@ -36,7 +59,7 @@ final class VehicleSelectionViewController: BaseViewController {
         // Define initial model
         
         let configures: [ReserveInfoStyle] = [
-            .active(icon: .icFlight32, title: "공항 갈 때", subtitle: "캐리어 걱정 없이 쾌적하게 이동", additionalViews: []),
+            .active(icon: .icFlight32, title: "공항 갈 때", subtitle: "캐리어 걱정 없이 쾌적하게 이동", additionalViews: taxiList[2...3].map { $0}),
             .inactive(icon: .icChildCare32, title: "아기와 함께 할 때", subtitle: "카시트로 안전하게, 걱정없는 이동"),
             .inactive(icon: .icDirectionsCar32, title: "장거리 운전을 해야할 때", subtitle: "렌터카 빌릴 필요 없이 편안하게"),
             .inactive(icon: .icGTranslate32, title: "외국인 손님과 함께", subtitle: "외국어 가능 기사님으로 문제없는 의사소통")
@@ -150,6 +173,11 @@ extension VehicleSelectionViewController {
         // TODO: 임의로 컬러를 바꾸는중 인터페이스 변경이 필요함
         reserveInfoViews.forEach { $0.layer.borderColor = UIColor.graysub.cgColor }
         tappedView.layer.borderColor = UIColor.btnActive.cgColor
+    }
+    
+    @objc private func veheicleSelectionButtonTapped(_ button: VehicleSelectionButton) {
+        taxiList.forEach { $0.setUnselected() }
+        button.setSelected()
     }
 }
 
