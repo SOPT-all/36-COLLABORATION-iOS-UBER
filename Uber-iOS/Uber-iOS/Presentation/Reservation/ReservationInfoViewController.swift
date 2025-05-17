@@ -15,6 +15,11 @@ final class ReservationInfoViewController: BaseViewController {
     
     // Content
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        title = "test"
+    }
+    
     private let imageView = UIImageView().then {
         $0.image = UIImage(resource: .route)
     }
@@ -203,7 +208,6 @@ final class ReservationInfoViewController: BaseViewController {
 extension ReservationInfoViewController {
     @objc private func vehicleSelectionButtonTapped() {
         let someViewController = SomeViewController()
-        someViewController.title = "차량 서비스 예약"
         navigationController?.pushViewController(someViewController, animated: true)
     }
     
@@ -212,7 +216,41 @@ extension ReservationInfoViewController {
     }
 }
 
-final class SomeViewController: UIViewController {
+extension ReservationInfoViewController: UberNavigationConfigurable {
+    var uberTitle: String? {
+        "힘들어"
+    }
+    
+    var prefersLargeTitle: Bool {
+        false
+    }
+    
+    var alignTitleLeft: Bool {
+        false
+    }
+    
+    var isVertical: Bool {
+        false
+    }
+}
+
+final class SomeViewController: UIViewController, UberNavigationConfigurable {
+    var uberTitle: String? {
+        "어쩔"
+    }
+    
+    var prefersLargeTitle: Bool {
+        true
+    }
+    
+    var alignTitleLeft: Bool {
+        true
+    }
+    
+    var isVertical: Bool {
+        true
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
