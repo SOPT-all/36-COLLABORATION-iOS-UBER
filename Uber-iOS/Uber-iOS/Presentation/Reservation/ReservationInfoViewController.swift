@@ -202,11 +202,20 @@ final class ReservationInfoViewController: BaseViewController {
 
 extension ReservationInfoViewController {
     @objc private func vehicleSelectionButtonTapped() {
-        navigationController?.pushViewController(HomeViewController(), animated: true)
+        let someViewController = SomeViewController()
+        someViewController.title = "차량 서비스 예약"
+        navigationController?.pushViewController(someViewController, animated: true)
     }
     
     @objc private func directPaymentButtonTapped() {
         
+    }
+}
+
+final class SomeViewController: UIViewController {
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        view.backgroundColor = .white
     }
 }
 
