@@ -21,7 +21,10 @@
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
 				Base/BaseViewController.swift,
+				Config/Secret.swift,
+				"Extension/NSMutableAttributedString+.swift",
 				"Extension/NSObject+.swift",
+				"Extension/String+.swift",
 				"Extension/UIButton+.swift",
 				"Extension/UIView+.swift",
 				"Resources/Extension/UIFont+.swift",
@@ -189,7 +192,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 6B47X24XTW;
+				DEVELOPMENT_TEAM = X58MVPBY9R;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Uber-iOS/Global/Setting/Info.plist";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -221,7 +224,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 6B47X24XTW;
+				DEVELOPMENT_TEAM = X58MVPBY9R;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Uber-iOS/Global/Setting/Info.plist";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
