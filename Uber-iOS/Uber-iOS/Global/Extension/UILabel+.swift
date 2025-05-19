@@ -35,6 +35,7 @@ extension UILabel {
             let attributes: [NSAttributedString.Key: Any] = [
                 .paragraphStyle: style,
                 .baselineOffset: (lineHeight - font.lineHeight) / 2
+            ]
             
             var mutableAttrString = NSMutableAttributedString(string: text)
             
