@@ -15,15 +15,15 @@ final class HomeHeaderView: UIView {
     private let titleLabel = UILabel().then {
         $0.text = "어디 가실 예정이세요?"
         $0.textColor = .black
-        $0.font = UIFont.title1_eb32
+        $0.font = .title1_eb32
         $0.textAlignment = .left
         $0.numberOfLines = 1
     }
 
     private let descriptionLabel = UILabel().then {
         $0.text = "다양한 상황에서 차량을 불러보세요."
-        $0.textColor = UIColor.sub2
-        $0.font = UIFont.body2_m16
+        $0.textColor = .sub2
+        $0.font = .body2_m16
         $0.textAlignment = .left
         $0.numberOfLines = 1
     }
@@ -45,7 +45,7 @@ final class HomeHeaderView: UIView {
         addSubviews(titleLabel, descriptionLabel)
 
         titleLabel.snp.makeConstraints {
-            $0.top.equalToSuperview().inset(12)
+            $0.top.equalToSuperview()
             $0.leading.trailing.equalToSuperview().inset(16)
         }
 

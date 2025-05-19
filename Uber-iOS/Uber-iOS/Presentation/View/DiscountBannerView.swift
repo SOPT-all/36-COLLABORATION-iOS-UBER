@@ -13,7 +13,7 @@ final class UberDiscountBannerView: UIView {
     // MARK: - UI Components
 
     private let containerView = UIView().then {
-        $0.backgroundColor = UIColor(red: 237/255, green: 243/255, blue: 255/255, alpha: 1) // 연파랑
+        $0.backgroundColor = UIColor(red: 0.933, green: 0.953, blue: 1.0, alpha: 1.0) //디자인 시스템에 없는 색상
         $0.layer.cornerRadius = 12
         $0.clipsToBounds = true
     }
@@ -21,7 +21,7 @@ final class UberDiscountBannerView: UIView {
     private let titleLabel = UILabel().then {
         $0.text = "우버 이용료 5000원 할인 받기"
         $0.textColor = UIColor.point1
-        $0.font = UIFont.body3_b14
+        $0.font = .body3_b14
     }
 
     private let nextImageView = UIImageView().then {

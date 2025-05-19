@@ -30,11 +30,10 @@ final class HomeViewController: BaseViewController {
 
     override func configure() {
         super.configure()
-        view.addSubview(headerView)
-        view.addSubview(buttonStackView)
-        view.addSubview(uberDiscountBanner)
-        view.addSubview(reserveBannerView)
-        view.addSubview(tabBar)
+        
+        [headerView, buttonStackView, uberDiscountBanner, reserveBannerView, tabBar].forEach {
+            view.addSubview($0)
+        }
         
         calendarButton.onTap = { [weak self] in
             let nextVC = ViewController()
@@ -68,33 +67,11 @@ final class HomeViewController: BaseViewController {
 
         tabBar.snp.makeConstraints {
             $0.leading.trailing.equalToSuperview()
-            $0.bottom.equalTo(view.safeAreaLayoutGuide)
-            $0.height.equalTo(85)
+            $0.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom)
         }
     }
 }
 
-
-struct PreviewProvider_HomeViewController: PreviewProvider {
-    static var previews: some View {
-        HomeViewController().toPreview()
-    }
+#Preview{
+    HomeViewController()
 }
-
-#if DEBUG
-extension UIViewController {
-    private struct Preview: UIViewControllerRepresentable {
-        let viewController: UIViewController
-
-        func makeUIViewController(context: Context) -> UIViewController {
-            return viewController
-        }
-
-        func updateUIViewController(_ uiViewController: UIViewController, context: Context) {}
-    }
-
-    func toPreview() -> some View {
-        Preview(viewController: self)
-    }
-}
-#endif

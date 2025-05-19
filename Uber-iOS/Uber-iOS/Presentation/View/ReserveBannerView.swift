@@ -12,7 +12,7 @@ final class ReserveBannerView: UIView {
     
     // MARK: - UI Components
     private let containerView = UIView().then {
-        $0.backgroundColor = UIColor.bgWhite
+        $0.backgroundColor = .bgWhite
         $0.layer.cornerRadius = 12
         $0.layer.borderWidth = 1
         $0.layer.borderColor = UIColor.bgGray.cgColor
@@ -28,16 +28,16 @@ final class ReserveBannerView: UIView {
     
     private let titleLabel = UILabel().then {
         $0.text = "미리 예약하고 걱정을\n내려놓으세요"
-        $0.font = UIFont.title3_eb20
-        $0.textColor = UIColor.primary
+        $0.font = .title3_eb20
+        $0.textColor = .primary
         $0.numberOfLines = 2
     }
     
     private let reserveButton = UIButton().then {
         $0.setTitle("Reserve 이용해보기", for: .normal)
         $0.setTitleColor(UIColor.primary, for: .normal)
-        $0.titleLabel?.font = UIFont.body3_m14
-        $0.backgroundColor = UIColor.bgWhite
+        $0.titleLabel?.font = .body3_m14
+        $0.backgroundColor = .bgWhite
         $0.layer.borderWidth = 1
         $0.layer.borderColor = UIColor.iconInactive.cgColor
         $0.clipsToBounds = true

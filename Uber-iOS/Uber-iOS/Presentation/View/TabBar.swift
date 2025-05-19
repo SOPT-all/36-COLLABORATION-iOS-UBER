@@ -20,7 +20,7 @@ final class TabBar: UIView {
         $0.axis = .horizontal
         $0.alignment = .center
         $0.distribution = .equalSpacing
-        $0.spacing = 62
+        $0.spacing = 46
     }
 
     private let homeButton = TabButton(imageName: "home", title: "홈")
@@ -57,13 +57,13 @@ final class TabBar: UIView {
 
         topBorder.snp.makeConstraints {
             $0.top.leading.trailing.equalToSuperview()
-            $0.height.equalTo(2)
+            $0.height.equalTo(1)
         }
 
         stackView.snp.makeConstraints {
-            $0.top.equalTo(topBorder.snp.bottom).offset(8)
-            $0.leading.trailing.equalToSuperview().inset(30)
-            $0.bottom.equalToSuperview().inset(8)
+            $0.top.equalTo(topBorder.snp.bottom).offset(19)
+            $0.leading.trailing.equalToSuperview().inset(46)
+            $0.bottom.equalToSuperview()
         }
     }
 
@@ -93,13 +93,13 @@ final class TabButton: UIButton {
 
     private let iconImageView = UIImageView().then {
         $0.contentMode = .scaleAspectFit
-        $0.tintColor = UIColor.iconInactive
+        $0.tintColor = .iconInactive
         $0.isUserInteractionEnabled = false
     }
 
     private let titleLabelCustom = UILabel().then {
-        $0.font = UIFont.caption_b12
-        $0.textColor = UIColor.iconInactive
+        $0.font = .caption_b12
+        $0.textColor = .iconInactive
         $0.textAlignment = .center
         $0.isUserInteractionEnabled = false
     }
@@ -125,7 +125,7 @@ final class TabButton: UIButton {
         let stack = UIStackView(arrangedSubviews: [iconImageView, titleLabelCustom]).then {
             $0.axis = .vertical
             $0.alignment = .center
-            $0.spacing = 2
+            $0.spacing = 1
             $0.isUserInteractionEnabled = false
         }
 

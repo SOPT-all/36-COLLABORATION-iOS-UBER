@@ -14,7 +14,7 @@ final class ServiceButtonView: UIView {
 
     // MARK: - UI Components
     private let containerButton = UIButton().then {
-        $0.backgroundColor = UIColor.bgGray
+        $0.backgroundColor = .bgGray
         $0.layer.cornerRadius = 12
         $0.clipsToBounds = true
         $0.isUserInteractionEnabled = true
@@ -25,8 +25,8 @@ final class ServiceButtonView: UIView {
     }
 
     private let titleLabel = UILabel().then {
-        $0.textColor = UIColor.primary
-        $0.font = UIFont.caption_sb12
+        $0.textColor = .primary
+        $0.font = .caption_sb12
         $0.textAlignment = .left
     }
 
