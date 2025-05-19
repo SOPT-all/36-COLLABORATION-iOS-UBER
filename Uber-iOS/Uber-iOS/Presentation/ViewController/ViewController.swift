@@ -8,7 +8,6 @@
 import SnapKit
 import Then
 import UIKit
-import SwiftUI
 
 class ViewController: BaseViewController {
     
@@ -62,9 +61,5 @@ class ViewController: BaseViewController {
             $0.top.equalTo(helloLabel.snp.bottom).offset(4)
         }
     }
-}
-
-#Preview{
-    ViewController()
 }
 
