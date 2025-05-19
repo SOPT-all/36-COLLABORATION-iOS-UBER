@@ -8,8 +8,19 @@
 import SnapKit
 import Then
 import UIKit
+import SwiftUI
 
 class ViewController: BaseViewController {
+    
+    private let departureField = SearchLocationTextField(
+        icon: UIImage(named: "departure"),
+        placeholder: "출발지 검색"
+    )
+
+    private let arrivalField = SearchLocationTextField(
+        icon: UIImage(named: "place"),
+        placeholder: "도착지 검색"
+    )
 
     private let helloLabel = UILabel().then {
         $0.text = "우버들아 안뇽 붕붕"
@@ -27,10 +38,21 @@ class ViewController: BaseViewController {
     
     override func configure() {
         super.configure()
-        addSubviews(helloLabel, subLabel)
+        addSubviews(departureField, arrivalField, helloLabel, subLabel)
     }
     
     override func setConstraints() {
+        departureField.snp.makeConstraints {
+            $0.top.equalTo(view.safeAreaLayoutGuide).offset(16)
+            $0.leading.trailing.equalToSuperview().inset(20)
+            $0.height.equalTo(56)
+        }
+
+        arrivalField.snp.makeConstraints {
+            $0.top.equalTo(departureField.snp.bottom).offset(8)
+            $0.leading.trailing.height.equalTo(departureField)
+        }
+        
         helloLabel.snp.makeConstraints {
             $0.center.equalToSuperview()
         }
@@ -41,3 +63,8 @@ class ViewController: BaseViewController {
         }
     }
 }
+
+#Preview{
+    ViewController()
+}
+

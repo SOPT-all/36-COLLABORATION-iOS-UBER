@@ -7,7 +7,6 @@
 import UIKit
 import SnapKit
 import Then
-import SwiftUI
 
 final class HomeViewController: BaseViewController {
 
@@ -73,28 +72,3 @@ final class HomeViewController: BaseViewController {
         }
     }
 }
-
-
-struct PreviewProvider_HomeViewController: PreviewProvider {
-    static var previews: some View {
-        HomeViewController().toPreview()
-    }
-}
-
-#if DEBUG
-extension UIViewController {
-    private struct Preview: UIViewControllerRepresentable {
-        let viewController: UIViewController
-
-        func makeUIViewController(context: Context) -> UIViewController {
-            return viewController
-        }
-
-        func updateUIViewController(_ uiViewController: UIViewController, context: Context) {}
-    }
-
-    func toPreview() -> some View {
-        Preview(viewController: self)
-    }
-}
-#endif
