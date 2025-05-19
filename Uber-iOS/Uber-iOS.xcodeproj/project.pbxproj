@@ -56,8 +56,9 @@
 		};
 		147249C22DCCDD0D0093B866 /* Network */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
-			path = Network;
-			sourceTree = "<group>";
+			name = Network;
+			path = "Uber-iOS/Network";
+			sourceTree = SOURCE_ROOT;
 		};
 		147249C42DCCDD1E0093B866 /* Presentation */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
