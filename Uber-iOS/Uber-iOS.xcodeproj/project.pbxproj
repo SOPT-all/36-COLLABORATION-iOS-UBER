@@ -13,7 +13,7 @@
 
 /* Begin PBXFileReference section */
 		9853E13E2DD225CB0061EDDC /* Secrets.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Secrets.xcconfig; sourceTree = "<group>"; };
-		988989A62DD39F8B00215B7E /* Uber-iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Uber-iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		985DCB1C2DD4FA5A003A24B1 /* Uber-iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Uber-iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
@@ -26,8 +26,6 @@
 				"Extension/NSObject+.swift",
 				"Extension/String+.swift",
 				"Extension/UIButton+.swift",
-				"Extension/UILabel+.swift",
-				"Extension/UIStackView+.swift",
 				"Extension/UIView+.swift",
 				"Resources/Extension/UIFont+.swift",
 				Resources/Resources/Assets.xcassets,
@@ -95,7 +93,7 @@
 			children = (
 				9853E13E2DD225CB0061EDDC /* Secrets.xcconfig */,
 				147249AC2DCCDCE90093B866 /* Uber-iOS */,
-				988989A62DD39F8B00215B7E /* Uber-iOS.app */,
+				985DCB1C2DD4FA5A003A24B1 /* Uber-iOS.app */,
 			);
 			sourceTree = "<group>";
 		};
@@ -125,7 +123,7 @@
 				1497B1B72DCCD721007B5E1B /* Then */,
 			);
 			productName = "Uber-iOS";
-			productReference = 988989A62DD39F8B00215B7E /* Uber-iOS.app */;
+			productReference = 985DCB1C2DD4FA5A003A24B1 /* Uber-iOS.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
