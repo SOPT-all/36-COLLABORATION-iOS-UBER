@@ -10,17 +10,17 @@ import Foundation
 enum EndPoint {
     case taxi  // 택시 종류 반환
     case location  // 출발지, 목적지 저장
-    case getSearch  // 검색 기록 조회
-    case allDeleteSearch  // 검색 기록 전체 삭제
-    case singleDeleteSearch(Double)  // 검색 기록 삭제
+    case getSearchKeywords  // 검색 기록 조회
+    case deleteAllSearchKeywords  // 검색 기록 전체 삭제
+    case deleteSingleSearchKeyword(Double)  // 검색 기록 삭제
 
     var httpMethod: HTTPMethodType {
         switch self {
-        case .taxi, .getSearch:
+        case .taxi, .getSearchKeywords:
             .get
         case .location:
             .post
-        case .allDeleteSearch, .singleDeleteSearch:
+        case .deleteAllSearchKeywords, .deleteSingleSearchKeyword:
             .delete
         }
     }
@@ -31,11 +31,11 @@ enum EndPoint {
             "/uber/v1/taxi"
         case .location:
             "/uber/v1/location"
-        case .getSearch:
+        case .getSearchKeywords:
             "/uber/v1/search"
-        case .allDeleteSearch:
+        case .deleteAllSearchKeywords:
             "/uber/v1/search"
-        case .singleDeleteSearch(let id):
+        case .deleteSingleSearchKeyword(let id):
             "/uber/v1/search/\(id)"
         }
     }
