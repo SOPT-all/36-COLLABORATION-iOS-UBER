@@ -21,6 +21,7 @@
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
 				Base/BaseViewController.swift,
+				Config/Secret.swift,
 				"Extension/NSMutableAttributedString+.swift",
 				"Extension/NSObject+.swift",
 				"Extension/String+.swift",
