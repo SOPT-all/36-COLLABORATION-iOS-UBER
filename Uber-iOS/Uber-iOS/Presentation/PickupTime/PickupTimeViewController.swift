@@ -118,12 +118,19 @@ final class PickupTimeViewController: UIViewController {
     private func setBindings() {
         datePicker.addTarget(self, action: #selector(dateChanged(_:)), for: .valueChanged)
     }
+    
+    private static let dateFormatter: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "h:mm a"
+        formatter.locale = Locale(identifier: "en_US_POSIX")
+        formatter.amSymbol = "am"
+        formatter.pmSymbol = "pm"
+        return formatter
+    }()
 
     @objc private func dateChanged(_ sender: UIDatePicker) {
-        let formatter = DateFormatter()
-        formatter.dateFormat = "a h:mm"
-        formatter.locale = Locale(identifier: "ko_KR")
-        arrivalLabel.text = "도착 시간 \(formatter.string(from: sender.date)) KST"
+        let formatted = Self.dateFormatter.string(from: sender.date)
+        arrivalLabel.text = "도착 시간 \(formatted) KST"
     }
 }
 
