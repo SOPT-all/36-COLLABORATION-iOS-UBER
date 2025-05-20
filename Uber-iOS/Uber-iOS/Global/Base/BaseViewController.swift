@@ -36,6 +36,7 @@ class BaseViewController: UIViewController {
             return
         }
         let navBar = UberNavigationBar()
+        navBar.backButton.addTarget(self, action: #selector(backButtonTapped), for: .touchUpInside)
         
         view.backgroundColor = .white
         navigationController?.isNavigationBarHidden = true
@@ -50,6 +51,10 @@ class BaseViewController: UIViewController {
         }
         
         additionalSafeAreaInsets.top = 56
+    }
+    
+    @objc func backButtonTapped() {
+        navigationController?.popViewController(animated: true)
     }
 }
 

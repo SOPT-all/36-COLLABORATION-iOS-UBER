@@ -205,7 +205,7 @@ final class ReservationInfoViewController: BaseViewController {
 // MARK: - UI Action
 
 extension ReservationInfoViewController {
-    @objc private func vehicleSelectionButtonTapped() {        
+    @objc private func vehicleSelectionButtonTapped() {  
     }
     
     @objc private func directPaymentButtonTapped() {

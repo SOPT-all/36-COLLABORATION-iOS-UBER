@@ -62,6 +62,7 @@ final class UberNavigationBar: UIView {
         backButton.snp.makeConstraints {
             $0.centerY.equalToSuperview()
             $0.leading.equalToSuperview().offset(18)
+            $0.size.equalTo(36)
         }
         
         titleLabel.snp.makeConstraints {
