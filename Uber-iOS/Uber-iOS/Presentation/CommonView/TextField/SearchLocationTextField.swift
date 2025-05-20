@@ -21,7 +21,7 @@ final class SearchLocationTextField: UIView {
         $0.borderStyle = .none
         $0.backgroundColor = .bgGray
         $0.font = .body2_m16
-        $0.textColor = UIColor.primary
+        $0.textColor = .primary
         $0.clearButtonMode = .whileEditing
     }
 
