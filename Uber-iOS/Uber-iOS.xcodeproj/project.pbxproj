@@ -12,6 +12,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		146C830D2DDCD4A100A5E339 /* Secrets.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Secrets.xcconfig; sourceTree = "<group>"; };
 		9853E13E2DD225CB0061EDDC /* Secrets.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Secrets.xcconfig; sourceTree = "<group>"; };
 		985DCB1C2DD4FA5A003A24B1 /* Uber-iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Uber-iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -97,6 +98,7 @@
 				9853E13E2DD225CB0061EDDC /* Secrets.xcconfig */,
 				147249AC2DCCDCE90093B866 /* Uber-iOS */,
 				985DCB1C2DD4FA5A003A24B1 /* Uber-iOS.app */,
+				146C830D2DDCD4A100A5E339 /* Secrets.xcconfig */,
 			);
 			sourceTree = "<group>";
 		};
@@ -256,7 +258,7 @@
 		};
 		1497B1B12DCCD656007B5E1B /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 9853E13E2DD225CB0061EDDC /* Secrets.xcconfig */;
+			baseConfigurationReference = 146C830D2DDCD4A100A5E339 /* Secrets.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
