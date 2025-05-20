@@ -15,14 +15,14 @@ struct TaxiInfo {
     let min: Double
     let max: Double
     let guests: Int
-    let commnet: String
+    let comment: String
     
     static func dummy() -> [TaxiInfo] {
         [
-            .init(id: 0, type: "STANDARD", min: 20000, max: 22000, guests: 4, commnet: "택시 안내 코멘트"),
-            .init(id: 1, type: "STANDARD", min: 20000, max: 22000, guests: 4, commnet: "택시 안내 코멘트"),
-            .init(id: 2, type: "STANDARD", min: 20000, max: 22000, guests: 4, commnet: "택시 안내 코멘트"),
-            .init(id: 3, type: "STANDARD", min: 20000, max: 22000, guests: 4, commnet: "택시 안내 코멘트")
+            .init(id: 0, type: "STANDARD", min: 20000, max: 22000, guests: 4, comment: "택시 안내 코멘트"),
+            .init(id: 1, type: "STANDARD", min: 20000, max: 22000, guests: 4, comment: "택시 안내 코멘트"),
+            .init(id: 2, type: "STANDARD", min: 20000, max: 22000, guests: 4, comment: "택시 안내 코멘트"),
+            .init(id: 3, type: "STANDARD", min: 20000, max: 22000, guests: 4, comment: "택시 안내 코멘트")
         ]
     }
 }

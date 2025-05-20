@@ -128,7 +128,7 @@ final class VehicleSelectionButton: UIButton {
     func configure(_ vehicle: TaxiInfo) {
         self.vehicleNameLabel.text = vehicle.type
         self.guestLabel.text = "\(vehicle.guests)"
-        self.descriptionLabel.text = vehicle.commnet
+        self.descriptionLabel.text = vehicle.comment
         self.priceLabel.text = "\(vehicle.min-vehicle.max)"
     }
 }
