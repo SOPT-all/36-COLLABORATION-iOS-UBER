@@ -32,7 +32,7 @@ class BaseViewController: UIViewController {
     }
     
     private func setupHeader() {
-        guard let configuralbe = self as? UberNavigationConfigurable else {
+        guard let configurable = self as? UberNavigationConfigurable else {
             return
         }
         let navBar = UberNavigationBar()
@@ -42,7 +42,7 @@ class BaseViewController: UIViewController {
         navigationController?.isNavigationBarHidden = true
         view.addSubview(navBar)
         
-        navBar.applyConfiguration(configuralbe)
+        navBar.applyConfiguration(configurable)
         
         navBar.snp.makeConstraints {
             $0.top.equalTo(view.safeAreaLayoutGuide).offset(-56)
