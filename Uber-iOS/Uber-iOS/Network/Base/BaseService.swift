@@ -73,7 +73,7 @@ final class BaseService {
             }
 
             guard (200...299).contains(decoded.code) else {
-                throw NetworkError.serverErrorMessage(decoded.msg ?? "")
+                throw NetworkError.serverErrorMessage(decoded.msg ?? "🚨 Response Status Code가 200번대가 아닙니다 🚨")
             }
 
             return data
