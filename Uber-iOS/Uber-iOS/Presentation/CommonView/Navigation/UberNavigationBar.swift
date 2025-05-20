@@ -9,14 +9,22 @@ import UIKit
 
 import SnapKit
 
+protocol UberNavigationConfigurable {
+    // Set navigation title
+    var uberTitle: String? { get }
+    // Set title size
+    var prefersLargeTitle: Bool { get }
+    var alignTitleLeft: Bool { get }
+    var backButtonHidden: Bool { get }
+}
+
+extension UberNavigationConfigurable {
+    var prefersLargeTitle: Bool { false }
+    var alignTitleLeft: Bool { false }
+    var backButtonHidden: Bool { false }
+}
+
 final class UberNavigationBar: UIView {
-    
-    // Container containing items
-    
-    let menuStackView = UIStackView().then {
-        $0.distribution = .equalCentering
-        $0.alignment = .center
-    }
     
     // BackButton
     
@@ -35,8 +43,9 @@ final class UberNavigationBar: UIView {
     
     let rightItem = UIButton()
     
-    private var centerConstraint: Constraint?
+    
     private var leadingConstraint: Constraint?
+    private var leadingButtonConstraint: Constraint?
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -48,48 +57,40 @@ final class UberNavigationBar: UIView {
     }
     
     private func setLayout() {
-        addSubviews(menuStackView)
-        menuStackView.addArrangedSubviews(backButton, titleLabel, rightItem)
-        menuStackView.isLayoutMarginsRelativeArrangement = true
-        menuStackView.layoutMargins = .init(top: 0, left: 18, bottom: 0, right: 18)
-        menuStackView.snp.makeConstraints {
-            $0.edges.equalToSuperview()
+        addSubviews(backButton, titleLabel, rightItem)
+        
+        backButton.snp.makeConstraints {
+            $0.centerY.equalToSuperview()
+            $0.leading.equalToSuperview().offset(18)
         }
         
         titleLabel.snp.makeConstraints {
             $0.centerY.equalToSuperview()
-            self.centerConstraint = $0.centerX.equalToSuperview().constraint
-            self.leadingConstraint = $0.leading.equalTo(backButton.snp.trailing).offset(10).constraint
-            $0.trailing.lessThanOrEqualTo(rightItem.snp.leading).offset(-8)
+            $0.centerX.equalToSuperview()
+            self.leadingButtonConstraint = $0.leading.equalTo(backButton.snp.trailing).offset(10).constraint
+            self.leadingConstraint = $0.leading.equalToSuperview().offset(18).constraint
         }
-        centerConstraint?.activate()
+        
+        rightItem.snp.makeConstraints {
+            $0.centerY.equalToSuperview()
+            $0.trailing.equalToSuperview().inset(18)
+        }
+        
+        leadingButtonConstraint?.deactivate()
         leadingConstraint?.deactivate()
     }
     
-    func applyConfiguration(_ vc: UberNavigationConfigurable) {
-        titleLabel.text = vc.uberTitle
-        titleLabel.font = vc.prefersLargeTitle ? .title1_eb32 : .body1_b18
+    func applyConfiguration(_ configurable: UberNavigationConfigurable) {
+        titleLabel.text = configurable.uberTitle
+        titleLabel.font = configurable.prefersLargeTitle ? .title1_eb32 : .body1_b18
+        backButton.isHidden = configurable.backButtonHidden ? true : false
         
-        if vc.alignTitleLeft {
+        if configurable.alignTitleLeft, configurable.backButtonHidden {
+            leadingButtonConstraint?.deactivate()
             leadingConstraint?.activate()
-            centerConstraint?.deactivate()
-        } else {
-            centerConstraint?.activate()
+        } else if configurable.alignTitleLeft, !configurable.backButtonHidden {
+            leadingButtonConstraint?.activate()
             leadingConstraint?.deactivate()
         }
-        
-        if vc.isVertical {
-            menuStackView.axis = .vertical
-            menuStackView.distribution = .fill
-        } else {
-            menuStackView.axis = .horizontal
-            menuStackView.distribution = .equalCentering
-        }
-    }
-    
-    func setDefaultStyle() {
-        titleLabel.text = ""
-        titleLabel.font = .body1_b18
-        menuStackView.alignment = .center
     }
 }

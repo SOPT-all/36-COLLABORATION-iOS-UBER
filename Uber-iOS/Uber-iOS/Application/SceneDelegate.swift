@@ -23,17 +23,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
 
         let window = UIWindow(windowScene: windowScene)
-//        let nav = UINavigationController(rootViewController: ReservationInfoViewController())
-//        window.rootViewController = nav
-//        
-//        window.makeKeyAndVisible()
-//        self.window = window
-        let container = UberContainerViewController()
-        let nav = UINavigationController(rootViewController: ReservationInfoViewController())        
-        container.embedNavigationController(nav)
-        window.rootViewController = container
+        let nav = UINavigationController(rootViewController: ReservationInfoViewController())
+        window.rootViewController = nav        
         window.makeKeyAndVisible()
-        self.window = window
+        self.window = window                
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {

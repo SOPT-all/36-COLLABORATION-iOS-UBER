@@ -16,8 +16,7 @@ final class ReservationInfoViewController: BaseViewController {
     // Content
     
     override func viewDidLoad() {
-        super.viewDidLoad()
-        title = "test"
+        super.viewDidLoad()      
     }
     
     private let imageView = UIImageView().then {
@@ -206,9 +205,7 @@ final class ReservationInfoViewController: BaseViewController {
 // MARK: - UI Action
 
 extension ReservationInfoViewController {
-    @objc private func vehicleSelectionButtonTapped() {
-        let someViewController = SomeViewController()
-        navigationController?.pushViewController(someViewController, animated: true)
+    @objc private func vehicleSelectionButtonTapped() {        
     }
     
     @objc private func directPaymentButtonTapped() {
@@ -216,48 +213,12 @@ extension ReservationInfoViewController {
     }
 }
 
-extension ReservationInfoViewController: UberNavigationConfigurable {
-    var uberTitle: String? {
-        "힘들어"
-    }
-    
-    var prefersLargeTitle: Bool {
-        false
-    }
-    
-    var alignTitleLeft: Bool {
-        false
-    }
-    
-    var isVertical: Bool {
-        false
-    }
-}
-
-final class SomeViewController: UIViewController, UberNavigationConfigurable {
-    var uberTitle: String? {
-        "어쩔"
-    }
-    
-    var prefersLargeTitle: Bool {
-        true
-    }
-    
-    var alignTitleLeft: Bool {
-        true
-    }
-    
-    var isVertical: Bool {
-        true
-    }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        view.backgroundColor = .white
-    }
-}
-
 #Preview {
     ReservationInfoViewController()
 }
 
+extension ReservationInfoViewController: UberNavigationConfigurable {
+    var uberTitle: String? {
+        "예약 정보"
+    }
+}
