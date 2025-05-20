@@ -8,7 +8,6 @@
 import UIKit
 import SnapKit
 import Then
-import SwiftUI
 
 final class PickupTimeViewController: UIViewController {
     
@@ -132,8 +131,4 @@ final class PickupTimeViewController: UIViewController {
         let formatted = Self.dateFormatter.string(from: sender.date)
         arrivalLabel.text = "도착 시간 \(formatted) KST"
     }
-}
-
-#Preview {
-    PickupTimeViewController()
 }
