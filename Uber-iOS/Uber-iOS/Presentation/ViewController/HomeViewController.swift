@@ -7,36 +7,94 @@
 import UIKit
 import SnapKit
 import Then
+import SwiftUI
 
 final class HomeViewController: BaseViewController {
 
-    private let goToNextButton = UIButton().then {
-        $0.setTitle("다음 화면으로", for: .normal)
-        $0.applyUberStyle()
+    private let headerView = HomeHeaderView()
+    
+    private let carButton = ServiceButtonView(title: "차량 서비스", imageName: "car")
+    private let calendarButton = ServiceButtonView(title: "예약", imageName: "calendar")
+    
+    private lazy var buttonStackView = UIStackView(arrangedSubviews: [carButton, calendarButton]).then {
+        $0.axis = .horizontal
+        $0.spacing = 12
+        $0.distribution = .fillEqually
     }
+    
+    private let uberDiscountBanner = UberDiscountBannerView()
+    private let reserveBannerView = ReserveBannerView()
+    private let tabBar = TabBar()
 
     // MARK: - LifeCycle
 
     override func configure() {
         super.configure()
-        view.backgroundColor = .white
-        addSubviews(goToNextButton)
+        view.addSubview(headerView)
+        view.addSubview(buttonStackView)
+        view.addSubview(uberDiscountBanner)
+        view.addSubview(reserveBannerView)
+        view.addSubview(tabBar)
         
-        goToNextButton.addTarget(self, action: #selector(goToNextTapped), for: .touchUpInside)
-    }
-
-    override func setConstraints() {
-        goToNextButton.snp.makeConstraints {
-            $0.height.equalTo(56)
-            $0.leading.trailing.equalToSuperview().inset(10)
-            $0.bottom.equalToSuperview().inset(34)
+        calendarButton.onTap = { [weak self] in
+            let nextVC = ViewController()
+            self?.navigationController?.pushViewController(nextVC, animated: true)
         }
     }
+    
+    override func setConstraints() {
+        headerView.snp.makeConstraints {
+            $0.top.equalTo(view.safeAreaLayoutGuide)
+            $0.leading.trailing.equalToSuperview()
+        }
+        
+        buttonStackView.snp.makeConstraints {
+            $0.top.equalTo(headerView.snp.bottom).offset(20)
+            $0.leading.trailing.equalToSuperview().inset(16)
+            $0.height.equalTo(93)
+        }
+        
+        uberDiscountBanner.snp.makeConstraints {
+            $0.top.equalTo(buttonStackView.snp.bottom).offset(20)
+            $0.leading.trailing.equalToSuperview().inset(16)
+            $0.height.equalTo(48)
+        }
+        
+        reserveBannerView.snp.makeConstraints {
+            $0.top.equalTo(uberDiscountBanner.snp.bottom).offset(20)
+            $0.leading.trailing.equalToSuperview().inset(16)
+            $0.height.equalTo(153)
+        }
 
-    // MARK: - Action
-
-    @objc private func goToNextTapped() {
-        let nextVC = ViewController()
-        navigationController?.pushViewController(nextVC, animated: true)
+        tabBar.snp.makeConstraints {
+            $0.leading.trailing.equalToSuperview()
+            $0.bottom.equalTo(view.safeAreaLayoutGuide)
+            $0.height.equalTo(85)
+        }
     }
 }
+
+
+struct PreviewProvider_HomeViewController: PreviewProvider {
+    static var previews: some View {
+        HomeViewController().toPreview()
+    }
+}
+
+#if DEBUG
+extension UIViewController {
+    private struct Preview: UIViewControllerRepresentable {
+        let viewController: UIViewController
+
+        func makeUIViewController(context: Context) -> UIViewController {
+            return viewController
+        }
+
+        func updateUIViewController(_ uiViewController: UIViewController, context: Context) {}
+    }
+
+    func toPreview() -> some View {
+        Preview(viewController: self)
+    }
+}
+#endif

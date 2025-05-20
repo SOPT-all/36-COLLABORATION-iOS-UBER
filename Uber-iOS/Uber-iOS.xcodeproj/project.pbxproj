@@ -13,7 +13,7 @@
 
 /* Begin PBXFileReference section */
 		9853E13E2DD225CB0061EDDC /* Secrets.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Secrets.xcconfig; sourceTree = "<group>"; };
-		988989A62DD39F8B00215B7E /* Uber-iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Uber-iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		985DCB1C2DD4FA5A003A24B1 /* Uber-iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Uber-iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
@@ -96,7 +96,7 @@
 			children = (
 				9853E13E2DD225CB0061EDDC /* Secrets.xcconfig */,
 				147249AC2DCCDCE90093B866 /* Uber-iOS */,
-				988989A62DD39F8B00215B7E /* Uber-iOS.app */,
+				985DCB1C2DD4FA5A003A24B1 /* Uber-iOS.app */,
 			);
 			sourceTree = "<group>";
 		};
@@ -126,7 +126,7 @@
 				1497B1B72DCCD721007B5E1B /* Then */,
 			);
 			productName = "Uber-iOS";
-			productReference = 988989A62DD39F8B00215B7E /* Uber-iOS.app */;
+			productReference = 985DCB1C2DD4FA5A003A24B1 /* Uber-iOS.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -190,12 +190,13 @@
 /* Begin XCBuildConfiguration section */
 		1497B1AF2DCCD656007B5E1B /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 9853E13E2DD225CB0061EDDC /* Secrets.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = X58MVPBY9R;
+				DEVELOPMENT_TEAM = 6B47X24XTW;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Uber-iOS/Global/Setting/Info.plist";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -222,12 +223,13 @@
 		};
 		1497B1B02DCCD656007B5E1B /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 9853E13E2DD225CB0061EDDC /* Secrets.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = X58MVPBY9R;
+				DEVELOPMENT_TEAM = 6B47X24XTW;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Uber-iOS/Global/Setting/Info.plist";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -254,6 +256,7 @@
 		};
 		1497B1B12DCCD656007B5E1B /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 9853E13E2DD225CB0061EDDC /* Secrets.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
@@ -317,6 +320,7 @@
 		};
 		1497B1B22DCCD656007B5E1B /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 9853E13E2DD225CB0061EDDC /* Secrets.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
