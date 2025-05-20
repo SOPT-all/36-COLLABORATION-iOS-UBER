@@ -21,7 +21,7 @@ final class SearchLocationTextField: UIView {
         $0.borderStyle = .none
         $0.backgroundColor = .bgGray
         $0.font = .body2_m16
-        $0.textColor = UIColor.primary
+        $0.textColor = .primary
         $0.clearButtonMode = .whileEditing
     }
 
@@ -42,7 +42,6 @@ final class SearchLocationTextField: UIView {
 
     private func setupLayout() {
         layer.cornerRadius = 30
-        backgroundColor = UIColor.bgGray
         addSubviews(iconImageView, textField)
 
         iconImageView.snp.makeConstraints {
