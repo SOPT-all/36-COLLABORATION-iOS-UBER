@@ -53,14 +53,4 @@ class BaseViewController: UIViewController {
     }
 }
 
-extension UINavigationController: UIGestureRecognizerDelegate {
-    // 뒤로가기 스와이프 제스처 가능하도록 수정
-    override open func viewDidLoad() {
-        super.viewDidLoad()
-        interactivePopGestureRecognizer?.delegate = self        
-    }
-    
-    public func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
-        return viewControllers.count > 1
-    }
-}
+

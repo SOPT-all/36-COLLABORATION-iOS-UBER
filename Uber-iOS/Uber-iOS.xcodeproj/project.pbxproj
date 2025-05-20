@@ -27,6 +27,7 @@
 				"Extension/String+.swift",
 				"Extension/UIButton+.swift",
 				"Extension/UILabel+.swift",
+				"Extension/UINavigationController+.swift",
 				"Extension/UIStackView+.swift",
 				"Extension/UIView+.swift",
 				"Resources/Extension/UIFont+.swift",
