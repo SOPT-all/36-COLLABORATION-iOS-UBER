@@ -60,7 +60,7 @@ final class VehicleSelectionViewController: BaseViewController {
         // Define initial model
         
         let configures: [ReserveInfoStyle] = [
-            .active(icon: .icFlight32, title: "공항 갈 때", subtitle: "캐리어 걱정 없이 쾌적하게 이동", additionalViews: []),
+            .active(icon: .icFlight32, title: "공항 갈 때", subtitle: "캐리어 걱정 없이 쾌적하게 이동", additionalViews: caseTaxiStack.arrangedSubviews),
             .inactive(icon: .icChildCare32, title: "아기와 함께 할 때", subtitle: "카시트로 안전하게, 걱정없는 이동"),
             .inactive(icon: .icDirectionsCar32, title: "장거리 운전을 해야할 때", subtitle: "렌터카 빌릴 필요 없이 편안하게"),
             .inactive(icon: .icGTranslate32, title: "외국인 손님과 함께", subtitle: "외국어 가능 기사님으로 문제없는 의사소통")
@@ -181,6 +181,7 @@ extension VehicleSelectionViewController {
 // MARK: - UIAction
 
 extension VehicleSelectionViewController {
+    
     @objc private func reserveInfoTapped(_ gesture: UITapGestureRecognizer) {
         guard let tappedView = gesture.view as? ReserveInfoView else { return }
         // TODO: 임의로 컬러를 바꾸는중 인터페이스 변경이 필요함
