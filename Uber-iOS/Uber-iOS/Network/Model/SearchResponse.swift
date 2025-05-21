@@ -26,3 +26,5 @@ extension SearchKeyword {
         )
     }
 }
+
+struct EmptyResponse: Decodable {}
