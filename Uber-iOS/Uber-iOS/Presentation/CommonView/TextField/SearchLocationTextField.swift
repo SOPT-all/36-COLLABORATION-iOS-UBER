@@ -43,6 +43,9 @@ final class SearchLocationTextField: UIView {
         setupLayout()
         setupAction()
         applyInitialStyle()
+        
+        self.isUserInteractionEnabled = true
+        self.textField.isUserInteractionEnabled = true
     }
 
     required init?(coder: NSCoder) {
