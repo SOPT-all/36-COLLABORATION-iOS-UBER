@@ -18,6 +18,19 @@ final class ReservationInfoViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()      
     }
+        
+    private let startLocationTextField = SearchLocationTextField(icon: .place, placeholder: "").then {
+        $0.textField.text = "서울시 마포구 동교로 19길 86"
+    }
+    private let arriveLocationTextField = SearchLocationTextField(icon: .place, placeholder: "").then {
+        $0.textField.text = "김포공항"
+    }
+    
+    private lazy var locationStack = UIStackView().then {
+        $0.axis = .vertical
+        $0.spacing = 10
+        $0.addArrangedSubviews(startLocationTextField, arriveLocationTextField, imageView)
+    }
     
     private let imageView = UIImageView().then {
         $0.image = UIImage(resource: .route)
@@ -122,7 +135,7 @@ final class ReservationInfoViewController: BaseViewController {
     private lazy var sections: [SectionView] = [
         .init(
             title: "출발/도착",
-            content: imageView,
+            content: locationStack,
             contentEdge: .init(top: 10, left: 15, bottom: 10, right: 15)
         ),
         .init(
