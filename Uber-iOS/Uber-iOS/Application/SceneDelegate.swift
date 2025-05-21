@@ -23,7 +23,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
 
         let window = UIWindow(windowScene: windowScene)
-        let nav = UINavigationController(rootViewController: ReservationInfoViewController())
+        let nav = UINavigationController(rootViewController: HomeViewController())
         window.rootViewController = nav
         window.makeKeyAndVisible()
         self.window = window                
