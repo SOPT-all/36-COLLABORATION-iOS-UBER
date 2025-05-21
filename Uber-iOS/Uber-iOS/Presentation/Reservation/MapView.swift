@@ -35,7 +35,7 @@ final class MapView: UIView {
         mapView.showsCompass = false
         mapView.showsScale = false
         mapView.showsTraffic = false
-        
+        mapView.register(LocationAnnotationView.self, forAnnotationViewWithReuseIdentifier: NSStringFromClass(LocationAnnotationView.self))
         let center = CLLocationCoordinate2D(latitude: 37.55782517284962, longitude: 127.00096200411859)
         let region = MKCoordinateRegion(center: center, span: MKCoordinateSpan(latitudeDelta: 0.001, longitudeDelta: 0.001))
         mapView.setRegion(region, animated: true)
@@ -51,6 +51,10 @@ final class MapView: UIView {
         }
     }
     
+    private func setupAnnotationView(for annotation: LocationAnnotation, on mapView: MKMapView) -> MKAnnotationView {
+        return mapView.dequeueReusableAnnotationView(withIdentifier: NSStringFromClass(LocationAnnotationView.self), for: annotation)
+    }
+    
     private func getRoute() {
         guard let start, let end else { return }
         let request = MKDirections.Request()
@@ -61,9 +65,15 @@ final class MapView: UIView {
         Task {
             let directions = MKDirections(request: request)
             let response = try? await directions.calculate()
-            
+            let startLocation = try await reverseGeoCoding(location: start)
+            let endLocation = try await reverseGeoCoding(location: end)
             if let result = response?.routes.first {
                 mapView.addOverlay(result.polyline)
+                let startAnnotation = LocationAnnotation(coordinate: start, location: startLocation)
+                let endAnnotation = LocationAnnotation(coordinate: end, location: endLocation)                
+                
+                mapView.addAnnotation(startAnnotation)
+                mapView.addAnnotation(endAnnotation)
                 self.mapView.setVisibleMapRect(result.polyline.boundingMapRect, edgePadding: UIEdgeInsets(top: 40, left: 40, bottom: 40, right: 40), animated: true)
             }
         }
@@ -88,5 +98,35 @@ extension MapView: MKMapViewDelegate {
         renderer.lineWidth = 4.0
         renderer.alpha = 1.0
         return renderer
+    }
+    
+    func mapView(_ mapView: MKMapView, viewFor annotation: any MKAnnotation) -> MKAnnotationView? {
+        var annotationView: MKAnnotationView?
+        
+        if let locationAnnotation = annotation as? LocationAnnotation {
+            annotationView = setupAnnotationView(for: locationAnnotation, on: mapView)
+        }
+        
+        return annotationView
+    }
+}
+
+extension MapView {
+    func reverseGeoCoding(location: CLLocationCoordinate2D) async throws  -> String {
+        let geoCoder = CLGeocoder()
+        let location = CLLocation(latitude: location.latitude, longitude: location.longitude)
+        do {
+            let result = try await geoCoder.reverseGeocodeLocation(location)
+            let city = result.last?.administrativeArea
+            let state = result.last?.subLocality
+            if let state {
+                return state
+            } else if let city {
+                return city
+            }
+        } catch {
+            throw error
+        }
+        return ""
     }
 }
