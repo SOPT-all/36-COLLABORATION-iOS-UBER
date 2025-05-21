@@ -9,7 +9,7 @@ import UIKit
 
 import SnapKit
 
-final class VehicleSelectionButton: UIButton {
+final class VehicleSelectionButton: UIButton {        
     
     private let placeholerView = UIView().then {
         $0.backgroundColor = .graysub
@@ -139,7 +139,7 @@ final class VehicleSelectionButton: UIButton {
         self.vehicleNameLabel.text = vehicle.type
         self.guestLabel.text = "\(vehicle.guests)"
         self.descriptionLabel.text = vehicle.comment
-        self.priceLabel.text = "\(vehicle.min-vehicle.max)"
+        self.priceLabel.text = "₩\(vehicle.min)-\(vehicle.max)"
         self.vehicleImage.load(url: URL(string: vehicle.image)!)
     }
     

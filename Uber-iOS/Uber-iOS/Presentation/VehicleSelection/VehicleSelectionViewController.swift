@@ -175,11 +175,18 @@ extension VehicleSelectionViewController {
     @objc private func reserveInfoTapped(_ gesture: UITapGestureRecognizer) {
         guard let tappedView = gesture.view as? ReserveInfoView else { return }
         // TODO: 임의로 컬러를 바꾸는중 인터페이스 변경이 필요함
+        buttonRefs.forEach { $0.setUnselected() }
         reserveInfoViews.forEach { $0.layer.borderColor = UIColor.graysub.cgColor }
         tappedView.layer.borderColor = UIColor.btnActive.cgColor
     }
     
     @objc private func veheicleSelectionButtonTapped(_ button: VehicleSelectionButton) {
+        reserveInfoViews.forEach { $0.layer.borderColor = UIColor.graysub.cgColor }
+        
+        if !uberTaxiStack.arrangedSubviews.contains(button) {
+            reserveInfoViews[0].layer.borderColor = UIColor.btnActive.cgColor
+        }
+        
         buttonRefs.forEach { $0.setUnselected() }
         button.setSelected()
     }
@@ -204,9 +211,9 @@ extension VehicleSelectionViewController {
 extension VehicleSelectionViewController {
     private func bindData(result: VehicleEntity) {
         buttonRefs.removeAll()
-        
         uberTaxiStack.arrangedSubviews.forEach { $0.removeFromSuperview() }
         caseTaxiStack.arrangedSubviews.forEach { $0.removeFromSuperview() }
+        
         result.taxiList.forEach {
             let button = VehicleSelectionButton()
             button.configure($0)
@@ -220,7 +227,8 @@ extension VehicleSelectionViewController {
             button.addTarget(self, action: #selector(veheicleSelectionButtonTapped(_:)), for: .touchUpInside)
             buttonRefs.append(button)
             caseTaxiStack.addArrangedSubview(button)
-        }        
+        }
+        
         reserveInfoViews[0].addAdditionalViews(caseTaxiStack.arrangedSubviews)
     }
 }
