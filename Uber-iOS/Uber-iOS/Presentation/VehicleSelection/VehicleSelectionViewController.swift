@@ -15,6 +15,12 @@ final class VehicleSelectionViewController: BaseViewController {
     
     private let service: VehicleService
     
+    private var selectedTaxiInfo = VehicleTypeEntity() {
+        didSet {
+            print("selectedTaxi: \(selectedTaxiInfo)")
+        }
+    }
+    
     // ScrollView
     
     private let scrollView = UIScrollView().then {
@@ -188,6 +194,7 @@ extension VehicleSelectionViewController {
         }
         
         buttonRefs.forEach { $0.setUnselected() }
+        selectedTaxiInfo = button.taxiInfo
         button.setSelected()
     }
 }
