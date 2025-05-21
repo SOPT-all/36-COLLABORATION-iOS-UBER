@@ -11,6 +11,23 @@
         <string>SUIT-SemiBold.otf</string>
         <string>SUIT-Medium.otf</string>
 	</array>
+    
+    <key>NSAppTransportSecurity</key>
+    <dict>
+        <key>NSExceptionDomains</key>
+        <dict>
+            <key>3.37.10.178</key>
+            <dict>
+                <key>NSIncludesSubdomains</key>
+                <true/>
+                <key>NSTemporaryExceptionAllowsInsecureHTTPLoads</key>
+                <true/>
+                <key>NSTemporaryExceptionMinimumTLSVersion</key>
+                <string>TLSv1.2</string>
+            </dict>
+        </dict>
+    </dict>
+    
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>
