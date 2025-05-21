@@ -12,7 +12,7 @@ enum EndPoint {
     case location  // 출발지, 목적지 저장
     case getSearchKeywords  // 검색 기록 조회
     case deleteAllSearchKeywords  // 검색 기록 전체 삭제
-    case deleteSingleSearchKeyword(Double)  // 검색 기록 삭제
+    case deleteSingleSearchKeyword(Int)  // 검색 기록 삭제
 
     var httpMethod: HTTPMethodType {
         switch self {
