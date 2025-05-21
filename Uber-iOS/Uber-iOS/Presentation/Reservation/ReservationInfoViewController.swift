@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import MapKit
 
 import SnapKit
 
@@ -16,12 +17,13 @@ final class ReservationInfoViewController: BaseViewController {
     // Content
     
     override func viewDidLoad() {
-        super.viewDidLoad()      
+        super.viewDidLoad()
+        let start = CLLocationCoordinate2D(latitude: 37.562028277162554, longitude: 126.80157843708025)
+        let end = CLLocationCoordinate2D(latitude: 37.55900742133684, longitude: 126.91640052895927)
+        mapView.setCoordinator(start, end)    
     }
     
-    private let imageView = UIImageView().then {
-        $0.image = UIImage(resource: .route)
-    }
+    private let mapView = MapView()
     
     private let pickupTimeLabel = UILabel().then {
         $0.font = .caption_m12
@@ -122,7 +124,7 @@ final class ReservationInfoViewController: BaseViewController {
     private lazy var sections: [SectionView] = [
         .init(
             title: "출발/도착",
-            content: imageView,
+            content: mapView,
             contentEdge: .init(top: 10, left: 15, bottom: 10, right: 15)
         ),
         .init(
