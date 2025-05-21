@@ -79,17 +79,8 @@ final class ReservationInfoViewController: BaseViewController {
         $0.addArrangedSubviews(expectedArriveLabel, expectedArriveDetailLabel)
     }
     
-    private lazy var vehicleSelectionButton = UIButton().then {
-        $0.setTitle("차량 선택하기", for: .normal)
-        $0.setTitleColor(.primary, for: .normal)
-        $0.titleLabel?.font = .body2_sb16
-        $0.layer.borderWidth = 1
-        $0.layer.cornerRadius = 12
-        $0.layer.borderColor = UIColor.black.cgColor
-        $0.snp.makeConstraints {
-            $0.height.equalTo(56)
-        }
-        $0.addTarget(self, action: #selector(vehicleSelectionButtonTapped), for: .touchUpInside)
+    private lazy var vehicleInfoButton = VehicleInfoButton().then {
+        $0.addTarget(self, action: #selector(vehicleInfoButtonTapped), for: .touchUpInside)
     }
     
     private let expectedPaymentLabel = UILabel().then {
@@ -167,7 +158,7 @@ final class ReservationInfoViewController: BaseViewController {
         .init(
             title: "차량 선택",
             subtitle: .init(string: "상황에 최적화 된 차량과 기사님을 만나보세요\n가장 훌륭한 탑승 경험을 누릴 수 있어요"),
-            content: vehicleSelectionButton,
+            content: vehicleInfoButton,
             contentEdge: .init(top: 16, left: 17.5, bottom: 6, right: 17.5)
         ),
         .init(
@@ -243,7 +234,8 @@ final class ReservationInfoViewController: BaseViewController {
 // MARK: - UI Action
 
 extension ReservationInfoViewController {
-    @objc private func vehicleSelectionButtonTapped() {  
+    @objc private func vehicleInfoButtonTapped() {
+        vehicleInfoButton.setVehicleInfo()
     }
     
     @objc private func directPaymentButtonTapped() {
