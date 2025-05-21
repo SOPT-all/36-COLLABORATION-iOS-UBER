@@ -125,11 +125,12 @@ final class VehicleSelectionButton: UIButton {
         layer.borderWidth = 0
     }
     
-    func configure(_ vehicle: TaxiInfo) {
+    func configure(_ vehicle: VehicleTypeEntity) {
         self.vehicleNameLabel.text = vehicle.type
         self.guestLabel.text = "\(vehicle.guests)"
         self.descriptionLabel.text = vehicle.comment
         self.priceLabel.text = "\(vehicle.min-vehicle.max)"
+        self.vehicleImage.load(url: URL(string: vehicle.image)!)
     }
 }
 

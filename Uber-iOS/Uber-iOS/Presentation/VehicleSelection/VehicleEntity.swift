@@ -17,7 +17,7 @@ struct VehicleTypeEntity: Decodable {
     let type: String
     let min: Int
     let max: Int
-    let guest: Int
+    let guests: Int
     let comment: String
     let image: String
 }

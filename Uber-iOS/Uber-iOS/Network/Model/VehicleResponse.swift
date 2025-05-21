@@ -17,7 +17,7 @@ struct VehicleTypeResponse: Decodable {
     let type: String
     let min: Int
     let max: Int
-    let guest: Int
+    let guests: Int
     let comment: String
     let image: String
 }
@@ -28,7 +28,7 @@ extension Array where Element == VehicleTypeResponse {
                          type: $0.type,
                          min: $0.min,
                          max: $0.max,
-                         guest: $0.guest,
+                         guests: $0.guests,
                          comment: $0.comment,
                          image: $0.image) }
     }
