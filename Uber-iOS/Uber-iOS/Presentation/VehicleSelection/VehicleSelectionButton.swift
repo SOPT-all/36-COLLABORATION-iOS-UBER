@@ -10,6 +10,12 @@ import UIKit
 import SnapKit
 
 final class VehicleSelectionButton: UIButton {
+    
+    private let placeholerView = UIView().then {
+        $0.backgroundColor = .graysub
+        $0.layer.cornerRadius = 12
+        $0.isHidden = true
+    }
       
     private let vehicleImage = UIImageView().then {
         $0.image = UIImage(resource: .taxi)
@@ -66,7 +72,7 @@ final class VehicleSelectionButton: UIButton {
         // Configure viewhierarcy
         
         addSubview(containerView)
-        
+        addSubviews(placeholerView)
         containerView.addSubviews(vehicleImage,
                                   vehicleNameLabel,
                                   userImage,
@@ -77,6 +83,10 @@ final class VehicleSelectionButton: UIButton {
         // Set constraint
         
         containerView.snp.makeConstraints {
+            $0.edges.equalToSuperview()
+        }
+        
+        placeholerView.snp.makeConstraints {
             $0.edges.equalToSuperview()
         }
         
@@ -131,6 +141,10 @@ final class VehicleSelectionButton: UIButton {
         self.descriptionLabel.text = vehicle.comment
         self.priceLabel.text = "\(vehicle.min-vehicle.max)"
         self.vehicleImage.load(url: URL(string: vehicle.image)!)
+    }
+    
+    func setPlaceholder() {
+        placeholerView.isHidden = false
     }
 }
 

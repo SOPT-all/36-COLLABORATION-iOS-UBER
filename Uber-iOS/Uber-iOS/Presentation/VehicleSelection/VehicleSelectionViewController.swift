@@ -16,6 +16,7 @@ final class VehicleSelectionViewController: BaseViewController {
     private let service: VehicleService
     
     // ScrollView
+    
     private let scrollView = UIScrollView().then {
         $0.showsVerticalScrollIndicator = false
         $0.contentInset = .init(top: 0, left: 0, bottom: 92, right: 0)
@@ -26,10 +27,22 @@ final class VehicleSelectionViewController: BaseViewController {
     private lazy var uberTaxiStack = UIStackView().then {
         let stackView = $0
         stackView.axis = .vertical
+        stackView.spacing = 3
+        (0..<2).forEach { _ in
+            let dummyButton = VehicleSelectionButton()
+            dummyButton.setPlaceholder()
+            stackView.addArrangedSubview(dummyButton)
+        }
     }
     
     private lazy var caseTaxiStack = UIStackView().then {
-        $0.axis = .vertical
+        let stackView = $0
+        stackView.axis = .vertical
+        (0..<2).forEach { _ in
+            let dummyButton = VehicleSelectionButton()
+            dummyButton.setPlaceholder()
+            stackView.addArrangedSubview(dummyButton)
+        }
     }
     
     private lazy var reserveInfoViews: [ReserveInfoView] = {
@@ -80,7 +93,7 @@ final class VehicleSelectionViewController: BaseViewController {
             title: "우버 기본 택시 제안",
             subtitle: .init(string: "우버가 제공하는 기본 택시들을 이용해보세요.\n안전하고 편리한 여정을 보장합니다."),
             content: uberTaxiStack,
-            contentEdge: .init(top: 10, left: 5.5, bottom: 0, right: 5.5)
+            contentEdge: .init(top: 10, left: 17.5, bottom: 0, right: 17.5)
         ),
         .init(
             title: "상황별 맞춤 차량 제안",
@@ -176,6 +189,8 @@ extension VehicleSelectionViewController {
         Task {
             do {
                 let response = try await service.fetchVehicleTypes()
+                uberTaxiStack.arrangedSubviews.forEach { $0.removeFromSuperview() }
+                caseTaxiStack.arrangedSubviews.forEach { $0.removeFromSuperview() }
                 response.taxiList.forEach {
                     let button = VehicleSelectionButton()
                     button.configure($0)
