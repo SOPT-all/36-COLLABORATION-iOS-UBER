@@ -185,6 +185,7 @@ extension VehicleSelectionViewController {
         guard let tappedView = gesture.view as? ReserveInfoView else { return }
         // TODO: 임의로 컬러를 바꾸는중 인터페이스 변경이 필요함
         buttonRefs.forEach { $0.setUnselected() }
+        selectedTaxiInfo = nil
         reserveInfoViews.forEach { $0.layer.borderColor = UIColor.graysub.cgColor }
         tappedView.layer.borderColor = UIColor.btnActive.cgColor
     }
