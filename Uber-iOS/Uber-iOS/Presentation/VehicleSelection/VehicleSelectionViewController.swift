@@ -60,7 +60,7 @@ final class VehicleSelectionViewController: BaseViewController {
         // Define initial model
         
         let configures: [ReserveInfoStyle] = [
-            .active(icon: .icFlight32, title: "공항 갈 때", subtitle: "캐리어 걱정 없이 쾌적하게 이동", additionalViews: caseTaxiStack.arrangedSubviews),
+            .active(icon: .icFlight32, title: "공항 갈 때", subtitle: "캐리어 걱정 없이 쾌적하게 이동", additionalViews: []),
             .inactive(icon: .icChildCare32, title: "아기와 함께 할 때", subtitle: "카시트로 안전하게, 걱정없는 이동"),
             .inactive(icon: .icDirectionsCar32, title: "장거리 운전을 해야할 때", subtitle: "렌터카 빌릴 필요 없이 편안하게"),
             .inactive(icon: .icGTranslate32, title: "외국인 손님과 함께", subtitle: "외국어 가능 기사님으로 문제없는 의사소통")
@@ -91,7 +91,7 @@ final class VehicleSelectionViewController: BaseViewController {
         $0.backgroundColor = .white
     }
     
-    private let goToReservInfoButton = UIButton().then {
+    private lazy var goToReservInfoButton = UIButton().then {
         $0.setTitle("차량 서비스 예약", for: .normal)
         $0.addTarget(self, action: #selector(goToReservInfoButtonTapped), for: .touchUpInside)
         $0.applyUberStyle()
@@ -246,7 +246,13 @@ extension VehicleSelectionViewController {
             caseTaxiStack.addArrangedSubview(button)
         }
         
-        reserveInfoViews[0].addAdditionalViews(caseTaxiStack.arrangedSubviews)
+        let caseTaxiList = caseTaxiStack.arrangedSubviews
+        reserveInfoViews[0].addAdditionalViews(caseTaxiList)
+        
+        if let selectedButton = caseTaxiList.map({ $0 as? VehicleSelectionButton }).first {
+            selectedButton?.setSelected()
+            selectedTaxiInfo = selectedButton?.taxiInfo
+        }
     }
 }
 

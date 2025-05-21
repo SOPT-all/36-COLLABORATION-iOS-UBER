@@ -135,7 +135,7 @@ final class VehicleSelectionButton: UIButton {
         self.vehicleNameLabel.text = taxiInfo.type
         self.guestLabel.text = "\(taxiInfo.guests)"
         self.descriptionLabel.text = taxiInfo.comment
-        self.priceLabel.text = "₩\(taxiInfo.min)-\(taxiInfo.max)"
+        self.priceLabel.text = "₩\(taxiInfo.min.formattedMoneyString)-\(taxiInfo.max.formattedMoneyString)"
         self.vehicleImage.load(url: URL(string: taxiInfo.image)!)
     }
     
@@ -158,3 +158,11 @@ final class VehicleSelectionButton: UIButton {
     }
 }
 
+extension Int {
+    var formattedMoneyString: String {
+        let formatter = NumberFormatter()
+        formatter.numberStyle = .decimal
+        formatter.groupingSeparator = ","
+        return formatter.string(for: self) ?? ""
+    }
+}
