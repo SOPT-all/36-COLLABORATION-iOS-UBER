@@ -21,3 +21,15 @@ struct VehicleTypeResponse: Decodable {
     let comment: String
     let image: String
 }
+
+extension Array where Element == VehicleTypeResponse {
+    func toEntity() -> [VehicleTypeEntity] {
+        self.map { .init(id: $0.id,
+                         type: $0.type,
+                         min: $0.min,
+                         max: $0.max,
+                         guest: $0.guest,
+                         comment: $0.comment,
+                         image: $0.image) }
+    }
+}

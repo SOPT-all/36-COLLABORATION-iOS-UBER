@@ -31,6 +31,8 @@ final class VehicleSelectionViewController: BaseViewController {
     
     // MARK: - Properties
     
+    private let service: VehicleService
+    
     // ScrollView
     private let scrollView = UIScrollView().then {
         $0.showsVerticalScrollIndicator = false
@@ -124,6 +126,17 @@ final class VehicleSelectionViewController: BaseViewController {
         }
     }
     
+    // MARK: -  Initilizer
+    
+    init(service: VehicleService) {
+        self.service = service
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     // MARK: - Layout
     
     override func configure() {
@@ -190,5 +203,5 @@ extension VehicleSelectionViewController: UberNavigationConfigurable {
 }
 
 #Preview {
-    VehicleSelectionViewController()
+    VehicleSelectionViewController(service: VehicleService())
 }

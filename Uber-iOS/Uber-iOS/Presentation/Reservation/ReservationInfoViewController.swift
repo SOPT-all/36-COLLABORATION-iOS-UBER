@@ -205,7 +205,9 @@ final class ReservationInfoViewController: BaseViewController {
 // MARK: - UI Action
 
 extension ReservationInfoViewController {
-    @objc private func vehicleSelectionButtonTapped() {  
+    @objc private func vehicleSelectionButtonTapped() {
+        let vehicleSelectionVC = VehicleSelectionViewController(service: VehicleService())
+        navigationController?.pushViewController(vehicleSelectionVC, animated: true)
     }
     
     @objc private func directPaymentButtonTapped() {
@@ -213,12 +215,14 @@ extension ReservationInfoViewController {
     }
 }
 
-#Preview {
-    ReservationInfoViewController()
-}
+// MARK: - UberNavigationConfigurable
 
 extension ReservationInfoViewController: UberNavigationConfigurable {
     var uberTitle: String? {
         "예약 정보"
     }
+}
+
+#Preview {
+    ReservationInfoViewController()
 }
