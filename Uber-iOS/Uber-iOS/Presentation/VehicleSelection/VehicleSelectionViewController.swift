@@ -174,7 +174,7 @@ final class VehicleSelectionViewController: BaseViewController {
 extension VehicleSelectionViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .white
+        fetchVehicleTypes()
     }
 }
 
@@ -191,6 +191,18 @@ extension VehicleSelectionViewController {
     @objc private func veheicleSelectionButtonTapped(_ button: VehicleSelectionButton) {
         taxiList.forEach { $0.setUnselected() }
         button.setSelected()
+    }
+}
+
+// MARK: - API
+extension VehicleSelectionViewController {
+    private func fetchVehicleTypes() {
+        Task {
+            do {
+                let response = try await service.fetchVehicleTypes()
+            } catch {
+            }
+        }
     }
 }
 
