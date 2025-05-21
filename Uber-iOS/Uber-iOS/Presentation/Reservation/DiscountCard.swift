@@ -45,7 +45,6 @@ final class DiscountCard: UIView {
         $0.font = .body1_eb18
         $0.textColor = .primary
         $0.setTextWithLineHeight(text: "5000원", lineHeight: 27)
-
     }
     
     private let couponCategoryLabel = UILabel().then {
@@ -67,7 +66,7 @@ final class DiscountCard: UIView {
     }
     
     private let deleteButton = UIButton().then {
-        $0.setImage(.delete, for: .normal)
+        $0.setImage(.deleteBlack, for: .normal)
         $0.addTarget(self, action: #selector(deleteButtonTapped), for: .touchUpInside)
     }
     
@@ -102,7 +101,7 @@ final class DiscountCard: UIView {
         }
         
         containerView.snp.makeConstraints {
-            $0.verticalEdges.equalToSuperview().inset(10)
+            $0.verticalEdges.equalToSuperview().inset(15)
             $0.leading.equalToSuperview().inset(20)
             $0.trailing.equalToSuperview().inset(11)
         }

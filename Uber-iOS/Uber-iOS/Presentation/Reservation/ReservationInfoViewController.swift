@@ -10,7 +10,7 @@ import UIKit
 import SnapKit
 
 final class ReservationInfoViewController: BaseViewController {
-        
+    
     // MARK: - Properties
     
     private var discountInfo: DiscountModel?
@@ -27,7 +27,7 @@ final class ReservationInfoViewController: BaseViewController {
         $0.spacing = 10
         $0.addArrangedSubviews(expectedPaymentLabel)
     }
-        
+    
     private let startLocationTextField = SearchLocationTextField(icon: .place, placeholder: "").then {
         $0.textField.text = "서울시 마포구 동교로 19길 86"
     }
@@ -235,7 +235,7 @@ final class ReservationInfoViewController: BaseViewController {
 
 extension ReservationInfoViewController {
     @objc private func vehicleInfoButtonTapped() {
-        vehicleInfoButton.setVehicleInfo()
+        
     }
     
     @objc private func directPaymentButtonTapped() {
