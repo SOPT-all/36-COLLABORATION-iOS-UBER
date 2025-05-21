@@ -26,4 +26,32 @@ final class SearchService: SearchServiceProtocol {
             throw error
         }
     }
+
+    func deleteSearchKeyword(id: Int) async throws {
+        do {
+            _ =
+                try await BaseService.shared
+                .request(endPoint: .deleteSingleSearchKeyword(id))
+                as EmptyResponse
+        } catch NetworkError.noData,
+            NetworkError.responseDecodingError
+        {
+            print("null 값은 정상 처리")
+        } catch {
+            print("통신 자체에 실패")
+        }
+    }
+
+    func deleteAllSearchKeywords() async {
+        do {
+            let _: EmptyResponse = try await BaseService.shared
+                .request(endPoint: .deleteAllSearchKeywords)
+        } catch NetworkError.noData,
+            NetworkError.responseDecodingError
+        {
+            print("null 값은 정상 처리")
+        } catch {
+            print("전체 삭제 중 에러:", error)
+        }
+    }
 }
