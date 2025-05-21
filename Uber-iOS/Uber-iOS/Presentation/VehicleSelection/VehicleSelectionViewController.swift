@@ -9,17 +9,19 @@ import UIKit
 
 import SnapKit
 
+protocol VehicleSelectionViewControllerDelegate: AnyObject {
+    func selectedTaxi(taxiInfo: VehicleTypeEntity)
+}
+
 final class VehicleSelectionViewController: BaseViewController {
     
     // MARK: - Properties
     
     private let service: VehicleService
     
-    private var selectedTaxiInfo = VehicleTypeEntity() {
-        didSet {
-            print("selectedTaxi: \(selectedTaxiInfo)")
-        }
-    }
+    private var selectedTaxiInfo: VehicleTypeEntity?
+    
+    weak var delegate: VehicleSelectionViewControllerDelegate?
     
     // ScrollView
     
@@ -91,6 +93,7 @@ final class VehicleSelectionViewController: BaseViewController {
     
     private let goToReservInfoButton = UIButton().then {
         $0.setTitle("차량 서비스 예약", for: .normal)
+        $0.addTarget(self, action: #selector(goToReservInfoButtonTapped), for: .touchUpInside)
         $0.applyUberStyle()
     }
     
@@ -196,6 +199,13 @@ extension VehicleSelectionViewController {
         buttonRefs.forEach { $0.setUnselected() }
         selectedTaxiInfo = button.taxiInfo
         button.setSelected()
+    }
+    
+    @objc private func goToReservInfoButtonTapped() {
+        if let selectedTaxiInfo {
+            delegate?.selectedTaxi(taxiInfo: selectedTaxiInfo)
+            navigationController?.popViewController(animated: true)
+        }
     }
 }
 

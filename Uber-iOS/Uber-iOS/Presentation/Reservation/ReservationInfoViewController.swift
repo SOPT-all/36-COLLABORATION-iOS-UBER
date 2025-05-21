@@ -207,6 +207,7 @@ final class ReservationInfoViewController: BaseViewController {
 extension ReservationInfoViewController {
     @objc private func vehicleSelectionButtonTapped() {
         let vehicleSelectionVC = VehicleSelectionViewController(service: VehicleService())
+        vehicleSelectionVC.delegate = self
         navigationController?.pushViewController(vehicleSelectionVC, animated: true)
     }
     
@@ -220,6 +221,12 @@ extension ReservationInfoViewController {
 extension ReservationInfoViewController: UberNavigationConfigurable {
     var uberTitle: String? {
         "예약 정보"
+    }
+}
+
+extension ReservationInfoViewController: VehicleSelectionViewControllerDelegate {
+    func selectedTaxi(taxiInfo: VehicleTypeEntity) {
+        print(taxiInfo)
     }
 }
 
