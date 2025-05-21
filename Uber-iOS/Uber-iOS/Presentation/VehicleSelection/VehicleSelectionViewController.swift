@@ -181,6 +181,14 @@ extension VehicleSelectionViewController {
     }
 }
 
+// MARK: - UberNavigationConfigurable
+
+extension VehicleSelectionViewController: UberNavigationConfigurable {
+    var uberTitle: String? {
+        "차량 선택"
+    }
+}
+
 #Preview {
     VehicleSelectionViewController()
 }
