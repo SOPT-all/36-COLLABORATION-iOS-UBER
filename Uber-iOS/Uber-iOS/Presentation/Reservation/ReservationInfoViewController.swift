@@ -13,10 +13,19 @@ final class ReservationInfoViewController: BaseViewController {
         
     // MARK: - Properties
     
+    private var discountInfo: DiscountModel?
+    
     // Content
     
     override func viewDidLoad() {
-        super.viewDidLoad()      
+        super.viewDidLoad()
+        loadCouponInfo()
+    }
+    
+    private lazy var couponStack = UIStackView().then {
+        $0.axis = .vertical
+        $0.spacing = 10
+        $0.addArrangedSubviews(expectedPaymentLabel)
     }
         
     private let startLocationTextField = SearchLocationTextField(icon: .place, placeholder: "").then {
@@ -29,7 +38,14 @@ final class ReservationInfoViewController: BaseViewController {
     private lazy var locationStack = UIStackView().then {
         $0.axis = .vertical
         $0.spacing = 10
-        $0.addArrangedSubviews(startLocationTextField, arriveLocationTextField, imageView)
+        $0.addArrangedSubviews(startLocationTextField, arriveLocationTextField)
+        $0.isUserInteractionEnabled = false
+    }
+    
+    private lazy var startAndArriveStack = UIStackView().then {
+        $0.axis = .vertical
+        $0.spacing = 20
+        $0.addArrangedSubviews(locationStack, imageView)
     }
     
     private let imageView = UIImageView().then {
@@ -135,7 +151,7 @@ final class ReservationInfoViewController: BaseViewController {
     private lazy var sections: [SectionView] = [
         .init(
             title: "출발/도착",
-            content: locationStack,
+            content: startAndArriveStack,
             contentEdge: .init(top: 10, left: 15, bottom: 10, right: 15)
         ),
         .init(
@@ -158,8 +174,8 @@ final class ReservationInfoViewController: BaseViewController {
             title: "예상 결제 금액",
             subtitle: .init(string: "적용 가능한 할인 혜택이 없습니다.")
                 .prependImage(image: UIImage(resource: .promotion), imageSize: .init(width: 18, height: 18)),
-            content: expectedPaymentLabel,
-            contentEdge: .init(top: 0, left: 25, bottom: 10, right: 25)
+            content: couponStack,
+            contentEdge: .init(top: 10, left: 17.5, bottom: 10, right: 17.5)
         ).then { $0.headerAxis = .horizontal },
         .init(
             title: "",
@@ -211,6 +227,15 @@ final class ReservationInfoViewController: BaseViewController {
             $0.top.equalTo(buttonContainer.safeAreaLayoutGuide).inset(6)
             $0.bottom.equalTo(buttonContainer.safeAreaLayoutGuide).inset(6)
             $0.height.equalTo(56)
+        }
+    }
+    
+    func loadCouponInfo() {
+        DiscountModel.makeDummy().forEach {
+            let discountCard = DiscountCard()
+            discountCard.configure($0)
+            couponStack.addArrangedSubview(discountCard)
+            self.discountInfo = $0
         }
     }
 }
