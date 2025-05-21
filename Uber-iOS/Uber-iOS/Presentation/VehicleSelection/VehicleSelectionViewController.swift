@@ -24,6 +24,8 @@ final class VehicleSelectionViewController: BaseViewController {
     
     // Contents
     
+    private var buttonRefs: [VehicleSelectionButton] = []
+    
     private lazy var uberTaxiStack = UIStackView().then {
         let stackView = $0
         stackView.axis = .vertical
@@ -178,6 +180,7 @@ extension VehicleSelectionViewController {
     }
     
     @objc private func veheicleSelectionButtonTapped(_ button: VehicleSelectionButton) {
+        buttonRefs.forEach { $0.setUnselected() }
         button.setSelected()
     }
 }
@@ -189,21 +192,7 @@ extension VehicleSelectionViewController {
         Task {
             do {
                 let response = try await service.fetchVehicleTypes()
-                uberTaxiStack.arrangedSubviews.forEach { $0.removeFromSuperview() }
-                caseTaxiStack.arrangedSubviews.forEach { $0.removeFromSuperview() }
-                response.taxiList.forEach {
-                    let button = VehicleSelectionButton()
-                    button.configure($0)
-                    button.addTarget(self, action: #selector(veheicleSelectionButtonTapped(_:)), for: .touchUpInside)
-                    uberTaxiStack.addArrangedSubview(button)
-                }
-                response.caseTaxiList.forEach {
-                    let button = VehicleSelectionButton()
-                    button.configure($0)
-                    button.addTarget(self, action: #selector(veheicleSelectionButtonTapped(_:)), for: .touchUpInside)
-                    caseTaxiStack.addArrangedSubview(button)
-                }
-                reserveInfoViews[0].addAdditionalViews(caseTaxiStack.arrangedSubviews)
+                bindData(result: response)
             } catch {
             }
         }
@@ -213,7 +202,27 @@ extension VehicleSelectionViewController {
 // MARK: - Binding
 
 extension VehicleSelectionViewController {
-    
+    private func bindData(result: VehicleEntity) {
+        buttonRefs.removeAll()
+        
+        uberTaxiStack.arrangedSubviews.forEach { $0.removeFromSuperview() }
+        caseTaxiStack.arrangedSubviews.forEach { $0.removeFromSuperview() }
+        result.taxiList.forEach {
+            let button = VehicleSelectionButton()
+            button.configure($0)
+            button.addTarget(self, action: #selector(veheicleSelectionButtonTapped(_:)), for: .touchUpInside)
+            buttonRefs.append(button)
+            uberTaxiStack.addArrangedSubview(button)
+        }
+        result.caseTaxiList.forEach {
+            let button = VehicleSelectionButton()
+            button.configure($0)
+            button.addTarget(self, action: #selector(veheicleSelectionButtonTapped(_:)), for: .touchUpInside)
+            buttonRefs.append(button)
+            caseTaxiStack.addArrangedSubview(button)
+        }        
+        reserveInfoViews[0].addAdditionalViews(caseTaxiStack.arrangedSubviews)
+    }
 }
 
 // MARK: - UberNavigationConfigurable
