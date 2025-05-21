@@ -235,7 +235,7 @@ final class ReservationInfoViewController: BaseViewController {
 
 extension ReservationInfoViewController {
     @objc private func vehicleInfoButtonTapped() {
-        
+        vehicleInfoButton.setVehicleInfo()
     }
     
     @objc private func directPaymentButtonTapped() {

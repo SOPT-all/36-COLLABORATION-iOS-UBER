@@ -81,11 +81,13 @@ final class VehicleInfoButton: UIButton {
     }
     
     func setVehicleInfo() {
+        layer.borderWidth = 2.0
         contentStack.isHidden = false
         setTitle(nil, for: .normal)
     }
     
     func setDefaultStyle() {
+        layer.borderWidth = 1.0
         contentStack.isHidden = true
         setTitle("차량 선택하기", for: .normal)
     }
