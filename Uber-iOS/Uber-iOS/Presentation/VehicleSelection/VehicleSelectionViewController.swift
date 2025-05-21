@@ -10,7 +10,7 @@ import UIKit
 import SnapKit
 
 protocol VehicleSelectionViewControllerDelegate: AnyObject {
-    func selectedTaxi(taxiInfo: VehicleTypeEntity)
+    func selectedTaxi(taxiInfo: TaxiInfoEntity)
 }
 
 final class VehicleSelectionViewController: BaseViewController {
@@ -19,7 +19,7 @@ final class VehicleSelectionViewController: BaseViewController {
     
     private let service: VehicleService
     
-    private var selectedTaxiInfo: VehicleTypeEntity?
+    private var selectedTaxiInfo: TaxiInfoEntity?
     
     weak var delegate: VehicleSelectionViewControllerDelegate?
     
@@ -227,7 +227,7 @@ extension VehicleSelectionViewController {
 // MARK: - Binding
 
 extension VehicleSelectionViewController {
-    private func bindData(result: VehicleEntity) {
+    private func bindData(result: TaxiEntity) {
         buttonRefs.removeAll()
         uberTaxiStack.arrangedSubviews.forEach { $0.removeFromSuperview() }
         caseTaxiStack.arrangedSubviews.forEach { $0.removeFromSuperview() }

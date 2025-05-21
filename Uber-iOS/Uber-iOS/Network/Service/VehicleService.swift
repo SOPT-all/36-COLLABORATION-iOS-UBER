@@ -6,16 +6,16 @@
 //
 
 protocol VehicleServiceProtocol {
-    func fetchVehicleTypes() async throws -> VehicleEntity
+    func fetchVehicleTypes() async throws -> TaxiEntity
 }
 
 final class VehicleService: VehicleServiceProtocol {
     
     private let network = BaseService.shared
     
-    func fetchVehicleTypes() async throws -> VehicleEntity {
+    func fetchVehicleTypes() async throws -> TaxiEntity {
         do {
-            let response: VehicleResponse = try await network.request(endPoint: .taxi)
+            let response: TaxiResponse = try await network.request(endPoint: .taxi)
             return .init(taxiList: response.taxiList.toEntity(), caseTaxiList: response.caseTaxiList.toEntity())
         } catch {
             throw error

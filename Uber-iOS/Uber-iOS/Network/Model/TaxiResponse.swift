@@ -1,5 +1,5 @@
 //
-//  VehicleResponse.swift
+//  TaxiResponse.swift
 //  Uber-iOS
 //
 //  Created by 권석기 on 5/21/25.
@@ -7,12 +7,12 @@
 
 import Foundation
 
-struct VehicleResponse: Decodable {
-    let taxiList: [VehicleTypeResponse]
-    let caseTaxiList: [VehicleTypeResponse]
+struct TaxiResponse: Decodable {
+    let taxiList: [TaxiInfoResponse]
+    let caseTaxiList: [TaxiInfoResponse]
 }
 
-struct VehicleTypeResponse: Decodable {
+struct TaxiInfoResponse: Decodable {
     let id: Int
     let type: String
     let min: Int
@@ -22,8 +22,8 @@ struct VehicleTypeResponse: Decodable {
     let image: String
 }
 
-extension Array where Element == VehicleTypeResponse {
-    func toEntity() -> [VehicleTypeEntity] {
+extension Array where Element == TaxiInfoResponse {
+    func toEntity() -> [TaxiInfoEntity] {
         self.map { .init(id: $0.id,
                          type: $0.type,
                          min: $0.min,

@@ -11,7 +11,7 @@ import SnapKit
 
 final class VehicleSelectionButton: UIButton {
     
-    var taxiInfo = VehicleTypeEntity() {
+    var taxiInfo = TaxiInfoEntity() {
         didSet {
             bindData()
         }
@@ -149,7 +149,7 @@ final class VehicleSelectionButton: UIButton {
         layer.borderWidth = 0
     }
     
-    func configure(_ newTaxiInfo: VehicleTypeEntity) {
+    func configure(_ newTaxiInfo: TaxiInfoEntity) {
         taxiInfo = newTaxiInfo
     }
     
