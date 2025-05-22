@@ -10,7 +10,19 @@ import UIKit
 import SnapKit
 
 final class VehicleSelectionButton: UIButton {
-      
+    
+    var taxiInfo = TaxiInfoEntity() {
+        didSet {
+            bindData()
+        }
+    }
+    
+    private let placeholerView = UIView().then {
+        $0.backgroundColor = .graysub
+        $0.layer.cornerRadius = 12
+        $0.isHidden = true
+    }
+    
     private let vehicleImage = UIImageView().then {
         $0.image = UIImage(resource: .taxi)
     }
@@ -19,7 +31,7 @@ final class VehicleSelectionButton: UIButton {
         $0.setTextWithLineHeight(text: $0.text, lineHeight: 27)
         $0.font = .body1_eb18
         $0.textColor = .primary
-        $0.numberOfLines = 0        
+        $0.numberOfLines = 0
     }
     
     private let userImage = UIImageView(image: UIImage(resource: .guest))
@@ -66,7 +78,7 @@ final class VehicleSelectionButton: UIButton {
         // Configure viewhierarcy
         
         addSubview(containerView)
-        
+        addSubviews(placeholerView)
         containerView.addSubviews(vehicleImage,
                                   vehicleNameLabel,
                                   userImage,
@@ -77,6 +89,10 @@ final class VehicleSelectionButton: UIButton {
         // Set constraint
         
         containerView.snp.makeConstraints {
+            $0.edges.equalToSuperview()
+        }
+        
+        placeholerView.snp.makeConstraints {
             $0.edges.equalToSuperview()
         }
         
@@ -115,6 +131,14 @@ final class VehicleSelectionButton: UIButton {
         
     }
     
+    private func bindData() {
+        self.vehicleNameLabel.text = taxiInfo.type
+        self.guestLabel.text = "\(taxiInfo.guests)"
+        self.descriptionLabel.text = taxiInfo.comment
+        self.priceLabel.text = "₩\(taxiInfo.min.formattedMoneyString)-\(taxiInfo.max.formattedMoneyString)"
+        self.vehicleImage.load(url: URL(string: taxiInfo.image)!)
+    }
+    
     // Change button style
     
     func setSelected() {
@@ -124,5 +148,21 @@ final class VehicleSelectionButton: UIButton {
     func setUnselected() {
         layer.borderWidth = 0
     }
+    
+    func configure(_ newTaxiInfo: TaxiInfoEntity) {
+        taxiInfo = newTaxiInfo
+    }
+    
+    func setPlaceholder() {
+        placeholerView.isHidden = false
+    }
 }
 
+extension Int {
+    var formattedMoneyString: String {
+        let formatter = NumberFormatter()
+        formatter.numberStyle = .decimal
+        formatter.groupingSeparator = ","
+        return formatter.string(for: self) ?? ""
+    }
+}

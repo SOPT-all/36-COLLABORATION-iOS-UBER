@@ -11,6 +11,15 @@ import UIKit
 
 final class ReserveNoticeView: UIView {
 
+    // MARK: - Layout Constants
+    private enum Layout {
+        static let verticalPadding: CGFloat = 12
+        static let horizontalLeading: CGFloat = 32
+        static let horizontalTrailing: CGFloat = 16
+        static let iconSize: CGFloat = 24
+        static let stackSpacing: CGFloat = 20
+    }
+
     // MARK: - Properties
 
     private let iconImageView = UIImageView().then {
@@ -27,7 +36,7 @@ final class ReserveNoticeView: UIView {
 
     private let contentStackView = UIStackView().then {
         $0.axis = .horizontal
-        $0.spacing = 20
+        $0.spacing = Layout.stackSpacing
         $0.alignment = .center
     }
 
@@ -46,8 +55,8 @@ final class ReserveNoticeView: UIView {
     // MARK: - Configure
 
     private func configure() {
-        contentStackView.addArrangedSubviews(iconImageView, contentLabel)
         addSubviews(contentStackView)
+        contentStackView.addArrangedSubviews(iconImageView, contentLabel)
     }
 
     // MARK: - Layout
@@ -57,7 +66,14 @@ final class ReserveNoticeView: UIView {
             $0.size.equalTo(24)
         }
         contentStackView.snp.makeConstraints {
-            $0.edges.equalToSuperview()
+            $0.edges.equalToSuperview().inset(
+                UIEdgeInsets(
+                    top: Layout.verticalPadding,
+                    left: Layout.horizontalLeading,
+                    bottom: Layout.verticalPadding,
+                    right: Layout.horizontalTrailing
+                )
+            )
         }
     }
 
@@ -68,7 +84,7 @@ final class ReserveNoticeView: UIView {
         case .calendar:
             iconImageView.image = UIImage(resource: .calender)
             contentLabel.text = "최대 90일 전부터 차량을 예약할 수 있습니다."
-            
+
         case .sandclock:
             iconImageView.image = UIImage(resource: .sandclock)
             contentLabel.text = "이용 시 대기 시간이 요금에 포함되어 있습니다."
