@@ -10,13 +10,42 @@ import UIKit
 import SnapKit
 
 final class ReservationInfoViewController: BaseViewController {
-        
+    
     // MARK: - Properties
+    
+    private var discountInfo: DiscountModel?
     
     // Content
     
     override func viewDidLoad() {
-        super.viewDidLoad()      
+        super.viewDidLoad()
+        loadCouponInfo()
+    }
+    
+    private lazy var couponStack = UIStackView().then {
+        $0.axis = .vertical
+        $0.spacing = 10
+        $0.addArrangedSubviews(expectedPaymentLabel)
+    }
+    
+    private let startLocationTextField = SearchLocationTextField(icon: .place, placeholder: "").then {
+        $0.textField.text = "서울시 마포구 동교로 19길 86"
+    }
+    private let arriveLocationTextField = SearchLocationTextField(icon: .place, placeholder: "").then {
+        $0.textField.text = "김포공항"
+    }
+    
+    private lazy var locationStack = UIStackView().then {
+        $0.axis = .vertical
+        $0.spacing = 10
+        $0.addArrangedSubviews(startLocationTextField, arriveLocationTextField)
+        $0.isUserInteractionEnabled = false
+    }
+    
+    private lazy var startAndArriveStack = UIStackView().then {
+        $0.axis = .vertical
+        $0.spacing = 20
+        $0.addArrangedSubviews(locationStack, imageView)
     }
     
     private let imageView = UIImageView().then {
@@ -50,17 +79,8 @@ final class ReservationInfoViewController: BaseViewController {
         $0.addArrangedSubviews(expectedArriveLabel, expectedArriveDetailLabel)
     }
     
-    private lazy var vehicleSelectionButton = UIButton().then {
-        $0.setTitle("차량 선택하기", for: .normal)
-        $0.setTitleColor(.primary, for: .normal)
-        $0.titleLabel?.font = .body2_sb16
-        $0.layer.borderWidth = 1
-        $0.layer.cornerRadius = 12
-        $0.layer.borderColor = UIColor.black.cgColor
-        $0.snp.makeConstraints {
-            $0.height.equalTo(56)
-        }
-        $0.addTarget(self, action: #selector(vehicleSelectionButtonTapped), for: .touchUpInside)
+    private lazy var vehicleInfoButton = VehicleInfoButton().then {
+        $0.addTarget(self, action: #selector(vehicleInfoButtonTapped), for: .touchUpInside)
     }
     
     private let expectedPaymentLabel = UILabel().then {
@@ -122,7 +142,7 @@ final class ReservationInfoViewController: BaseViewController {
     private lazy var sections: [SectionView] = [
         .init(
             title: "출발/도착",
-            content: imageView,
+            content: startAndArriveStack,
             contentEdge: .init(top: 10, left: 15, bottom: 10, right: 15)
         ),
         .init(
@@ -138,15 +158,15 @@ final class ReservationInfoViewController: BaseViewController {
         .init(
             title: "차량 선택",
             subtitle: .init(string: "상황에 최적화 된 차량과 기사님을 만나보세요\n가장 훌륭한 탑승 경험을 누릴 수 있어요"),
-            content: vehicleSelectionButton,
+            content: vehicleInfoButton,
             contentEdge: .init(top: 16, left: 17.5, bottom: 6, right: 17.5)
         ),
         .init(
             title: "예상 결제 금액",
             subtitle: .init(string: "적용 가능한 할인 혜택이 없습니다.")
                 .prependImage(image: UIImage(resource: .promotion), imageSize: .init(width: 18, height: 18)),
-            content: expectedPaymentLabel,
-            contentEdge: .init(top: 0, left: 25, bottom: 10, right: 25)
+            content: couponStack,
+            contentEdge: .init(top: 10, left: 17.5, bottom: 10, right: 17.5)
         ).then { $0.headerAxis = .horizontal },
         .init(
             title: "",
@@ -200,12 +220,24 @@ final class ReservationInfoViewController: BaseViewController {
             $0.height.equalTo(56)
         }
     }
+    
+    func loadCouponInfo() {
+        DiscountModel.makeDummy().forEach {
+            let discountCard = DiscountCard()
+            discountCard.configure($0)
+            couponStack.addArrangedSubview(discountCard)
+            self.discountInfo = $0
+        }
+    }
 }
 
 // MARK: - UI Action
 
 extension ReservationInfoViewController {
-    @objc private func vehicleSelectionButtonTapped() {  
+    @objc private func vehicleSelectionButtonTapped() {
+        let vehicleSelectionVC = VehicleSelectionViewController(service: VehicleService())
+        vehicleSelectionVC.delegate = self
+        navigationController?.pushViewController(vehicleSelectionVC, animated: true)
     }
     
     @objc private func directPaymentButtonTapped() {
@@ -213,12 +245,20 @@ extension ReservationInfoViewController {
     }
 }
 
-#Preview {
-    ReservationInfoViewController()
-}
+// MARK: - UberNavigationConfigurable
 
 extension ReservationInfoViewController: UberNavigationConfigurable {
     var uberTitle: String? {
         "예약 정보"
     }
+}
+
+extension ReservationInfoViewController: VehicleSelectionViewControllerDelegate {
+    func selectedTaxi(taxiInfo: TaxiInfoEntity) {
+        print(taxiInfo)
+    }
+}
+
+#Preview {
+    ReservationInfoViewController()
 }

@@ -9,48 +9,49 @@ import UIKit
 
 import SnapKit
 
-struct TaxiInfo {
-    let id: Int
-    let type: String
-    let min: Double
-    let max: Double
-    let guests: Int
-    let comment: String
-    
-    static func dummy() -> [TaxiInfo] {
-        [
-            .init(id: 0, type: "STANDARD", min: 20000, max: 22000, guests: 4, comment: "택시 안내 코멘트"),
-            .init(id: 1, type: "STANDARD", min: 20000, max: 22000, guests: 4, comment: "택시 안내 코멘트"),
-            .init(id: 2, type: "STANDARD", min: 20000, max: 22000, guests: 4, comment: "택시 안내 코멘트"),
-            .init(id: 3, type: "STANDARD", min: 20000, max: 22000, guests: 4, comment: "택시 안내 코멘트")
-        ]
-    }
+protocol VehicleSelectionViewControllerDelegate: AnyObject {
+    func selectedTaxi(taxiInfo: TaxiInfoEntity)
 }
 
 final class VehicleSelectionViewController: BaseViewController {
     
     // MARK: - Properties
     
+    private let service: VehicleService
+    
+    private var selectedTaxiInfo: TaxiInfoEntity?
+    
+    weak var delegate: VehicleSelectionViewControllerDelegate?
+    
     // ScrollView
+    
     private let scrollView = UIScrollView().then {
         $0.showsVerticalScrollIndicator = false
         $0.contentInset = .init(top: 0, left: 0, bottom: 92, right: 0)
     }
     
-    private lazy var taxiList: [VehicleSelectionButton] = TaxiInfo.dummy().map {
-        let button = VehicleSelectionButton()
-        button.configure($0)
-        button.addTarget(self, action: #selector(veheicleSelectionButtonTapped(_:)), for: .touchUpInside)
-        return button
-    }
-    
     // Contents
+    
+    private var buttonRefs: [VehicleSelectionButton] = []
     
     private lazy var uberTaxiStack = UIStackView().then {
         let stackView = $0
         stackView.axis = .vertical
-        taxiList[0...1].forEach {
-            stackView.addArrangedSubview($0)
+        stackView.spacing = 3
+        (0..<2).forEach { _ in
+            let dummyButton = VehicleSelectionButton()
+            dummyButton.setPlaceholder()
+            stackView.addArrangedSubview(dummyButton)
+        }
+    }
+    
+    private lazy var caseTaxiStack = UIStackView().then {
+        let stackView = $0
+        stackView.axis = .vertical
+        (0..<2).forEach { _ in
+            let dummyButton = VehicleSelectionButton()
+            dummyButton.setPlaceholder()
+            stackView.addArrangedSubview(dummyButton)
         }
     }
     
@@ -59,7 +60,7 @@ final class VehicleSelectionViewController: BaseViewController {
         // Define initial model
         
         let configures: [ReserveInfoStyle] = [
-            .active(icon: .icFlight32, title: "공항 갈 때", subtitle: "캐리어 걱정 없이 쾌적하게 이동", additionalViews: taxiList[2...3].map { $0}),
+            .active(icon: .icFlight32, title: "공항 갈 때", subtitle: "캐리어 걱정 없이 쾌적하게 이동", additionalViews: caseTaxiStack.arrangedSubviews),
             .inactive(icon: .icChildCare32, title: "아기와 함께 할 때", subtitle: "카시트로 안전하게, 걱정없는 이동"),
             .inactive(icon: .icDirectionsCar32, title: "장거리 운전을 해야할 때", subtitle: "렌터카 빌릴 필요 없이 편안하게"),
             .inactive(icon: .icGTranslate32, title: "외국인 손님과 함께", subtitle: "외국어 가능 기사님으로 문제없는 의사소통")
@@ -90,8 +91,9 @@ final class VehicleSelectionViewController: BaseViewController {
         $0.backgroundColor = .white
     }
     
-    private let goToReservInfoButton = UIButton().then {
+    private lazy var goToReservInfoButton = UIButton().then {
         $0.setTitle("차량 서비스 예약", for: .normal)
+        $0.addTarget(self, action: #selector(goToReservInfoButtonTapped), for: .touchUpInside)
         $0.applyUberStyle()
     }
     
@@ -102,7 +104,7 @@ final class VehicleSelectionViewController: BaseViewController {
             title: "우버 기본 택시 제안",
             subtitle: .init(string: "우버가 제공하는 기본 택시들을 이용해보세요.\n안전하고 편리한 여정을 보장합니다."),
             content: uberTaxiStack,
-            contentEdge: .init(top: 10, left: 5.5, bottom: 0, right: 5.5)
+            contentEdge: .init(top: 10, left: 17.5, bottom: 0, right: 17.5)
         ),
         .init(
             title: "상황별 맞춤 차량 제안",
@@ -122,6 +124,17 @@ final class VehicleSelectionViewController: BaseViewController {
         sections.forEach { section in
             stackView.addArrangedSubview(section)
         }
+    }
+    
+    // MARK: -  Initilizer
+    
+    init(service: VehicleService) {
+        self.service = service
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
     
     // MARK: - Layout
@@ -161,26 +174,99 @@ final class VehicleSelectionViewController: BaseViewController {
 extension VehicleSelectionViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .white
+        fetchVehicleTypes()
     }
 }
 
 // MARK: - UIAction
 
 extension VehicleSelectionViewController {
+    
     @objc private func reserveInfoTapped(_ gesture: UITapGestureRecognizer) {
         guard let tappedView = gesture.view as? ReserveInfoView else { return }
         // TODO: 임의로 컬러를 바꾸는중 인터페이스 변경이 필요함
+        buttonRefs.forEach { $0.setUnselected() }
+        selectedTaxiInfo = nil
         reserveInfoViews.forEach { $0.layer.borderColor = UIColor.graysub.cgColor }
         tappedView.layer.borderColor = UIColor.btnActive.cgColor
     }
     
     @objc private func veheicleSelectionButtonTapped(_ button: VehicleSelectionButton) {
-        taxiList.forEach { $0.setUnselected() }
+        reserveInfoViews.forEach { $0.layer.borderColor = UIColor.graysub.cgColor }
+        
+        if !uberTaxiStack.arrangedSubviews.contains(button) {
+            reserveInfoViews[0].layer.borderColor = UIColor.btnActive.cgColor
+        }
+        
+        buttonRefs.forEach { $0.setUnselected() }
+        selectedTaxiInfo = button.taxiInfo
         button.setSelected()
+    }
+    
+    @objc private func goToReservInfoButtonTapped() {
+        if let selectedTaxiInfo {
+            delegate?.selectedTaxi(taxiInfo: selectedTaxiInfo)
+            navigationController?.popViewController(animated: true)
+        }
+    }
+}
+
+// MARK: - API
+
+extension VehicleSelectionViewController {
+    private func fetchVehicleTypes() {
+        Task {
+            do {
+                let response = try await service.fetchVehicleTypes()
+                bindData(result: response)
+            } catch {
+            }
+        }
+    }
+}
+
+// MARK: - Binding
+
+extension VehicleSelectionViewController {
+    private func bindData(result: TaxiEntity) {
+        buttonRefs.removeAll()
+        uberTaxiStack.arrangedSubviews.forEach { $0.removeFromSuperview() }
+        caseTaxiStack.arrangedSubviews.forEach { $0.removeFromSuperview() }
+        
+        result.taxiList.forEach {
+            let button = VehicleSelectionButton()
+            button.configure($0)
+            button.addTarget(self, action: #selector(veheicleSelectionButtonTapped(_:)), for: .touchUpInside)
+            buttonRefs.append(button)
+            uberTaxiStack.addArrangedSubview(button)
+        }
+        result.caseTaxiList.forEach {
+            let button = VehicleSelectionButton()
+            button.configure($0)
+            button.addTarget(self, action: #selector(veheicleSelectionButtonTapped(_:)), for: .touchUpInside)
+            buttonRefs.append(button)
+            caseTaxiStack.addArrangedSubview(button)
+        }
+        
+        let caseTaxiList = caseTaxiStack.arrangedSubviews
+        reserveInfoViews[0].addAdditionalViews(caseTaxiList)
+        
+        if let selectedButton = caseTaxiList.map({ $0 as? VehicleSelectionButton }).first {
+            selectedButton?.setSelected()
+            selectedTaxiInfo = selectedButton?.taxiInfo
+        }
+    }
+}
+
+// MARK: - UberNavigationConfigurable
+
+extension VehicleSelectionViewController: UberNavigationConfigurable {
+    var uberTitle: String? {
+        "차량 선택"
     }
 }
 
 #Preview {
-    VehicleSelectionViewController()
+    VehicleSelectionViewController(service: VehicleService())
 }
+
