@@ -128,6 +128,7 @@ final class ReservationInfoViewController: BaseViewController {
     private let goTovehicleReservButton = UIButton().then {
         $0.setTitle("차량 서비스 예약", for: .normal)
         $0.applyUberStyle()
+        $0.addTarget(self, action: #selector(goTovehicleReservButtonTapped), for: .touchUpInside)
     }
     
     // ScrollView
@@ -242,6 +243,14 @@ extension ReservationInfoViewController {
     
     @objc private func directPaymentButtonTapped() {
         
+    }
+    
+    @objc private func goTovehicleReservButtonTapped() {
+        let reservationCompleteVC = UIViewController()
+        let completeView = ReservationCompleteView()
+        completeView.backgroundColor = .white
+        reservationCompleteVC.view = completeView
+        navigationController?.pushViewController(reservationCompleteVC, animated: true)
     }
 }
 
