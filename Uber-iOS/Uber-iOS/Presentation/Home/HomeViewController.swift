@@ -39,11 +39,12 @@ final class HomeViewController: BaseViewController {
             let reserveNoticeVC = ReserveNoticeViewController()
             self?.navigationController?.pushViewController(reserveNoticeVC, animated: true)
         }
+        navigationController?.isNavigationBarHidden = true
     }
     
     override func setConstraints() {
         headerView.snp.makeConstraints {
-            $0.top.equalTo(view.safeAreaLayoutGuide)
+            $0.top.equalTo(view.safeAreaLayoutGuide).offset(12)
             $0.leading.trailing.equalToSuperview()
         }
         

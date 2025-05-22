@@ -49,8 +49,9 @@ class BaseViewController: UIViewController {
             $0.horizontalEdges.equalToSuperview()
             $0.height.equalTo(56)
         }
-        
-        additionalSafeAreaInsets.top = 68
+
+        additionalSafeAreaInsets.top = 56 + 24
+
     }
     
     @objc func backButtonTapped() {

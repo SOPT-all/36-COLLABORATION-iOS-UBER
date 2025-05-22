@@ -46,12 +46,12 @@ final class ReservationInfoViewController: BaseViewController {
     }
     
     private let startLocationTextField = SearchLocationTextField(icon: .place, placeholder: "").then {
-        $0.textField.text = "서울시 마포구 동교로 19길 86"
+        $0.textField.text = "매탄로 82길"
         $0.backgroundColor = .white
         $0.applyFilledStyle()
     }
     private let arriveLocationTextField = SearchLocationTextField(icon: .place, placeholder: "").then {
-        $0.textField.text = "김포공항"
+        $0.textField.text = "더 좋은 세상"
         $0.backgroundColor = .white
         $0.applyFilledStyle()
     }

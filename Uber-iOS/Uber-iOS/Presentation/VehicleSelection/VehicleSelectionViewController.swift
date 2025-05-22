@@ -216,7 +216,7 @@ extension VehicleSelectionViewController {
 extension VehicleSelectionViewController {
     private func fetchVehicleTypes() {
         Task {
-            do {
+            do {     
                 let response = try await service.fetchVehicleTypes()
                 bindData(result: response)
             } catch {
