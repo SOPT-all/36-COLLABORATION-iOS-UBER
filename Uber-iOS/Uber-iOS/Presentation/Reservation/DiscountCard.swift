@@ -53,7 +53,7 @@ final class DiscountCard: UIView {
         $0.textColor = .sub2
     }
     
-    private let discounDescriptionLabel = UILabel().then {
+    private let discountDescriptionLabel = UILabel().then {
         $0.text = "운행 금액과 무관하게 적용 가능\n*Uber Black Taxi에는 사용 불가"
         $0.font = .caption_m12
         $0.textColor = .sub3
@@ -62,7 +62,7 @@ final class DiscountCard: UIView {
     
     private lazy var discountInfoStack = UIStackView().then {
         $0.axis = .vertical
-        $0.addArrangedSubviews(discountPriceLabel, couponCategoryLabel, discounDescriptionLabel)
+        $0.addArrangedSubviews(discountPriceLabel, couponCategoryLabel, discountDescriptionLabel)
     }
     
     private let deleteButton = UIButton().then {
@@ -110,7 +110,7 @@ final class DiscountCard: UIView {
     private func bind() {
         self.discountPriceLabel.attributedText = NSMutableAttributedString(string: "\(discountInfo.discountPrice)원").prependImage(image: .promotion, imageSize: .init(width: 18, height: 18))
         self.couponCategoryLabel.text = discountInfo.discountType
-        self.discounDescriptionLabel.text = discountInfo.discountDescription
+        self.discountDescriptionLabel.text = discountInfo.discountDescription
     }
     
     func configure(_ discountInfo: DiscountModel) {
