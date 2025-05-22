@@ -10,49 +10,71 @@ import Then
 import UIKit
 
 final class RecentSearchViewController: BaseViewController {
-
+    
     private let searchService: SearchService = SearchService()
-
+    
+    private let departureField = SearchLocationTextField(
+        icon: UIImage(named: "departure"),
+        placeholder: "출발지 검색"
+    )
+    
+    private let arrivalField = SearchLocationTextField(
+        icon: UIImage(named: "place"),
+        placeholder: "도착지 검색"
+    )
+    
+    private lazy var textFieldStack = UIStackView().then {
+        $0.axis = .vertical
+        $0.spacing = 8
+        $0.addArrangedSubviews(departureField, arrivalField)
+        $0.isLayoutMarginsRelativeArrangement = true
+        $0.layoutMargins = .init(top: 10, left: 16, bottom: 10, right: 16)
+    }
+    
     private let headerView = RecentSearchHeaderView()
-
+    
     private let scrollView = UIScrollView().then {
         $0.showsVerticalScrollIndicator = true
         $0.alwaysBounceVertical = true
     }
-
+    
     private let contentView = UIView()
-
+    
     private let stackView = UIStackView().then {
         $0.axis = .vertical
         $0.spacing = 0
     }
-
+    
     private var items: [SearchKeywordEntity] = [] {
         didSet { updateContent() }
     }
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         fetchRecentSearch()
     }
-
+    
     override func configure() {
         super.configure()
-        view.addSubviews(headerView, scrollView)
+        view.addSubviews(textFieldStack, headerView, scrollView)
         scrollView.addSubview(contentView)
         contentView.addSubview(stackView)
-
+        
         headerView.allDeleteButton.addTarget(
             self,
             action: #selector(didTapDeleteAll),
             for: .touchUpInside
         )
     }
-
+    
     override func setConstraints() {
         super.setConstraints()
-        headerView.snp.makeConstraints {
+        textFieldStack.snp.makeConstraints {
             $0.top.equalTo(view.safeAreaLayoutGuide)
+            $0.leading.trailing.equalToSuperview()
+        }
+        headerView.snp.makeConstraints {
+            $0.top.equalTo(textFieldStack.snp.bottom)
             $0.leading.trailing.equalToSuperview()
             $0.height.equalTo(48)
         }
@@ -68,7 +90,7 @@ final class RecentSearchViewController: BaseViewController {
             $0.edges.equalTo(contentView)
         }
     }
-
+    
     // MARK: - Data & Content
     private func fetchRecentSearch() {
         Task {
@@ -80,7 +102,7 @@ final class RecentSearchViewController: BaseViewController {
             }
         }
     }
-
+    
     @MainActor
     private func deleteKeyword(id: Int) async {
         do {
@@ -91,7 +113,7 @@ final class RecentSearchViewController: BaseViewController {
             print("삭제 실패 \(error.localizedDescription)")
         }
     }
-
+    
     private func updateContent() {
         stackView.arrangedSubviews.forEach {
             if $0 is RecentSearchCell {
@@ -119,10 +141,14 @@ extension RecentSearchViewController {
     @objc private func didTapDeleteAll() {
         Task { await deleteAllKeywords() }
     }
-
+    
     @MainActor
     private func deleteAllKeywords() async {
         await searchService.deleteAllSearchKeywords()
         items = []
     }
+}
+
+extension RecentSearchViewController: UberNavigationConfigurable {
+    var uberTitle: String? { "차량 서비스 예약" }
 }
