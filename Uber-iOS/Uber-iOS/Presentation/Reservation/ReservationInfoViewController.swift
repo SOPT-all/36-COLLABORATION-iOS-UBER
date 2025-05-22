@@ -15,7 +15,8 @@ final class ReservationInfoViewController: BaseViewController {
     
     private let pickupDateTime: Date
     
-    private var discountInfo: DiscountModel?
+    private var discountInfo: DiscountModel? { didSet { setDiscountAmount() } }
+    private var expectedPayment = (min: 0, max: 0) { didSet { setDiscountAmount() }}
     
     // MARK: - Intilizer
     
@@ -106,7 +107,7 @@ final class ReservationInfoViewController: BaseViewController {
     private let expectedPaymentLabel = UILabel().then {
         $0.font = .caption_m12
         $0.textColor = .sub1
-        $0.attributedText = "₩ 15,000 - 19,000".replaceFont(pattern: "[0-9]", replaceFont: .body2_sb16)
+        $0.attributedText = "₩ 0".replaceFont(pattern: "[0-9]", replaceFont: .body2_sb16)
     }
     
     private lazy var directPaymentView = UIStackView().then {
@@ -246,17 +247,32 @@ final class ReservationInfoViewController: BaseViewController {
         DiscountModel.makeDummy().forEach {
             let discountCard = DiscountCard()
             discountCard.configure($0)
+            discountCard.deleteButton.addTarget(self, action: #selector(deleteCouponButtonTapped(_:)), for: .touchUpInside)
             couponStack.addArrangedSubview(discountCard)
             self.discountInfo = $0
         }
     }
     
     private func bind() {
+        // Pickup time
         let pickupTimeString = pickupDateTime.formmatedString("MM월 dd일 (E) / a:hh:mm")
         let expectedArriveTime = pickupDateTime.addingTimeInterval(TimeInterval(integerLiteral: 60 * 25))
         let expectedArriveTimeString = expectedArriveTime.formmatedString("a hh:mm")
         pickupTimeLabel.attributedText = pickupTimeString.replaceFont(pattern: "[0-9]|\\([ㄱ-ㅣ가-힣]\\)", replaceFont: .body2_sb16)
         expectedArriveLabel.attributedText =  expectedArriveTimeString.replaceFont(pattern: "[0-9]|\\([ㄱ-ㅣ가-힣]\\)", replaceFont: .body2_sb16)
+    }
+    
+    private func setDiscountAmount() {
+        let discountPrice = discountInfo?.discountPrice ?? 0
+        let minPrice = expectedPayment.min - discountPrice
+        let maxPrice = expectedPayment.max - discountPrice
+        
+        guard discountPrice < expectedPayment.min else { return }
+        
+        let formattedPriceRange = "₩ \(minPrice.formattedMoneyString)-\(maxPrice.formattedMoneyString)"
+        let styledPriceRange = formattedPriceRange.replaceFont(pattern: "[0-9]", replaceFont: .body2_sb16)
+        
+        expectedPaymentLabel.attributedText = styledPriceRange
     }
 }
 
@@ -277,6 +293,11 @@ extension ReservationInfoViewController {
         let completeVC = ReservationCompleteViewController()
         navigationController?.pushViewController(completeVC, animated: true)
     }
+    
+    @objc private func deleteCouponButtonTapped(_ sender: UIButton) {
+        discountInfo = nil
+        couponStack.arrangedSubviews[1...].forEach { $0.removeFromSuperview() }
+    }
 }
 
 // MARK: - UberNavigationConfigurable
@@ -290,6 +311,7 @@ extension ReservationInfoViewController: UberNavigationConfigurable {
 extension ReservationInfoViewController: VehicleSelectionViewControllerDelegate {
     func selectedTaxi(taxiInfo: TaxiInfoEntity) {
         vehicleInfoButton.setVehicleInfo(taxiInfo)
+        expectedPayment = (min: taxiInfo.min, max: taxiInfo.max)
     }
 }
 
