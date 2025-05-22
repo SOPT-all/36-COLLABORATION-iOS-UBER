@@ -41,6 +41,7 @@ final class SearchLocationTextField: UIView {
     // MARK: - Layout
 
     private func setupLayout() {
+        backgroundColor = .bgGray
         layer.cornerRadius = 30
         addSubviews(iconImageView, textField)
 

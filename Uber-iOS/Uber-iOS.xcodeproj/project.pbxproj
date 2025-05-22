@@ -88,6 +88,7 @@
 				147249BF2DCCDD050093B866 /* Global */,
 				147249C22DCCDD0D0093B866 /* Network */,
 				147249C42DCCDD1E0093B866 /* Presentation */,
+				47BDC89D2DDE419E00494A0E /* Screts.xcconfig */,
 			);
 			path = "Uber-iOS";
 			sourceTree = "<group>";
