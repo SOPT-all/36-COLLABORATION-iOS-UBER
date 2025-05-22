@@ -118,6 +118,9 @@ final class PickupTimeViewController: BaseViewController {
     
     private func setBindings() {
         datePicker.addTarget(self, action: #selector(dateChanged(_:)), for: .valueChanged)
+        let totalTime = datePicker.date.addingTimeInterval(TimeInterval(integerLiteral: 60 * 25))
+        let formatted = Self.dateFormatter.string(from: totalTime)
+        arrivalLabel.text = "도착 시간 \(formatted) KST"
     }
     
     private static let dateFormatter: DateFormatter = {
