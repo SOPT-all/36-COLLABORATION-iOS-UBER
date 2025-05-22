@@ -159,7 +159,7 @@ final class ReserveNoticeViewController: BaseViewController {
             field.backgroundColor = .bgGray
             field.isUserInteractionEnabled = false
             field.snp.makeConstraints {
-                $0.height.equalTo(56)
+                $0.height.equalTo(48)
             }
         }
     }

@@ -10,6 +10,7 @@ import Then
 import UIKit
 
 final class RecentSearchViewController: BaseViewController {
+    
     private let locationService = LocationService()
     private let searchService: SearchService = SearchService()
     
@@ -56,6 +57,7 @@ final class RecentSearchViewController: BaseViewController {
     
     override func configure() {
         super.configure()
+        
         view.addSubviews(textFieldStack, headerView, scrollView)
         scrollView.addSubview(contentView)
         contentView.addSubview(stackView)
@@ -77,6 +79,8 @@ final class RecentSearchViewController: BaseViewController {
     
     override func setConstraints() {
         super.setConstraints()
+        departureField.snp.makeConstraints { $0.height.equalTo(48) }
+        arrivalField.snp.makeConstraints { $0.height.equalTo(48) }
         textFieldStack.snp.makeConstraints {
             $0.top.equalTo(view.safeAreaLayoutGuide)
             $0.leading.trailing.equalToSuperview()
