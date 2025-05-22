@@ -10,7 +10,7 @@ import Then
 import UIKit
 
 final class RecentSearchViewController: BaseViewController {
-    
+    private let locationService = LocationService()
     private let searchService: SearchService = SearchService()
     
     private let departureField = SearchLocationTextField(
@@ -65,6 +65,14 @@ final class RecentSearchViewController: BaseViewController {
             action: #selector(didTapDeleteAll),
             for: .touchUpInside
         )
+        departureField.textField.delegate = self
+        arrivalField.textField.delegate = self
+        
+        departureField.textField.addTarget(self, action: #selector(textFieldDidEndEditing), for: .editingDidEndOnExit)
+        arrivalField.textField.addTarget(self, action: #selector(textFieldDidEndEditing), for: .editingDidEndOnExit)
+        
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+        view.addGestureRecognizer(tapGesture)
     }
     
     override func setConstraints() {
@@ -135,8 +143,23 @@ final class RecentSearchViewController: BaseViewController {
             stackView.addArrangedSubview(cellView)
         }
     }
+    
+    private func showAlert(message: String, completion: (() -> Void)? = nil) {
+        let alert = UIAlertController(title: "알림", message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "확인", style: .default) { _ in
+            completion?()
+        })
+        present(alert, animated: true)
+    }
+    
+    private func moveToPickerTimeView() {
+        let pickerVC = PickupTimeViewController()
+        self.navigationController?.pushViewController(pickerVC, animated: true)
+    }
 }
 
+
+// MARK: - UI Action
 extension RecentSearchViewController {
     @objc private func didTapDeleteAll() {
         Task { await deleteAllKeywords() }
@@ -146,6 +169,42 @@ extension RecentSearchViewController {
     private func deleteAllKeywords() async {
         await searchService.deleteAllSearchKeywords()
         items = []
+    }
+    
+    @objc private func textFieldDidEndEditing() {
+        guard
+            let departure = departureField.textField.text, !departure.isEmpty,
+            let arrival = arrivalField.textField.text, !arrival.isEmpty,
+            departure != arrival
+        else {
+            showAlert(message: "출발지와 도착지를 올바르게 입력해주세요.")
+            return
+        }
+        
+        Task {
+            do {
+                try await locationService.sendLocation(departures: departure, destination: arrival)
+                print("🥳 출발지/도착지 전송 성공")
+                self.moveToPickerTimeView()
+            } catch {
+                print("😱 에러 발생: \(error.localizedDescription)")
+                showAlert(message: "요청 중 오류가 발생했습니다.\n다시 시도해주세요.")
+            }
+        }
+    }
+    
+    @objc private func dismissKeyboard() {
+        view.endEditing(true)
+    }
+}
+
+// MARK: - UITextFieldDelegate
+
+extension RecentSearchViewController: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        textFieldDidEndEditing()
+        return true
     }
 }
 
