@@ -10,7 +10,7 @@ import SnapKit
 import Then
 import SwiftUI
 
-final class PickupTimeViewController: UIViewController {
+final class PickupTimeViewController: BaseViewController {
     
     // MARK: - UI Components
     
@@ -60,6 +60,7 @@ final class PickupTimeViewController: UIViewController {
     private let nextButton = UIButton().then {
         $0.setTitle("다음", for: .normal)
         $0.applyUberStyle()
+        $0.addTarget(self, action: #selector(nextButtonTapped), for: .touchUpInside)
     }
     
     // MARK: - LifeCycle
@@ -73,21 +74,21 @@ final class PickupTimeViewController: UIViewController {
     
     // MARK: - Configure
     
-    private func configure() {
+    override func configure() {
         view.backgroundColor = .white
         view.addSubviews(titleLabel, datePicker, arrivalLabel, infoLabel, footerLabel, nextButton)
     }
     
     // MARK: - Constraints
     
-    private func setConstraints() {
+    override func setConstraints() {
         titleLabel.snp.makeConstraints {
-            $0.top.equalTo(view.safeAreaLayoutGuide).offset(12)
+            $0.top.equalTo(view.safeAreaLayoutGuide)
             $0.leading.equalTo(view.safeAreaLayoutGuide).offset(14)
         }
         
         datePicker.snp.makeConstraints {
-            $0.top.equalTo(titleLabel.snp.bottom).offset(24)
+            $0.top.equalTo(titleLabel.snp.bottom).offset(10)
             $0.centerX.equalToSuperview()
         }
         
@@ -132,6 +133,15 @@ final class PickupTimeViewController: UIViewController {
         let formatted = Self.dateFormatter.string(from: sender.date)
         arrivalLabel.text = "도착 시간 \(formatted) KST"
     }
+    
+    @objc private func nextButtonTapped() {
+        let reservationInfoVC = ReservationInfoViewController()
+        navigationController?.pushViewController(reservationInfoVC, animated: true)
+    }
+}
+
+extension PickupTimeViewController: UberNavigationConfigurable {
+    var uberTitle: String? { nil }
 }
 
 #Preview {
