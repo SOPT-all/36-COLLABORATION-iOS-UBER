@@ -289,7 +289,7 @@ extension ReservationInfoViewController: UberNavigationConfigurable {
 
 extension ReservationInfoViewController: VehicleSelectionViewControllerDelegate {
     func selectedTaxi(taxiInfo: TaxiInfoEntity) {
-        print(taxiInfo)
+        vehicleInfoButton.setVehicleInfo(taxiInfo)
     }
 }
 
