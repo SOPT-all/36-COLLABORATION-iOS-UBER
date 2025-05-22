@@ -13,11 +13,27 @@ final class ReservationInfoViewController: BaseViewController {
     
     // MARK: - Properties
     
+    private let pickupDateTime: Date
+    
     private var discountInfo: DiscountModel?
-            
+    
+    // MARK: - Intilizer
+    
+    init(pickupDateTime: Date) {
+        self.pickupDateTime = pickupDateTime
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    // MARK: - LifeCycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         loadCouponInfo()
+        bind()
     }
     
     // MARK: - UI Component
@@ -226,13 +242,21 @@ final class ReservationInfoViewController: BaseViewController {
         }
     }
     
-    func loadCouponInfo() {
+    private func loadCouponInfo() {
         DiscountModel.makeDummy().forEach {
             let discountCard = DiscountCard()
             discountCard.configure($0)
             couponStack.addArrangedSubview(discountCard)
             self.discountInfo = $0
         }
+    }
+    
+    private func bind() {
+        let pickupTimeString = pickupDateTime.formmatedString("MM월 dd일 (E) / a:hh:mm")
+        let expectedArriveTime = pickupDateTime.addingTimeInterval(TimeInterval(integerLiteral: 60 * 25))
+        let expectedArriveTimeString = expectedArriveTime.formmatedString("a hh:mm")
+        pickupTimeLabel.attributedText = pickupTimeString.replaceFont(pattern: "[0-9]|\\([ㄱ-ㅣ가-힣]\\)", replaceFont: .body2_sb16)
+        expectedArriveLabel.attributedText =  expectedArriveTimeString.replaceFont(pattern: "[0-9]|\\([ㄱ-ㅣ가-힣]\\)", replaceFont: .body2_sb16)
     }
 }
 
@@ -270,5 +294,5 @@ extension ReservationInfoViewController: VehicleSelectionViewControllerDelegate 
 }
 
 #Preview {
-    ReservationInfoViewController()
+    ReservationInfoViewController(pickupDateTime: .now)
 }

@@ -23,6 +23,7 @@
 			membershipExceptions = (
 				Base/BaseViewController.swift,
 				Config/Secret.swift,
+				"Extension/Date+.swift",
 				"Extension/NSMutableAttributedString+.swift",
 				"Extension/NSObject+.swift",
 				"Extension/String+.swift",

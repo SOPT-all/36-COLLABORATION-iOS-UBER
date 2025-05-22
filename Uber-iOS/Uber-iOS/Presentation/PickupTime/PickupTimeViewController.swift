@@ -57,7 +57,7 @@ final class PickupTimeViewController: BaseViewController {
         $0.numberOfLines = 0
     }
     
-    private let nextButton = UIButton().then {
+    private lazy var nextButton = UIButton().then {
         $0.setTitle("다음", for: .normal)
         $0.applyUberStyle()
         $0.addTarget(self, action: #selector(nextButtonTapped), for: .touchUpInside)
@@ -139,7 +139,8 @@ final class PickupTimeViewController: BaseViewController {
     }
     
     @objc private func nextButtonTapped() {
-        let reservationInfoVC = ReservationInfoViewController()
+        let pickupTime = self.datePicker.date
+        let reservationInfoVC = ReservationInfoViewController(pickupDateTime: pickupTime)
         navigationController?.pushViewController(reservationInfoVC, animated: true)
     }
 }
