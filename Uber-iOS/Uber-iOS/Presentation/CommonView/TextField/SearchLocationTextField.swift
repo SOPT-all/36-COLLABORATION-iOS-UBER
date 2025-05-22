@@ -94,7 +94,7 @@ final class SearchLocationTextField: UIView {
         backgroundColor = .bgGray
     }
     
-    private func applyFilledStyle() {
+    func applyFilledStyle() {
         layer.borderWidth = 1
         layer.borderColor = UIColor.bgGray.cgColor
         backgroundColor = .bgWhite

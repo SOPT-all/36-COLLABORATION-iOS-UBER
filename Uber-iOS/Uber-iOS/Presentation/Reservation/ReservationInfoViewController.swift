@@ -14,13 +14,13 @@ final class ReservationInfoViewController: BaseViewController {
     // MARK: - Properties
     
     private var discountInfo: DiscountModel?
-    
-    // Content
-    
+            
     override func viewDidLoad() {
         super.viewDidLoad()
         loadCouponInfo()
     }
+    
+    // MARK: - UI Component
     
     private lazy var couponStack = UIStackView().then {
         $0.axis = .vertical
@@ -30,9 +30,13 @@ final class ReservationInfoViewController: BaseViewController {
     
     private let startLocationTextField = SearchLocationTextField(icon: .place, placeholder: "").then {
         $0.textField.text = "서울시 마포구 동교로 19길 86"
+        $0.backgroundColor = .white
+        $0.applyFilledStyle()
     }
     private let arriveLocationTextField = SearchLocationTextField(icon: .place, placeholder: "").then {
         $0.textField.text = "김포공항"
+        $0.backgroundColor = .white
+        $0.applyFilledStyle()
     }
     
     private lazy var locationStack = UIStackView().then {

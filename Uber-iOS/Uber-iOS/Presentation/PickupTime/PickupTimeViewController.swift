@@ -130,7 +130,8 @@ final class PickupTimeViewController: BaseViewController {
     }()
     
     @objc private func dateChanged(_ sender: UIDatePicker) {
-        let formatted = Self.dateFormatter.string(from: sender.date)
+        let totalTime = sender.date.addingTimeInterval(TimeInterval(integerLiteral: 60 * 25))
+        let formatted = Self.dateFormatter.string(from: totalTime)
         arrivalLabel.text = "도착 시간 \(formatted) KST"
     }
     
