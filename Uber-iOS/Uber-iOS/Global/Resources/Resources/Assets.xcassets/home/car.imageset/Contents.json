@@ -6,10 +6,12 @@
       "scale" : "1x"
     },
     {
+      "filename" : "Property 1=car_none@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
+      "filename" : "Property 1=car_none@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }
