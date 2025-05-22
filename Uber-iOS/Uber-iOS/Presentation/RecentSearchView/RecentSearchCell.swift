@@ -11,6 +11,8 @@ import UIKit
 
 final class RecentSearchCell: UIView {
 
+    private var keywordId: Int?
+
     // MARK: - UI Components
 
     private let containerView = UIView()
@@ -22,6 +24,7 @@ final class RecentSearchCell: UIView {
     private let titleLabel = UILabel().then {
         $0.font = .body1_sb18
         $0.textColor = .primary
+        $0.setTextWithLineHeight(text: $0.text, lineHeight: -4)
     }
 
     private let locationLabel = UILabel().then {
@@ -29,6 +32,7 @@ final class RecentSearchCell: UIView {
         $0.textColor = .sub3
         $0.numberOfLines = 1
         $0.lineBreakMode = .byTruncatingTail
+        $0.setTextWithLineHeight(text: $0.text, lineHeight: -4)
     }
 
     private let dateLabel = UILabel().then {
@@ -85,7 +89,7 @@ final class RecentSearchCell: UIView {
     private func setConstraints() {
         containerView.snp.makeConstraints {
             $0.edges.equalToSuperview().inset(
-                UIEdgeInsets(top: 12, left: 20, bottom: 12, right: 20)
+                UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 20)
             )
         }
 
@@ -113,9 +117,24 @@ final class RecentSearchCell: UIView {
 
     // MARK: - Public API
 
-    func configure(title: String, location: String, date: String) {
+    func configure(
+        id: Int,
+        title: String,
+        location: String,
+        date: String,
+        deleteAction: @escaping (Int) -> Void
+    ) {
+        self.keywordId = id
         titleLabel.text = title
         locationLabel.text = location
         dateLabel.text = date
+
+        deleteButton.addAction(
+            .init { [weak self] _ in
+                guard let id = self?.keywordId else { return }
+                deleteAction(id)
+            },
+            for: .touchUpInside
+        )
     }
 }

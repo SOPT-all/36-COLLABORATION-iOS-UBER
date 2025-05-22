@@ -234,7 +234,7 @@ final class ReservationInfoViewController: BaseViewController {
 // MARK: - UI Action
 
 extension ReservationInfoViewController {
-    @objc private func vehicleSelectionButtonTapped() {
+    @objc private func vehicleInfoButtonTapped() {
         let vehicleSelectionVC = VehicleSelectionViewController(service: VehicleService())
         vehicleSelectionVC.delegate = self
         navigationController?.pushViewController(vehicleSelectionVC, animated: true)
