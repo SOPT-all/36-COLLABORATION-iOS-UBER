@@ -207,3 +207,9 @@ final class ReserveNoticeViewController: BaseViewController {
         }
     }
 }
+
+extension ReserveNoticeViewController: UberNavigationConfigurable {
+    var uberTitle: String? { "예약하기" }
+    var prefersLargeTitle: Bool { true }
+    var alignTitleLeft: Bool { true }
+}

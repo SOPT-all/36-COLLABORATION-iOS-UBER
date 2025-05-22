@@ -36,8 +36,8 @@ final class HomeViewController: BaseViewController {
         view.addSubview(tabBar)
         
         calendarButton.onTap = { [weak self] in
-            let nextVC = ViewController()
-            self?.navigationController?.pushViewController(nextVC, animated: true)
+            let reserveNoticeVC = ReserveNoticeViewController()
+            self?.navigationController?.pushViewController(reserveNoticeVC, animated: true)
         }
     }
     
