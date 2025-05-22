@@ -149,7 +149,7 @@ final class ReserveInfoView: UIView {
         layer.borderColor = color
     }
 
-    private func addAdditionalViews(_ views: [UIView]) {
+    func addAdditionalViews(_ views: [UIView]) {
         additionalTaxiContainerView.arrangedSubviews.forEach {
             $0.removeFromSuperview()
         }

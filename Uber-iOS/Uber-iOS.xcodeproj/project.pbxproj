@@ -9,12 +9,12 @@
 /* Begin PBXBuildFile section */
 		1497B1B52DCCD70A007B5E1B /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 1497B1B42DCCD70A007B5E1B /* SnapKit */; };
 		1497B1B82DCCD721007B5E1B /* Then in Frameworks */ = {isa = PBXBuildFile; productRef = 1497B1B72DCCD721007B5E1B /* Then */; };
-		47BDC89E2DDE419E00494A0E /* Screts.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 47BDC89D2DDE419E00494A0E /* Screts.xcconfig */; };
+		47BDC7222DDDC84400494A0E /* Secrets.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 47BDC7212DDDC84400494A0E /* Secrets.xcconfig */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		47BDC89D2DDE419E00494A0E /* Screts.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Screts.xcconfig; sourceTree = "<group>"; };
-		985DCB1C2DD4FA5A003A24B1 /* Uber-iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Uber-iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		47BDC7212DDDC84400494A0E /* Secrets.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Secrets.xcconfig; sourceTree = "<group>"; };
+		988989A62DD39F8B00215B7E /* Uber-iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Uber-iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
@@ -27,8 +27,8 @@
 				"Extension/NSObject+.swift",
 				"Extension/String+.swift",
 				"Extension/UIButton+.swift",
+				"Extension/UIImageView+.swift",
 				"Extension/UILabel+.swift",
-				"Extension/UINavigationController+.swift",
 				"Extension/UIStackView+.swift",
 				"Extension/UIView+.swift",
 				"Resources/Extension/UIFont+.swift",
@@ -96,8 +96,9 @@
 		1497B1922DCCD655007B5E1B = {
 			isa = PBXGroup;
 			children = (
+				47BDC7212DDDC84400494A0E /* Secrets.xcconfig */,
 				147249AC2DCCDCE90093B866 /* Uber-iOS */,
-				985DCB1C2DD4FA5A003A24B1 /* Uber-iOS.app */,
+				988989A62DD39F8B00215B7E /* Uber-iOS.app */,
 			);
 			sourceTree = "<group>";
 		};
@@ -127,7 +128,7 @@
 				1497B1B72DCCD721007B5E1B /* Then */,
 			);
 			productName = "Uber-iOS";
-			productReference = 985DCB1C2DD4FA5A003A24B1 /* Uber-iOS.app */;
+			productReference = 988989A62DD39F8B00215B7E /* Uber-iOS.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -173,7 +174,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				47BDC89E2DDE419E00494A0E /* Screts.xcconfig in Resources */,
+				47BDC7222DDDC84400494A0E /* Secrets.xcconfig in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -192,6 +193,7 @@
 /* Begin XCBuildConfiguration section */
 		1497B1AF2DCCD656007B5E1B /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 47BDC7212DDDC84400494A0E /* Secrets.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -224,6 +226,7 @@
 		};
 		1497B1B02DCCD656007B5E1B /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 47BDC7212DDDC84400494A0E /* Secrets.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -256,6 +259,7 @@
 		};
 		1497B1B12DCCD656007B5E1B /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 47BDC7212DDDC84400494A0E /* Secrets.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
@@ -319,6 +323,7 @@
 		};
 		1497B1B22DCCD656007B5E1B /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 47BDC7212DDDC84400494A0E /* Secrets.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
