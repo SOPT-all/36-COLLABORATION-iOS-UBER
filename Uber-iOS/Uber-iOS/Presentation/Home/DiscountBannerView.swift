@@ -20,7 +20,7 @@ final class UberDiscountBannerView: UIView {
 
     private let titleLabel = UILabel().then {
         $0.text = "우버 이용료 5000원 할인 받기"
-        $0.textColor = UIColor.point1
+        $0.textColor = .point1
         $0.font = UIFont.body3_b14
     }
 

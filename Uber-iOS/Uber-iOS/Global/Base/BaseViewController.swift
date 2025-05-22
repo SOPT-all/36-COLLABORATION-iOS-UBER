@@ -45,12 +45,13 @@ class BaseViewController: UIViewController {
         navBar.applyConfiguration(configurable)
         
         navBar.snp.makeConstraints {
-            $0.top.equalTo(view.safeAreaLayoutGuide).offset(-56)
+            $0.top.equalTo(view.safeAreaLayoutGuide).offset(-68)
             $0.horizontalEdges.equalToSuperview()
             $0.height.equalTo(56)
         }
-        
-        additionalSafeAreaInsets.top = 56
+
+        additionalSafeAreaInsets.top = 56 + 24
+
     }
     
     @objc func backButtonTapped() {

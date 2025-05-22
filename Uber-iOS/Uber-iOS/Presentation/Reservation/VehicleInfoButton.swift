@@ -18,6 +18,7 @@ final class VehicleInfoButton: UIButton {
         $0.spacing = 5
         $0.distribution = .equalSpacing
         $0.isHidden = true
+        $0.isUserInteractionEnabled = false
     }
     private let carImageView = UIImageView().then {
         $0.image = .taxi
@@ -66,24 +67,31 @@ final class VehicleInfoButton: UIButton {
             contentStack.addArrangedSubview($0)
         }
         
+        carImageView.snp.makeConstraints {
+            $0.size.equalTo(54)
+        }
+        
         self.snp.makeConstraints {
-            $0.height.equalTo(56)
+            $0.height.equalTo(68)
         }
         
         moveButtonImageView.snp.makeConstraints {
             $0.size.equalTo(24)
         }
-               
+        
         addSubview(contentStack)
         contentStack.snp.makeConstraints {
             $0.edges.equalToSuperview()
         }
     }
     
-    func setVehicleInfo() {
+    func setVehicleInfo(_ taxiInfo: TaxiInfoEntity) {
         layer.borderWidth = 2.0
         contentStack.isHidden = false
         setTitle(nil, for: .normal)
+        self.carImageView.load(url: URL(string: taxiInfo.image)!)
+        self.selectedCarInfo.text = "공항갈때 / \(taxiInfo.type)"
+        self.guestLabel.text = "\(taxiInfo.guests)"
     }
     
     func setDefaultStyle() {

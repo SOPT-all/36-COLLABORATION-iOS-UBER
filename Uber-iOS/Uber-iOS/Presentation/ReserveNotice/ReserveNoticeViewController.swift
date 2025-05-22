@@ -73,6 +73,8 @@ final class ReserveNoticeViewController: BaseViewController {
                 bottom: 0,
                 right: Layout.sideInset
             )
+            let tapGesture = UITapGestureRecognizer(target: self, action: #selector(searchFieldTapped))
+            $0.addGestureRecognizer(tapGesture)
         }
 
     private lazy var placeFields: [SearchLocationTextField] = placeholders.map {
@@ -155,8 +157,9 @@ final class ReserveNoticeViewController: BaseViewController {
     private func configureTextField() {
         placeFields.forEach { field in
             field.backgroundColor = .bgGray
+            field.isUserInteractionEnabled = false
             field.snp.makeConstraints {
-                $0.height.equalTo(56)
+                $0.height.equalTo(48)
             }
         }
     }
@@ -206,4 +209,21 @@ final class ReserveNoticeViewController: BaseViewController {
             $0.leading.trailing.bottom.equalToSuperview()
         }
     }
+}
+
+// MARK: - UI Action
+
+extension ReserveNoticeViewController {
+    @objc private func searchFieldTapped() {
+        let recentSearchVC = RecentSearchViewController()
+        navigationController?.pushViewController(recentSearchVC, animated: true)
+    }
+}
+
+// MARK: - Configure navigation
+
+extension ReserveNoticeViewController: UberNavigationConfigurable {
+    var uberTitle: String? { "예약하기" }
+    var prefersLargeTitle: Bool { true }
+    var alignTitleLeft: Bool { true }
 }

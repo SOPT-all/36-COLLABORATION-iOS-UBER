@@ -65,12 +65,11 @@ final class DiscountCard: UIView {
         $0.addArrangedSubviews(discountPriceLabel, couponCategoryLabel, discountDescriptionLabel)
     }
     
-    private let deleteButton = UIButton().then {
-        $0.setImage(.deleteBlack, for: .normal)
-        $0.addTarget(self, action: #selector(deleteButtonTapped), for: .touchUpInside)
-    }
-    
     private let containerView = UIView()
+    
+    let deleteButton = UIButton().then {
+        $0.setImage(.deleteBlack, for: .normal)
+    }
     
     override init(frame: CGRect) {
         super.init(frame: frame)
