@@ -156,7 +156,6 @@ final class ReservationInfoViewController: BaseViewController {
     
     private let scrollView = UIScrollView().then {
         $0.showsVerticalScrollIndicator = false
-        $0.contentInset = .init(top: 0, left: 0, bottom: 92, right: 0)
     }
     
     // Sections containing content
@@ -193,7 +192,7 @@ final class ReservationInfoViewController: BaseViewController {
         .init(
             title: "",
             content: directPaymentView,
-            contentEdge: .init(top: 10, left: 18, bottom: 10, right: 18)
+            contentEdge: .init(top: 7, left: 18, bottom: 0, right: 18)
         )
     ]
     
@@ -207,7 +206,9 @@ final class ReservationInfoViewController: BaseViewController {
         sections.forEach { section in
             stackView.addArrangedSubview(section)
         }
+        stackView.addArrangedSubview(buttonContainer)
         stackView.setCustomSpacing(0, after: sections[1])
+        stackView.setCustomSpacing(0, after: sections[sections.count - 1])
     }
     
     // Override method
@@ -215,7 +216,7 @@ final class ReservationInfoViewController: BaseViewController {
     override func configure() {
         scrollView.addSubview(contentStackView)
         buttonContainer.addSubview(goTovehicleReservButton)
-        [scrollView, buttonContainer].forEach {
+        [scrollView].forEach {
             view.addSubview($0)
         }
     }
