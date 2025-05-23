@@ -313,6 +313,7 @@ extension ReservationInfoViewController: VehicleSelectionViewControllerDelegate 
     func selectedTaxi(taxiInfo: TaxiInfoEntity) {
         vehicleInfoButton.setVehicleInfo(taxiInfo)
         expectedPayment = (min: taxiInfo.min, max: taxiInfo.max)
+        goTovehicleReservButton.setTitle("\(taxiInfo.type) 예약하기", for: .normal)
     }
 }
 

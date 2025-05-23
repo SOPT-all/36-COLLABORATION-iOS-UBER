@@ -16,7 +16,7 @@ final class VehicleInfoButton: UIButton {
         $0.layoutMargins = .init(top: 0, left: 15, bottom: 0, right: 15)
         $0.alignment = .center
         $0.spacing = 5
-        $0.distribution = .equalSpacing
+        $0.distribution = .fillProportionally
         $0.isHidden = true
         $0.isUserInteractionEnabled = false
     }
