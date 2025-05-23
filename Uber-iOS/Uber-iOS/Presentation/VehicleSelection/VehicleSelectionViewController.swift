@@ -19,7 +19,7 @@ final class VehicleSelectionViewController: BaseViewController {
     
     private let service: VehicleService
     
-    private var selectedTaxiInfo: TaxiInfoEntity?
+    private var selectedTaxiInfo: TaxiInfoEntity? { didSet { setButtonTitle() } }
     
     weak var delegate: VehicleSelectionViewControllerDelegate?
     
@@ -254,6 +254,14 @@ extension VehicleSelectionViewController {
         if let selectedButton = caseTaxiList.map({ $0 as? VehicleSelectionButton }).first {
             selectedButton?.setSelected()
             selectedTaxiInfo = selectedButton?.taxiInfo
+        }
+    }
+    
+    private func setButtonTitle() {
+        if let resultText = selectedTaxiInfo?.type  {
+            goToReservInfoButton.setTitle("\(resultText) 예약하기", for: .normal)
+        } else {
+            goToReservInfoButton.setTitle("차량 서비스 예약", for: .normal)
         }
     }
 }
