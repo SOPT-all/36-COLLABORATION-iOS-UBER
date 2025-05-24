@@ -15,8 +15,8 @@
 <br/>
 
 ## 🚕 제출 과제
-[🚖 1차 사전 과제 ](https://secretive-stargazer-15c.notion.site/1-1fd14b7e1eff806eb5cddc2d1b2b869b) <br/>
-[🚖 3차 최종 과제 ](https://secretive-stargazer-15c.notion.site/Uber-iOS-1fd14b7e1eff8012983dd4db638d1703)
+[🚖 Team Uber의 1차 사전 과제 ](https://secretive-stargazer-15c.notion.site/1-1fd14b7e1eff806eb5cddc2d1b2b869b) 보러 가기 <br/>
+[🚖 Team Uber의 3차 최종 과제 ](https://secretive-stargazer-15c.notion.site/Uber-iOS-1fd14b7e1eff8012983dd4db638d1703) 보러 가기
 
 <br/>
 
@@ -27,8 +27,14 @@ https://github.com/user-attachments/assets/b3ead083-cdf1-4fda-9717-0ab15c4b57a4
 <br/>
 
 ## 🔧 *****TECH STACKS*****
-iOS XCode Github Git <br/>
-Swift UiKit MVC <br/>
-URLSession
+
++ `iOS`
++ `XCode`
++ `Swift`
++ `UiKit`
++ `SnapKit`
++ `Then`
++ `MVC`
++ `URLSession`
 
 <br/>
