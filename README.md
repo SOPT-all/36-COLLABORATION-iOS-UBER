@@ -7,7 +7,7 @@
 
 
 ## 🍎 *****Contributors*****
-| 조휘원 <br> [@hwidung](https://github.com/hwidung) |             선영주 <br> [@dudwntjs](https://github.com/dudwntjs)             |              권석기 <br>[@Seokki-Kwon](https://github.com/Seokki-Kwon)               |
+| 조휘원 <br> [@hwidung](https://github.com/hwidung) |             선영주 <br> [@dudwntjs](https://github.com/dudwntjs)             |              권석기 <br>[@Seokki-Kwon](https://github.com/seokgit)               |
 |:---:|:-----------------------------------------------------------------------------:|:-----------------------------------------------------------------------------:|
 | <img width="250" src="https://github.com/user-attachments/assets/92fa35b6-3174-4814-9066-28040f82ae7b"/> | <img width="250" src="https://github.com/user-attachments/assets/26a0f97c-055b-467d-8f20-f0950ca553e1"/> | <img width="250" src="https://github.com/user-attachments/assets/c132d9be-3663-449e-9b9c-493e02081406"/> |
 | `예약하기` `차량 서비스 예약` |`홈 뷰` `픽업 시간 선택` `예약 완료`|`예약 정보` `차량 선택`|
